@@ -17,7 +17,7 @@
         <div class="card-body">
             <form method="post" action="{{ route('hrd.jeniscuti.save') }}" enctype="multipart/form-data">
                 @csrf
-
+                @method('POST')
                 <div class="form-group">
                     <label for="nama_cuti">Nama Cuti</label>
                     <input type="text" class="form-control" id="nama_cuti" name="nama_cuti">

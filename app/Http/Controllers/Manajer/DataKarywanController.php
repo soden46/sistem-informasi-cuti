@@ -21,16 +21,17 @@ class DataKarywanController extends Controller
     {
         $cari = $request->cari;
 
+        $manajer = Employee::where('npp', auth()->user()->npp)->first();
         if ($cari != NULL) {
             return view('manajer.karyawan.index', [
                 'title' => 'Data aryawan',
-                'karyawan' => Employee::with('divisi')->where('hak_akses', 'karyawan')->orWhere('nama_emp', 'like', "%{$cari}%")->paginate(10),
+                'karyawan' => Employee::with('divisi')->where('hak_akses', 'karyawan')->where('id_divisi', $manajer->id_divisi)->orWhere('nama_emp', 'like', "%{$cari}%")->paginate(10),
                 'div' => DivisiModel::get(),
             ]);
         } else {
             return view('manajer.karyawan.index', [
                 'title' => 'Data Karyawan',
-                'karyawan' => Employee::with('divisi')->where('hak_akses', 'karyawan')->paginate(10),
+                'karyawan' => Employee::with('divisi')->where('hak_akses', 'karyawan')->where('id_divisi', $manajer->id_divisi)->paginate(10),
                 'div' => DivisiModel::get(),
             ]);
         }
