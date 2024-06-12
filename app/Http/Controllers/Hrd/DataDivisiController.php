@@ -53,7 +53,6 @@ class DataDivisiController extends Controller
     {
 
         $validatedData = $request->validate([
-            'id_divisi' => 'required|max:5',
             'nama_divisi' => 'required|max:20',
         ]);
 
@@ -87,7 +86,6 @@ class DataDivisiController extends Controller
     public function update(Request $request, $id_divisi)
     {
         $rules = [
-            'id_divisi' => 'required|max:5',
             'nama_divisi' => 'required|max:20',
         ];
 
