@@ -14,6 +14,7 @@ use App\Http\Controllers\Hrd\DataDivisiController;
 use App\Http\Controllers\Hrd\DataJenisCutiController;
 use App\Http\Controllers\Hrd\DataKarywanController;
 use App\Http\Controllers\Hrd\HrdController;
+use App\Http\Controllers\Manajer\ManajerController;
 use App\Http\Controllers\Siswa\SiswaController;
 use FontLib\Table\Type\name;
 use Illuminate\Support\Facades\Artisan;
@@ -43,10 +44,10 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('aut
 
 //admin
 Route::group(['prefix' => 'manajer', 'as' => 'manajer.'], function () {
-    Route::get('/dashbord', [AdminController::class, 'dashboard'])->name('index');
+    Route::get('/dashbord', [ManajerController::class, 'dashboard'])->name('index');
     // Admin
-    Route::controller(AdminController::class)->group(function () {
-        Route::get('/admin', 'index')->name('manajer');
+    Route::controller(ManajerController::class)->group(function () {
+        Route::get('/manajer', 'index')->name('manajer');
         Route::get('/manajer/create', 'create')->name('manajer.create');
         Route::post('/manajer/save', 'store')->name('manajer.save');
         Route::get('/manajer/edit/{id_manajer}', 'edit')->name('manajer.edit');
