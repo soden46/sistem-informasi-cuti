@@ -17,7 +17,7 @@
         </form>
     </div>
     <div>
-        <a class="btn btn-md btn-primary" href="{{ route('hrd.cuti.create') }}">Tambah Cuti</a>
+        <!-- <a class="btn btn-md btn-primary" href="{{ route('hrd.cuti.create') }}">Tambah Cuti</a> -->
         <a class="btn btn-md btn-success" href="{{ route('hrd.cuti.cetak') }}" target="_blank"><i class="fa fa-print"></i> Cetak PDF</a>
     </div>
 </div>

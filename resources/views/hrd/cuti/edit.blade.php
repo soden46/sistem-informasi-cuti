@@ -64,7 +64,7 @@
                             <textarea name="ket_reject" class="form-control">{{ $cuti->ket_reject }}</textarea>
                         </div>
                         <button type="submit" class="btn btn-primary">Update</button>
-                        <a href="{{ route('hrd.cuti.index') }}" class="btn btn-secondary">Batal</a>
+                        <a href="{{ route('hrd.cuti') }}" class="btn btn-secondary">Batal</a>
                     </form>
                 </div>
             </div>

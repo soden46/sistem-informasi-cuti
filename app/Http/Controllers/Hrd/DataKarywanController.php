@@ -28,7 +28,7 @@ class DataKarywanController extends Controller
                 'div' => DivisiModel::get(),
             ]);
         } else {
-            return view('hrd.Karyawan.index', [
+            return view('hrd.karyawan.index', [
                 'title' => 'Data Karyawan',
                 'karyawan' => Employee::with('divisi')->where('hak_akses', 'karyawan')->paginate(10),
                 'div' => DivisiModel::get(),
@@ -104,7 +104,7 @@ class DataKarywanController extends Controller
     {
 
         return view('hrd.karyawan.edit', [
-            'title' => 'Edit Data Karyawan',
+            'title' => 'Edit Data karyawan',
             'karyawan' => Employee::with('divisi')->where('npp', $npp)->first(),
             'div' => DivisiModel::get(),
         ]);

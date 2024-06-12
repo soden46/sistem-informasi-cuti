@@ -17,7 +17,7 @@
         </form>
     </div>
     <div>
-        <a class="btn btn-md btn-primary" href="{{ route('hrd.jeniscuti.create') }}">Tambah Jenis Cuti</a>
+        <!-- <a class="btn btn-md btn-primary" href="{{ route('hrd.jeniscuti.create') }}">Tambah Jenis Cuti</a> -->
         <a class="btn btn-md btn-success" href="{{ route('hrd.jeniscuti.cetak') }}" target="_blank"><i class="fa fa-print"></i> Cetak PDF</a>
     </div>
 </div>
