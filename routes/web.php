@@ -9,7 +9,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\DataEkskulController;
 use App\Http\Controllers\admin\DataPembinaController;
 use App\Http\Controllers\admin\DataSiswaController;
-use App\Http\Controllers\DataCutiControllerl;
+use App\Http\Controllers\Hrd\DataCutiControllerl;
 use App\Http\Controllers\Hrd\DataDivisiController;
 use App\Http\Controllers\Hrd\DataJenisCutiController;
 use App\Http\Controllers\Hrd\DataKarywanController;

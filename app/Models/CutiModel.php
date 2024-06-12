@@ -12,7 +12,7 @@ class CutiModel extends Model
     use HasFactory;
 
     public $table = "cuti";
-    protected $primary = 'id_cuti';
+    protected $primary = 'no_cuti';
     protected $guarded = [];
 
     public function jenisCuti()
@@ -35,14 +35,14 @@ class CutiModel extends Model
     {
         do {
             // Menghasilkan ID unik dari karakter acak, bisa diubah sesuai kebutuhan
-            $id = strtoupper(Str::random(5));
-        } while (self::idExists($id));
+            $no_cuti = strtoupper(Str::random(5));
+        } while (self::idExists($no_cuti));
 
-        return $id;
+        return $no_cuti;
     }
 
-    private static function idExists($id)
+    private static function idExists($no_cuti)
     {
-        return self::where('id', $id)->exists();
+        return self::where('no_cuti', $no_cuti)->exists();
     }
 }
