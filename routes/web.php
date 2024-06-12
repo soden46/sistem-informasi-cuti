@@ -44,7 +44,7 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('aut
 
 //admin
 Route::group(['prefix' => 'manajer', 'as' => 'manajer.'], function () {
-    Route::get('/dashbord', [ManajerController::class, 'dashboard'])->name('index');
+    Route::get('/dashbord', [ManajerController::class, 'index'])->name('index');
     // Admin
     Route::controller(ManajerController::class)->group(function () {
         Route::get('/manajer', 'index')->name('manajer');
