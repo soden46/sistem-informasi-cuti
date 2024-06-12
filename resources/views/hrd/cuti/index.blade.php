@@ -35,7 +35,7 @@
         <th style="width: 150px">Keterangan Reject</th>
         <th style="width: 100px">Aksi</th>
     </tr>
-    @foreach ($jenis as $data)
+    @foreach ($cuti as $data)
     <tr>
         <td style="width: 150px">{{$data->no_cuti }}</td>
         <td style="width: 150px">{{$data->npp }}</td>
