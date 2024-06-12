@@ -21,8 +21,9 @@ class ManajerController extends Controller
     public function index(Request $request)
     {
         $user = Auth::user();
+        $manajer = Employee::where('npp', auth()->user()->npp)->first();
         // dd(auth()->user());
-        $karyawan = Employee::where('hak_akses', 'karyawan')->where('active', 'Ya')->count();
+        $karyawan = Employee::where('hak_akses', 'karyawan')->where('hak_akses', 'karyawan')->where('id_divisi', $manajer->id_divisi)->where('active', 'Ya')->count();
         $hrd = Employee::where('hak_akses', 'hrd')->where('active', 'Ya')->count();
         return view('manajer.index', compact('user', 'karyawan', 'hrd'));
     }
