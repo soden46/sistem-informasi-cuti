@@ -10,7 +10,7 @@
             <div class="card">
                 <div class="card-header">Tambah Data Cuti</div>
                 <div class="card-body">
-                    <form action="{{ route('hrd.cuti.store') }}" method="POST">
+                    <form action="{{ route('hrd.cuti.save') }}" method="POST">
                         @csrf
                         <div class="form-group">
                             <label for="no_cuti">No Cuti</label>

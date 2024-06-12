@@ -41,8 +41,7 @@ class LoginController extends Controller
             Log::info('User logged in: ', ['nama_emp' => $user->nama_emp, 'hak_akses' => $user->hak_akses]);
             Session::regenerate();
             if ($user->hak_akses == 'manajer divisi') {
-                dd("MANAJER");
-                // return redirect()->route('admin.index');
+                return redirect()->route('manajer.index');
             } elseif ($user->hak_akses == 'hrd') {
                 return redirect()->route('hrd.index');
             } elseif ($user->hak_akses == 'karyawan') {
