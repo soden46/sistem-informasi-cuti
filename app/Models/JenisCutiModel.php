@@ -13,8 +13,8 @@ class JenisCutiModel extends Model
     protected $table = "jenis_cuti";
     protected $primaryKey = 'id_jenis_cuti';
     protected $guarded = [];
-    public $incrementing = false; // Disable auto-incrementing
-    protected $keyType = 'string'; // Use string as primary key type
+    public $incrementing = false;
+    protected $keyType = 'string';
 
     protected static function boot()
     {
@@ -32,7 +32,6 @@ class JenisCutiModel extends Model
         $latestId = $latestId ? intval($latestId) : 0;
         $newId = $latestId + 1;
 
-        // Format the new ID with leading zeros to make it 5 characters long
         return str_pad($newId, 5, '0', STR_PAD_LEFT);
     }
 }

@@ -90,8 +90,7 @@ class DataJenisCutiController extends Controller
     public function update(Request $request, $id_jenis_cuti)
     {
         $rules = [
-            'id_jenis_cuti ' => 'required|max:5',
-            'nama_cuti ' => 'required|20',
+            'nama_cuti ' => 'required|max:20',
             'lama_cuti ' => 'required|max:3',
         ];
 

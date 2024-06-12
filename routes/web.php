@@ -72,9 +72,9 @@ Route::group(['prefix' => 'hrd', 'as' => 'hrd.'], function () {
     Route::get('/jenis-cuti', [DataJenisCutiController::class, 'index'])->name('jeniscuti');
     Route::get('/jenis-cuti/create', [DataJenisCutiController::class, 'create'])->name('jeniscuti.create');
     Route::post('/jenis-cuti/save', [DataJenisCutiController::class, 'store'])->name('jeniscuti.save');
-    Route::get('/jenis-cuti/edit/{id_jenis}', [DataJenisCutiController::class, 'edit'])->name('jeniscuti.edit');
-    Route::post('/jenis-cuti/update/{id_jenis}', [DataJenisCutiController::class, 'update'])->name('jeniscuti.update');
-    Route::delete('/jenis-cuti/{id_jenis}', [DataJenisCutiController::class, 'destroy'])->name('jeniscuti.destroy');
+    Route::get('/jenis-cuti/edit/{id_jenis_cuti}', [DataJenisCutiController::class, 'edit'])->name('jeniscuti.edit');
+    Route::put('/jenis-cuti/update/{id_jenis_cuti}', [DataJenisCutiController::class, 'update'])->name('jeniscuti.update');
+    Route::delete('/jenis-cuti/{id_jenis_cuti}', [DataJenisCutiController::class, 'destroy'])->name('jeniscuti.destroy');
     Route::get('/jenis-cuti/cetak', [DataJenisCutiController::class, 'pdf'])->name('jeniscuti.cetak');
 
     // Data Cuti
@@ -116,9 +116,9 @@ Route::group(['prefix' => 'manajer', 'as' => 'manajer.'], function () {
     Route::get('/jenis-cuti', [ManajerDataJenisCutiController::class, 'index'])->name('jeniscuti');
     Route::get('/jenis-cuti/create', [ManajerDataJenisCutiController::class, 'create'])->name('jeniscuti.create');
     Route::post('/jenis-cuti/save', [ManajerDataJenisCutiController::class, 'store'])->name('jeniscuti.save');
-    Route::get('/jenis-cuti/edit/{id_jenis}', [ManajerDataJenisCutiController::class, 'edit'])->name('jeniscuti.edit');
-    Route::post('/jenis-cuti/update/{id_jenis}', [ManajerDataJenisCutiController::class, 'update'])->name('jeniscuti.update');
-    Route::delete('/jenis-cuti/{id_jenis}', [ManajerDataJenisCutiController::class, 'destroy'])->name('jeniscuti.destroy');
+    Route::get('/jenis-cuti/edit/{id_jenis_cuti}', [ManajerDataJenisCutiController::class, 'edit'])->name('jeniscuti.edit');
+    Route::post('/jenis-cuti/update/{id_jenis_cuti}', [ManajerDataJenisCutiController::class, 'update'])->name('jeniscuti.update');
+    Route::delete('/jenis-cuti/{id_jenis_cuti}', [ManajerDataJenisCutiController::class, 'destroy'])->name('jeniscuti.destroy');
     Route::get('/jenis-cuti/cetak', [ManajerDataJenisCutiController::class, 'pdf'])->name('jeniscuti.cetak');
 
     // Data Cuti

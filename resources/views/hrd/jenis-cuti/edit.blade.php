@@ -15,9 +15,9 @@
             <h5 class="card-title">Edit Jenis Cuti</h5>
         </div>
         <div class="card-body">
-            <form method="post" action="{{ route('hrd.jeniscuti.update', $jenis->id_jenis_cuti) }}" enctype="multipart/form-data">
+            <form method="POST" action="{{ route('hrd.jeniscuti.update', $jenis->id_jenis_cuti) }}" enctype="multipart/form-data">
                 @csrf
-                @method('POST') <!-- Tambahkan ini untuk mengirimkan metode PUT -->
+                @method('PUT')
 
                 <div class="form-group">
                     <label for="nama_cuti">Nama Cuti</label>
@@ -30,7 +30,7 @@
                 </div>
 
                 <button type="submit" class="btn btn-primary">Simpan</button>
-                <a href="{{ route('hrd.jeniscuti') }}" class="btn btn-secondary">Batal</a> <!-- Tambahkan tombol untuk membatalkan -->
+                <a href="{{ route('hrd.jeniscuti') }}" class="btn btn-secondary">Batal</a>
             </form>
         </div>
     </div>

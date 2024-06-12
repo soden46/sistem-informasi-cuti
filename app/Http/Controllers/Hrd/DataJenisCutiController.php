@@ -69,7 +69,7 @@ class DataJenisCutiController extends Controller
      * @param  \App\Models\Penduduk  $masyarakat
      * @return \Illuminate\Http\Response
      */
-    public function edit(JenisCutiModel  $id_jenis_cuti)
+    public function edit($id_jenis_cuti)
     {
 
         return view('hrd.jenis-cuti.edit', [
@@ -88,17 +88,15 @@ class DataJenisCutiController extends Controller
     public function update(Request $request, $id_jenis_cuti)
     {
         $rules = [
-            'nama_cuti ' => 'required|max:20',
-            'lama_cuti ' => 'required|max:3',
+            'nama_cuti' => 'required|max:20',
+            'lama_cuti' => 'required|max:3',
         ];
 
         $validatedData = $request->validate($rules);
 
-        $JenisCutiModel = JenisCutiModel::where('id_jenis_cuti', $id_jenis_cuti)->first();
+        JenisCutiModel::where('id_jenis_cuti', $id_jenis_cuti)->update($validatedData);
 
-        $JenisCutiModel->update($validatedData);
-
-        return redirect()->route('hrd.jeniscuti')->with('success', 'Data has ben updated');
+        return redirect()->route('hrd.jeniscuti')->with('success', 'Data has been updated');
     }
 
     /**
