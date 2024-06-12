@@ -51,17 +51,16 @@ class DataJenisCutiController extends Controller
      */
     public function store(Request $request)
     {
-
         $rules = [
-            'nama_cuti ' => 'required|20',
-            'lama_cuti ' => 'required|max:3',
+            'nama_cuti' => 'required|max:20',
+            'lama_cuti' => 'required|max:3',
         ];
 
         $validatedData = $request->validate($rules);
 
         JenisCutiModel::create($validatedData);
 
-        return redirect()->route('hrd.jeniscuti')->with('success', 'Data has ben created');
+        return redirect()->route('hrd.jeniscuti')->with('success', 'Data has been created');
     }
 
     /**
@@ -89,7 +88,7 @@ class DataJenisCutiController extends Controller
     public function update(Request $request, $id_jenis_cuti)
     {
         $rules = [
-            'nama_cuti ' => 'required|20',
+            'nama_cuti ' => 'required|max:20',
             'lama_cuti ' => 'required|max:3',
         ];
 

@@ -10,16 +10,17 @@ use Illuminate\Support\Facades\DB;
 class JenisCutiModel extends Model
 {
     use HasFactory;
-    public $table = "jenis_cuti";
-    protected $primary = 'id_jenis_cuti';
+    protected $table = "jenis_cuti";
+    protected $primaryKey = 'id_jenis_cuti';
     protected $guarded = [];
+    public $incrementing = false; // Disable auto-incrementing
+    protected $keyType = 'string'; // Use string as primary key type
 
     protected static function boot()
     {
         parent::boot();
         static::creating(function ($model) {
             if (empty($model->{$model->getKeyName()})) {
-                // Logika untuk menghasilkan nilai unik dengan panjang 5 karakter
                 $model->{$model->getKeyName()} = self::generateUniqueId();
             }
         });
@@ -27,16 +28,11 @@ class JenisCutiModel extends Model
 
     private static function generateUniqueId()
     {
-        do {
-            // Menghasilkan ID unik dari karakter acak, bisa diubah sesuai kebutuhan
-            $id_jenis_cuti = strtoupper(Str::random(5));
-        } while (self::idExists($id_jenis_cuti));
+        $latestId = self::max('id_jenis_cuti');
+        $latestId = $latestId ? intval($latestId) : 0;
+        $newId = $latestId + 1;
 
-        return $id_jenis_cuti;
-    }
-
-    private static function idExists($id_jenis_cuti)
-    {
-        return self::where('id_jenis_cuti', $id_jenis_cuti)->exists();
+        // Format the new ID with leading zeros to make it 5 characters long
+        return str_pad($newId, 5, '0', STR_PAD_LEFT);
     }
 }
