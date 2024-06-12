@@ -26,8 +26,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Gate::define('manajer divisi', function (Employee $user) {
-            return $user->hak_akses == 'manajer divisi';
+        Gate::define('manajer', function (Employee $user) {
+            return $user->hak_akses == 'manajer';
         });
 
         Gate::define('hrd', function (Employee $user) {

@@ -18,7 +18,7 @@ class DivisiSeeder extends Seeder
         // Menyimpan data pertama
         DivisiModel::create([
             'id_divisi' => '1',
-            'nama_divisi' => 'manajer divisi',
+            'nama_divisi' => 'manajer',
             'created_at' => '2024-02-04 10:30:27',
             'updated_at' => '2024-02-04 10:30:27'
         ]);

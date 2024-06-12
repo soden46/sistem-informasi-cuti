@@ -23,7 +23,7 @@ class DataKarywanController extends Controller
 
         if ($cari != NULL) {
             return view('hrd.karyawan.index', [
-                'title' => 'Data Karyawan',
+                'title' => 'Data aryawan',
                 'karyawan' => Employee::with('divisi')->where('hak_akses', 'karyawan')->orWhere('nama_emp', 'like', "%{$cari}%")->paginate(10),
                 'div' => DivisiModel::get(),
             ]);

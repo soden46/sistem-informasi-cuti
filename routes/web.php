@@ -41,7 +41,7 @@ Route::post('/register', [RegisterController::class, 'store'])->name('register')
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth')->name('dashboard');
 
 //admin
-Route::group(['prefix' => 'manajer divisi', 'as' => 'manajer.'], function () {
+Route::group(['prefix' => 'manajer', 'as' => 'manajer.'], function () {
     Route::get('/dashbord', [AdminController::class, 'dashboard'])->name('index');
     // Admin
     Route::controller(AdminController::class)->group(function () {

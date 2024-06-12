@@ -62,7 +62,7 @@
                 <div class="form-group">
                     <label for="hak_akses">Hak Akses</label>
                     <select class="form-control" id="hak_akses" name="hak_akses">
-                        <option value="manajer divisi" {{ $karyawan->hak_akses == 'manajer divisi' ? 'selected' : '' }}>Manajer Divisi</option>
+                        <option value="manajer" {{ $karyawan->hak_akses == 'manajer' ? 'selected' : '' }}>Manajer Divisi</option>
                         <option value="hrd" {{ $karyawan->hak_akses == 'hrd' ? 'selected' : '' }}>HRD</option>
                         <option value="karyawan" {{ $karyawan->hak_akses == 'karyawan' ? 'selected' : '' }}>Karyawan</option>
                     </select>

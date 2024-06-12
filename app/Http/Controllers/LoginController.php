@@ -40,13 +40,12 @@ class LoginController extends Controller
             // dd($user);
             Log::info('User logged in: ', ['nama_emp' => $user->nama_emp, 'hak_akses' => $user->hak_akses]);
             Session::regenerate();
-            if ($user->hak_akses == 'manajer divisi') {
+            if ($user->hak_akses == 'manajer') {
                 return redirect()->route('manajer.index');
             } elseif ($user->hak_akses == 'hrd') {
                 return redirect()->route('hrd.index');
             } elseif ($user->hak_akses == 'karyawan') {
-                dd("Karyawan");
-                // return redirect()->route('siswa.index');
+                return redirect()->route('siswa.index');
             }
         } else {
             Log::warning('Failed login attempt: ', ['nama_emp' => $request->input('nama_emp')]);

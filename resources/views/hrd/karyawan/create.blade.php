@@ -59,7 +59,7 @@
                 <div class="form-group">
                     <label for="hak_akses">Hak Akses</label>
                     <select class="form-control" id="hak_akses" name="hak_akses">
-                        <option value="manajer divisi">Manajer Divisi</option>
+                        <option value="manajer">Manajer Divisi</option>
                         <option value="hrd">HRD</option>
                         <option value="karyawan">Karyawan</option>
                     </select>

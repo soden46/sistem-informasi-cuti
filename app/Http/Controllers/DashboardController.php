@@ -16,7 +16,7 @@ class DashboardController extends Controller
         if (!auth()->check()) {
             abort(403);
         }
-        if (auth()->user()->hak_akses == 'manajer divisi') {
+        if (auth()->user()->hak_akses == 'manajer') {
             dd(auth()->user());
             return view('manajer.index');
         }
