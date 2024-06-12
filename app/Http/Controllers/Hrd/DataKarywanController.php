@@ -167,7 +167,7 @@ class DataKarywanController extends Controller
     public function destroy($npp)
     {
         Employee::where('npp', $npp)->delete();
-        return redirect()->route('hrd.siswa')->with('success', 'Data has ben deleted');
+        return redirect()->route('hrd.karyawan')->with('success', 'Data has ben deleted');
     }
 
     public function pdf()
@@ -179,6 +179,6 @@ class DataKarywanController extends Controller
 
         $customPaper = [0, 0, 567.00, 500.80];
         $pdf = Pdf::loadView('hrd.laporan.karyawan', $data)->setPaper('customPaper', 'potrait');
-        return $pdf->stream('surat-keterangan-biasa.pdf');
+        return $pdf->stream('laporan-data-karyawan.pdf');
     }
 }

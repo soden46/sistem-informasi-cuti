@@ -26,17 +26,24 @@
         </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="{{route('hrd.karyawan')}}">
-            <i class="fa fa-light fa-newspaper"></i>
-            <span>Data Karyawan</span>
-        </a>
-    </li>
-    <li class="nav-item">
         <a class="nav-link" href="{{route('hrd.jeniscuti')}}">
             <i class="fa fa-info-circle"></i>
             <span>Data Jenis Cuti</span>
         </a>
     </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{route('hrd.cuti')}}">
+            <i class="fa fa-info-circle"></i>
+            <span>Cuti</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{route('hrd.karyawan')}}">
+            <i class="fa fa-light fa-newspaper"></i>
+            <span>Data Karyawan</span>
+        </a>
+    </li>
+
     <hr class="sidebar-divider">
     <li class="nav-item">
         <a class="nav-link" href="/logout">

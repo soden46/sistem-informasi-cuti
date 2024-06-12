@@ -7,12 +7,18 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 
-class DivisiModel extends Model
+class CutiModel extends Model
 {
     use HasFactory;
-    public $table = "divisi";
-    protected $primary = 'id_divisi';
+
+    public $table = "cuti";
+    protected $primary = 'id_cuti';
     protected $guarded = [];
+
+    public function jenisCuti()
+    {
+        return $this->hasOne(JenisCutiModel::class, 'id_jenis_cuti', 'id_jenis_cuti');
+    }
 
     protected static function boot()
     {
@@ -29,14 +35,14 @@ class DivisiModel extends Model
     {
         do {
             // Menghasilkan ID unik dari karakter acak, bisa diubah sesuai kebutuhan
-            $id_divisi = strtoupper(Str::random(5));
-        } while (self::idExists($id_divisi));
+            $id = strtoupper(Str::random(5));
+        } while (self::idExists($id));
 
-        return $id_divisi;
+        return $id;
     }
 
-    private static function idExists($id_divisi)
+    private static function idExists($id)
     {
-        return self::where('id_divisi', $id_divisi)->exists();
+        return self::where('id', $id)->exists();
     }
 }

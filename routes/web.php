@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\DataEkskulController;
 use App\Http\Controllers\admin\DataPembinaController;
 use App\Http\Controllers\admin\DataSiswaController;
+use App\Http\Controllers\DataCutiControllerl;
 use App\Http\Controllers\Hrd\DataDivisiController;
 use App\Http\Controllers\Hrd\DataJenisCutiController;
 use App\Http\Controllers\Hrd\DataKarywanController;
@@ -164,6 +165,15 @@ Route::group(['prefix' => 'hrd', 'as' => 'hrd.'], function () {
     Route::post('/jenis-cuti/update/{id_jenis}', [DataJenisCutiController::class, 'update'])->name('jeniscuti.update');
     Route::delete('/jenis-cuti/{id_jenis}', [DataJenisCutiController::class, 'destroy'])->name('jeniscuti.destroy');
     Route::get('/jenis-cuti/cetak', [DataJenisCutiController::class, 'pdf'])->name('jeniscuti.cetak');
+
+    // Data Cuti
+    Route::get('/cuti', [DataCutiControllerl::class, 'index'])->name('cuti');
+    Route::get('/cuti/create', [DataCutiControllerl::class, 'create'])->name('cuti.create');
+    Route::post('/cuti/save', [DataCutiControllerl::class, 'store'])->name('cuti.save');
+    Route::get('/cuti/edit/{id_jenis}', [DataCutiControllerl::class, 'edit'])->name('cuti.edit');
+    Route::post('/cuti/update/{id_jenis}', [DataCutiControllerl::class, 'update'])->name('cuti.update');
+    Route::delete('/cuti/{id_jenis}', [DataCutiControllerl::class, 'destroy'])->name('cuti.destroy');
+    Route::get('/cuti/cetak', [DataCutiControllerl::class, 'pdf'])->name('cuti.cetak');
 });
 
 

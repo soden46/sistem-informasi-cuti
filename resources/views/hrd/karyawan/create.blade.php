@@ -1,6 +1,6 @@
 @extends('dashboard', [
-'title' => 'Tambah Divisi',
-'pageTitle' => 'Tambah Divisi'
+'title' => 'Tambah Karyawan',
+'pageTitle' => 'Tambah Karyawan'
 ])
 
 @section('content')
@@ -13,11 +13,16 @@
 <div class="col-lg-8">
     <div class="card">
         <div class="card-header">
-            <h5 class="card-title">Tambah Divisi</h5>
+            <h5 class="card-title">Tambah Karyawan</h5>
         </div>
         <div class="card-body">
-            <form method="post" action="{{ route('hrd.divisi.save') }}" enctype="multipart/form-data">
+            <form method="post" action="{{ route('hrd.keryawan.save') }}" enctype="multipart/form-data">
                 @csrf
+
+                <div class="form-group">
+                    <label for="npp">NPP</label>
+                    <input type="text" class="form-control" id="npp" name="npp">
+                </div>
 
                 <div class="form-group">
                     <label for="id_divisi">Divisi</label>
@@ -29,8 +34,8 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="nama_divisi">Nama Divisi</label>
-                    <input type="text" class="form-control" id="nama_divisi" name="nama_divisi">
+                    <label for="nama_emp">Nama Karyawan</label>
+                    <input type="text" class="form-control" id="nama_emp" name="nama_emp">
                 </div>
 
                 <div class="form-group">

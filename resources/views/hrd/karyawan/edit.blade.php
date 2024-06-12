@@ -21,6 +21,11 @@
                 @method('PUT')
 
                 <div class="form-group">
+                    <label for="npp">NPP</label>
+                    <input type="text" class="form-control" id="npp" name="npp" value="{{ $karyawan->npp }}">
+                </div>
+
+                <div class="form-group">
                     <label for="id_divisi ">Divisi</label>
                     <select class="form-control" id="id_divisi " name="id_divisi ">
                         @foreach($div as $data)
@@ -29,6 +34,11 @@
                         </option>
                         @endforeach
                     </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="nama_emp">Nama Karyawan</label>
+                    <input type="text" class="form-control" id="nama_emp" name="nama_emp" value="{{ $karyawan->nama_emp }}">
                 </div>
 
                 <div class="form-group">
