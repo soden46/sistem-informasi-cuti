@@ -14,18 +14,14 @@ class CutiModel extends Model
     public $table = "cuti";
     protected $primary = 'no_cuti';
     protected $guarded = [];
-
-    public function jenisCuti()
-    {
-        return $this->hasOne(JenisCutiModel::class, 'id_jenis_cuti', 'id_jenis_cuti');
-    }
+    public $incrementing = false; // Disable auto-incrementing
+    protected $keyType = 'string'; // Use string as primary key type
 
     protected static function boot()
     {
         parent::boot();
         static::creating(function ($model) {
             if (empty($model->{$model->getKeyName()})) {
-                // Logika untuk menghasilkan nilai unik dengan panjang 5 karakter
                 $model->{$model->getKeyName()} = self::generateUniqueId();
             }
         });
@@ -33,16 +29,11 @@ class CutiModel extends Model
 
     private static function generateUniqueId()
     {
-        do {
-            // Menghasilkan ID unik dari karakter acak, bisa diubah sesuai kebutuhan
-            $no_cuti = strtoupper(Str::random(5));
-        } while (self::idExists($no_cuti));
+        $latestId = self::max('no_cuti');
+        $latestId = $latestId ? intval($latestId) : 0;
+        $newId = $latestId + 1;
 
-        return $no_cuti;
-    }
-
-    private static function idExists($no_cuti)
-    {
-        return self::where('no_cuti', $no_cuti)->exists();
+        // Format the new ID with leading zeros to make it 5 characters long
+        return str_pad($newId, 5, '0', STR_PAD_LEFT);
     }
 }
