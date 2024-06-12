@@ -61,7 +61,7 @@
                             <textarea name="ket_reject" class="form-control" placeholder="Keterangan Reject"></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary">Simpan</button>
-                        <a href="{{ route('hrd.cuti.index') }}" class="btn btn-secondary">Batal</a>
+                        <a href="{{ route('hrd.cuti') }}" class="btn btn-secondary">Batal</a>
                     </form>
                 </div>
             </div>
