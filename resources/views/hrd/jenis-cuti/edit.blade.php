@@ -24,6 +24,11 @@
                     <input type="text" class="form-control" id="nama_cuti" name="nama_cuti" value="{{ $jenis->nama_cuti }}">
                 </div>
 
+                <div class="form-group">
+                    <label for="lama_cuti">Lama Cuti</label>
+                    <input type="text" class="form-control" id="lama_cuti" name="lama_cuti" value="{{ $jenis->lama_cuti }}">
+                </div>
+
                 <button type="submit" class="btn btn-primary">Simpan</button>
                 <a href="{{ route('hrd.jeniscuti') }}" class="btn btn-secondary">Batal</a> <!-- Tambahkan tombol untuk membatalkan -->
             </form>

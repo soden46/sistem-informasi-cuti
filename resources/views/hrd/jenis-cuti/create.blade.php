@@ -22,7 +22,10 @@
                     <label for="nama_cuti">Nama Cuti</label>
                     <input type="text" class="form-control" id="nama_cuti" name="nama_cuti">
                 </div>
-
+                <div class="form-group">
+                    <label for="lama_cuti">Lama Cuti</label>
+                    <input type="text" class="form-control" id="lama_cuti" name="lama_cuti">
+                </div>
                 <button type="submit" class="btn btn-primary">Simpan</button>
                 <button type="reset" class="btn btn-secondary">Reset</button>
             </form>
