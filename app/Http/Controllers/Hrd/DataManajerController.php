@@ -98,7 +98,7 @@ class DataManajerController extends Controller
             'password' => $validatedData['password'],
             'foto_emp' => $validatedData['foto_emp'],
             'active' => $validatedData['active'],
-            'telp_emp' => $fotoPath
+            'telp_emp' => $validatedData['telp_emp']
         ]);
 
         return redirect()->route('hrd.manajer')->with('success', 'Data has ben created');
@@ -170,7 +170,7 @@ class DataManajerController extends Controller
             'password' => $validatedData['password'],
             'foto_emp' => $validatedData['foto_emp'],
             'active' => $validatedData['active'],
-            'telp_emp' => $fotoPath
+            $validatedData['telp_emp']
         ]);
 
         return redirect()->route('hrd.manajer')->with('success', 'Data has been updated');
