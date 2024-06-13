@@ -64,7 +64,6 @@ class DataManajerController extends Controller
             'alamat' => 'required',
             'jml_cuti' => 'nullable|max:11',
             'password' => 'required',
-            'foto_emp' => 'nullable|file|mimes:jpeg,png,jpg,gif|max:2048',
             'active' => 'required',
             'telp_emp' => 'nullable|max:20',
         ];
@@ -77,14 +76,6 @@ class DataManajerController extends Controller
         $hak_akses = "manajer";
         $jabatan = "manajer";
 
-        // Proses upload foto
-        if ($request->hasFile('foto_emp')) {
-            $fotoPath = $request->file('foto_emp')->store('manajer');
-            $validatedData['foto_emp'] = $fotoPath;
-        } else {
-            $validatedData['foto_emp'] = null; // Set default jika tidak ada foto diupload
-        }
-
         // Buat data karyawan
         Employee::create([
             'npp' => $validatedData['npp'],
@@ -96,7 +87,6 @@ class DataManajerController extends Controller
             'hak_akses' => 'manajer',
             'jml_cuti' => $validatedData['jml_cuti'],
             'password' => $validatedData['password'],
-            'foto_emp' => $validatedData['foto_emp'],
             'active' => $validatedData['active'],
             'telp_emp' => $validatedData['telp_emp']
         ]);
@@ -137,7 +127,6 @@ class DataManajerController extends Controller
             'alamat' => 'required',
             'jml_cuti' => 'nullable|max:11',
             'password' => 'nullable',
-            'foto_emp' => 'nullable|file|mimes:jpeg,png,jpg,gif|max:2048',
             'telp_emp' => 'nullable|max:20',
         ];
 
@@ -151,12 +140,6 @@ class DataManajerController extends Controller
             unset($validatedData['password']); // Remove password from validated data if it's empty
         }
 
-        // Handle file upload if a new file is provided
-        if ($request->hasFile('foto_emp')) {
-            $fotoPath = $request->file('foto_emp')->store('manajer');
-            $validatedData['foto_emp'] = $fotoPath;
-        }
-
         // Update the employee data
         Employee::where('npp', $npp)->update([
             'npp' => $validatedData['npp'],
@@ -168,7 +151,6 @@ class DataManajerController extends Controller
             'hak_akses' => 'manajer',
             'jml_cuti' => $validatedData['jml_cuti'],
             'password' => $validatedData['password'],
-            'foto_emp' => $validatedData['foto_emp'],
             'active' => $validatedData['active'],
             $validatedData['telp_emp']
         ]);

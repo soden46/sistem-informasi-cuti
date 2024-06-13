@@ -1,89 +1,84 @@
 @extends('dashboard', [
-    'title' => 'Tambah Karyawan',
-    'pageTitle' => 'Tambah Karyawan',
+'title' => 'Tambah Karyawan',
+'pageTitle' => 'Tambah Karyawan',
 ])
 
 @section('content')
-    @if ($message = Session::get('success'))
-        <div class="alert alert-success">
-            <p>{{ $message }}</p>
+@if ($message = Session::get('success'))
+<div class="alert alert-success">
+    <p>{{ $message }}</p>
+</div>
+@endif
+
+<div class="col-lg-8">
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title">Tambah Karyawan</h5>
         </div>
-    @endif
+        <div class="card-body">
+            <form method="post" action="{{ route('hrd.karyawan.save') }}" enctype="multipart/form-data">
+                @csrf
 
-    <div class="col-lg-8">
-        <div class="card">
-            <div class="card-header">
-                <h5 class="card-title">Tambah Karyawan</h5>
-            </div>
-            <div class="card-body">
-                <form method="post" action="{{ route('hrd.karyawan.save') }}" enctype="multipart/form-data">
-                    @csrf
+                <div class="form-group">
+                    <label for="npp">NPP</label>
+                    <input type="text" class="form-control" id="npp" name="npp">
+                </div>
 
-                    <div class="form-group">
-                        <label for="npp">NPP</label>
-                        <input type="text" class="form-control" id="npp" name="npp">
-                    </div>
+                <div class="form-group">
+                    <label for="id_divisi">Divisi</label>
+                    <select class="form-control" id="id_divisi" name="id_divisi">
+                        @foreach ($div as $data)
+                        <option value="{{ $data->id_divisi }}">{{ $data->id_divisi }} | {{ $data->nama_divisi }}
+                        </option>
+                        @endforeach
+                    </select>
+                </div>
 
-                    <div class="form-group">
-                        <label for="id_divisi">Divisi</label>
-                        <select class="form-control" id="id_divisi" name="id_divisi">
-                            @foreach ($div as $data)
-                                <option value="{{ $data->id_divisi }}">{{ $data->id_divisi }} | {{ $data->nama_divisi }}
-                                </option>
-                            @endforeach
-                        </select>
-                    </div>
+                <div class="form-group">
+                    <label for="nama_emp">Nama Karyawan</label>
+                    <input type="text" class="form-control" id="nama_emp" name="nama_emp">
+                </div>
 
-                    <div class="form-group">
-                        <label for="nama_emp">Nama Karyawan</label>
-                        <input type="text" class="form-control" id="nama_emp" name="nama_emp">
-                    </div>
+                <div class="form-group">
+                    <label for="jk_emp">Jenis Kelamin</label>
+                    <select class="form-control" id="jk_emp" name="jk_emp">
+                        <option value="Laki-Laki">Laki-Laki</option>
+                        <option value="Perempuan">Perempuan</option>
+                    </select>
+                </div>
 
-                    <div class="form-group">
-                        <label for="jk_emp">Jenis Kelamin</label>
-                        <select class="form-control" id="jk_emp" name="jk_emp">
-                            <option value="Laki-Laki">Laki-Laki</option>
-                            <option value="Perempuan">Perempuan</option>
-                        </select>
-                    </div>
+                <div class="form-group">
+                    <label for="alamat">Alamat</label>
+                    <textarea class="form-control" id="alamat" name="alamat" rows="3"></textarea>
+                </div>
 
-                    <div class="form-group">
-                        <label for="alamat">Alamat</label>
-                        <textarea class="form-control" id="alamat" name="alamat" rows="3"></textarea>
-                    </div>
+                <div class="form-group">
+                    <label for="jml_cuti">Jumlah Cuti</label>
+                    <input type="text" class="form-control" id="jml_cuti" name="jml_cuti">
+                </div>
 
-                    <div class="form-group">
-                        <label for="jml_cuti">Jumlah Cuti</label>
-                        <input type="text" class="form-control" id="jml_cuti" name="jml_cuti">
-                    </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" id="password" name="password">
+                </div>
 
-                    <div class="form-group">
-                        <label for="password">Password</label>
-                        <input type="password" class="form-control" id="password" name="password">
-                    </div>
+                <div class="form-group">
+                    <label for="active">Aktif</label>
+                    <select class="form-control" id="active" name="active">
+                        <option value="Ya">Ya</option>
+                        <option value="Tidak">Tidak</option>
+                    </select>
+                </div>
 
-                    <div class="form-group">
-                        <label for="foto_emp">Foto</label>
-                        <input type="file" class="form-control" id="foto_emp" name="foto_emp">
-                    </div>
+                <div class="form-group">
+                    <label for="telp_emp">Telepon</label>
+                    <input type="text" class="form-control" id="telp_emp" name="telp_emp">
+                </div>
 
-                    <div class="form-group">
-                        <label for="active">Aktif</label>
-                        <select class="form-control" id="active" name="active">
-                            <option value="Ya">Ya</option>
-                            <option value="Tidak">Tidak</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="telp_emp">Telepon</label>
-                        <input type="text" class="form-control" id="telp_emp" name="telp_emp">
-                    </div>
-
-                    <button type="submit" class="btn btn-primary">Simpan</button>
-                    <button type="reset" class="btn btn-secondary">Reset</button>
-                </form>
-            </div>
+                <button type="submit" class="btn btn-primary">Simpan</button>
+                <button type="reset" class="btn btn-secondary">Reset</button>
+            </form>
         </div>
     </div>
+</div>
 @endsection

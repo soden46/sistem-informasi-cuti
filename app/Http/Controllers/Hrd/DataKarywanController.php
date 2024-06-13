@@ -65,7 +65,6 @@ class DataKarywanController extends Controller
             'alamat' => 'required',
             'jml_cuti' => 'nullable|max:11',
             'password' => 'required',
-            'foto_emp' => 'nullable|file|mimes:jpeg,png,jpg,gif|max:2048',
             'active' => 'required',
             'telp_emp' => 'nullable|max:20',
         ];
@@ -75,14 +74,6 @@ class DataKarywanController extends Controller
 
         // Hash password
         $validatedData['password'] = Hash::make($validatedData['password']);
-
-        // Proses upload foto
-        if ($request->hasFile('foto_emp')) {
-            $fotoPath = $request->file('foto_emp')->store('karyawan');
-            $validatedData['foto_emp'] = $fotoPath;
-        } else {
-            $validatedData['foto_emp'] = null; // Set default jika tidak ada foto diupload
-        }
 
         // Buat data karyawan
         Employee::create([
@@ -95,7 +86,6 @@ class DataKarywanController extends Controller
             'hak_akses' => 'karyawan',
             'jml_cuti' => $validatedData['jml_cuti'],
             'password' => $validatedData['password'],
-            'foto_emp' => $validatedData['foto_emp'],
             'active' => $validatedData['active'],
             'telp_emp' => $validatedData['telp_emp']
         ]);
@@ -136,29 +126,19 @@ class DataKarywanController extends Controller
             'alamat' => 'required',
             'jml_cuti' => 'nullable|max:11',
             'password' => 'nullable',
-            'foto_emp' => 'nullable|file|mimes:jpeg,png,jpg,gif|max:2048',
+            'active' => 'required',
             'telp_emp' => 'nullable|max:20',
         ];
 
         // Validate request data
         $validatedData = $request->validate($rules);
 
-        // Hash password if it is provided
-        if (!empty($validatedData['password'])) {
-            $validatedData['password'] = Hash::make($validatedData['password']);
-        } else {
-            unset($validatedData['password']); // Remove password from validated data if it's empty
-        }
+        // Hash password
+        $validatedData['password'] = Hash::make($validatedData['password']);
 
-        // Handle file upload if a new file is provided
-        if ($request->hasFile('foto_emp')) {
-            $fotoPath = $request->file('foto_emp')->store('karyawan');
-            $validatedData['foto_emp'] = $fotoPath;
-        }
-
+        $employee = Employee::where('npp', $npp)->first();
         // Update the employee data
         Employee::where('npp', $npp)->update([
-            'npp' => $validatedData['npp'],
             'id_divisi' => $validatedData['id_divisi'],
             'nama_emp' => $validatedData['nama_emp'],
             'jk_emp' => $validatedData['jk_emp'],
@@ -166,8 +146,7 @@ class DataKarywanController extends Controller
             'alamat' => $validatedData['alamat'],
             'hak_akses' => 'karyawan',
             'jml_cuti' => $validatedData['jml_cuti'],
-            'password' => $validatedData['password'],
-            'foto_emp' => $validatedData['foto_emp'],
+            'password' => $validatedData['password'] ?? $employee->password,
             'active' => $validatedData['active'],
             'telp_emp' => $validatedData['telp_emp']
         ]);

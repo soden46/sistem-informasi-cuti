@@ -78,12 +78,6 @@
                     <input type="password" class="form-control" id="password" name="password">
                 </div>
 
-
-                <div class="form-group">
-                    <label for="foto_emp">Foto</label>
-                    <input type="file" class="form-control-file" id="foto_emp" name="foto_emp" accept="image/*">
-                </div>
-
                 <div class="form-group">
                     <label for="active">Aktif</label>
                     <select class="form-control" id="active" name="active">

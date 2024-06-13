@@ -15,7 +15,7 @@
                         @method('PUT')
                         <div class="form-group">
                             <label for="npp">NPP</label>
-                            <input type="text" name="npp" class="form-control" value="{{ $cuti->npp }}" required>
+                            <input type="text" name="npp" class="form-control" value="{{ $cuti->npp }}" readonly required>
                         </div>
                         <div class="form-group">
                             <label for="id_jenis_cuti">Jenis Cuti</label>
