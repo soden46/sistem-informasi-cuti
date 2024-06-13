@@ -14,18 +14,23 @@
                             @csrf
                             @method('PUT')
                             <div class="form-group">
-                                <label for="npp">NPP</label>
-                                <input type="text" name="npp" class="form-control" value="{{ $cuti->npp }}"
-                                    required>
+                                <label for="npp">Karyawan</label>
+                                <select name="npp" class="form-control" readonly disabled>
+                                    @foreach ($employee as $emp)
+                                        <option value="{{ $cuti->npp }}"
+                                            {{ isset($cuti) && $cuti->npp == $emp->npp ? 'selected' : '' }}>
+                                            {{ $emp->npp }} | {{ $emp->nama_emp }}
+                                        </option>
+                                    @endforeach
+                                </select>
                             </div>
 
                             <div class="form-group">
                                 <label for="id_jenis_cuti">Jenis Cuti</label>
-                                <select name="id_jenis_cuti" class="form-control">
-                                    <option value="">-- Pilih Jenis Cuti --</option>
+                                <select name="id_jenis_cuti" class="form-control" readonly disabled>
                                     @foreach ($jenisCuti as $jenis)
                                         <option value="{{ $jenis->id_jenis_cuti }}"
-                                            {{ isset($cuti) && $cuti->id_jenis_cuti == $jenis->id ? 'selected' : '' }}>
+                                            {{ isset($cuti) && $cuti->id_jenis_cuti == $jenis->id_jenis_cuti ? 'selected' : '' }}>
                                             {{ $jenis->nama_cuti }}
                                         </option>
                                     @endforeach
@@ -34,30 +39,30 @@
                             <div class="form-group">
                                 <label for="tgl_pengajuan">Tanggal Pengajuan</label>
                                 <input type="date" name="tgl_pengajuan" class="form-control"
-                                    value="{{ $cuti->tgl_pengajuan }}" required>
+                                    value="{{ $cuti->tgl_pengajuan }}" required readonly>
                             </div>
                             <div class="form-group">
                                 <label for="tgl_awal">Tanggal Awal</label>
                                 <input type="date" name="tgl_awal" class="form-control" value="{{ $cuti->tgl_awal }}"
-                                    required>
+                                    required readonly>
                             </div>
                             <div class="form-group">
                                 <label for="tgl_akhir">Tanggal Akhir</label>
                                 <input type="date" name="tgl_akhir" class="form-control" value="{{ $cuti->tgl_akhir }}"
-                                    required>
+                                    required readonly>
                             </div>
                             <div class="form-group">
                                 <label for="durasi">Durasi Cuti</label>
                                 <input type="number" name="durasi" class="form-control" value="{{ $cuti->durasi }}"
-                                    required>
+                                    required readonly>
                             </div>
                             <div class="form-group">
                                 <label for="keterangan">Keterangan</label>
-                                <textarea name="keterangan" class="form-control" required>{{ $cuti->keterangan }}</textarea>
+                                <textarea name="keterangan" class="form-control" required readonly>{{ $cuti->keterangan }}</textarea>
                             </div>
                             <div class="form-group">
                                 <label for="stt_cuti">Status Cuti</label>
-                                <select name="stt_cuti" class="form-control" required>
+                                <select name="stt_cuti" class="form-control" disabled readonly>
                                     <option value="Pending" {{ $cuti->stt_cuti == 'Pending' ? 'selected' : '' }}>Pending
                                     </option>
                                     <option value="Approved" {{ $cuti->stt_cuti == 'Approved' ? 'selected' : '' }}>Approved

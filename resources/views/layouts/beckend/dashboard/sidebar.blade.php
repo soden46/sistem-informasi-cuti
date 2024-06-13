@@ -38,6 +38,12 @@
             </a>
         </li>
         <li class="nav-item">
+            <a class="nav-link" href="{{ route('hrd.manajer') }}">
+                <i class="fa fa-info-circle"></i>
+                <span>Data Manajer</span>
+            </a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link" href="{{ route('hrd.karyawan') }}">
                 <i class="fa fa-light fa-newspaper"></i>
                 <span>Data Karyawan</span>

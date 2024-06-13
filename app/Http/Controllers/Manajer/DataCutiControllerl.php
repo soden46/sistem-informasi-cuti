@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Manajer;
 
 use App\Http\Controllers\Controller;
 use App\Models\CutiModel;
+use App\Models\Employee;
 use App\Models\JenisCutiModel;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
@@ -90,6 +91,7 @@ class DataCutiControllerl extends Controller
             'title' => 'Edit Data Cuti',
             'cuti' => CutiModel::with('jenisCuti')->where('no_cuti', $no_cuti)->first(),
             'jenisCuti' => JenisCutiModel::get(),
+            'employee' => Employee::get(),
         ]);
     }
 

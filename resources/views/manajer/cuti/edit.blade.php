@@ -13,19 +13,22 @@
                         <form action="{{ route('manajer.cuti.update', $cuti->no_cuti) }}" method="POST">
                             @csrf
                             @method('PUT')
+
                             <div class="form-group">
-                                <label for="no_cuti">No Cuti</label>
-                                <input type="text" name="no_cuti" class="form-control" value="{{ $cuti->no_cuti }}"
-                                    readonly>
+                                <label for="npp">Karyawan</label>
+                                <select name="npp" class="form-control" readonly disabled>
+                                    @foreach ($employee as $emp)
+                                        <option value="{{ $cuti->npp }}"
+                                            {{ isset($cuti) && $cuti->npp == $emp->npp ? 'selected' : '' }}>
+                                            {{ $emp->npp }} | {{ $emp->nama_emp }}
+                                        </option>
+                                    @endforeach
+                                </select>
                             </div>
-                            <div class="form-group">
-                                <label for="npp">NPP</label>
-                                <input type="text" name="npp" class="form-control" value="{{ $cuti->npp }}"
-                                    required readonly>
-                            </div>
+
                             <div class="form-group">
                                 <label for="id_jenis_cuti">Jenis Cuti</label>
-                                <select name="id_jenis_cuti" class="form-control" required readonly>
+                                <select name="id_jenis_cuti" class="form-control" readonly disabled>
                                     @foreach ($jenisCuti as $jenis)
                                         <option value="{{ $jenis->id_jenis_cuti }}"
                                             {{ $cuti->id_jenis_cuti == $jenis->id ? 'selected' : '' }}>

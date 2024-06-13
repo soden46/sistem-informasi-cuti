@@ -8,9 +8,8 @@ use App\Models\Employee;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Storage;
 
-class DataKarywanController extends Controller
+class DataManajerController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -22,15 +21,15 @@ class DataKarywanController extends Controller
         $cari = $request->cari;
 
         if ($cari != NULL) {
-            return view('hrd.karyawan.index', [
-                'title' => 'Data aryawan',
-                'karyawan' => Employee::with('divisi')->where('hak_akses', 'karyawan')->orWhere('nama_emp', 'like', "%{$cari}%")->paginate(10),
+            return view('hrd.manajer.index', [
+                'title' => 'Data Manajer',
+                'manajer' => Employee::with('divisi')->where('hak_akses', 'manajer')->orWhere('nama_emp', 'like', "%{$cari}%")->paginate(10),
                 'div' => DivisiModel::get(),
             ]);
         } else {
-            return view('hrd.karyawan.index', [
-                'title' => 'Data Karyawan',
-                'karyawan' => Employee::with('divisi')->where('hak_akses', 'karyawan')->paginate(10),
+            return view('hrd.manajer.index', [
+                'title' => 'Data Manajer',
+                'manajer' => Employee::with('divisi')->where('hak_akses', 'manajer')->paginate(10),
                 'div' => DivisiModel::get(),
             ]);
         }
@@ -43,8 +42,8 @@ class DataKarywanController extends Controller
      */
     public function create()
     {
-        return view('hrd.karyawan.create', [
-            'title' => 'Tambah Data Karyawan',
+        return view('hrd.manajer.create', [
+            'title' => 'Tambah Data Manajer',
             'div' => DivisiModel::get(),
         ]);
     }
@@ -62,9 +61,9 @@ class DataKarywanController extends Controller
             'id_divisi' => 'required',
             'nama_emp' => 'required|max:20',
             'jk_emp' => 'required',
-            'jabatan' => 'karyawan',
+            'jabatan' => 'manajer',
             'alamat' => 'required',
-            'hak_akses' => 'karyawan',
+            'hak_akses' => 'manajer',
             'jml_cuti' => 'nullable|max:11',
             'password' => 'required',
             'foto_emp' => 'nullable|file|mimes:jpeg,png,jpg,gif|max:2048',
@@ -80,7 +79,7 @@ class DataKarywanController extends Controller
 
         // Proses upload foto
         if ($request->hasFile('foto_emp')) {
-            $fotoPath = $request->file('foto_emp')->store('karyawan');
+            $fotoPath = $request->file('foto_emp')->store('manajer');
             $validatedData['foto_emp'] = $fotoPath;
         } else {
             $validatedData['foto_emp'] = null; // Set default jika tidak ada foto diupload
@@ -89,7 +88,7 @@ class DataKarywanController extends Controller
         // Buat data karyawan
         Employee::create($validatedData);
 
-        return redirect()->route('hrd.karyawan')->with('success', 'Data has ben created');
+        return redirect()->route('hrd.manajer')->with('success', 'Data has ben created');
     }
 
     /**
@@ -101,9 +100,9 @@ class DataKarywanController extends Controller
     public function edit(Employee $divisi, $npp)
     {
 
-        return view('hrd.karyawan.edit', [
-            'title' => 'Edit Data karyawan',
-            'karyawan' => Employee::with('divisi')->where('npp', $npp)->first(),
+        return view('hrd.manajer.edit', [
+            'title' => 'Edit Data Manajer',
+            'manajer' => Employee::with('divisi')->where('npp', $npp)->first(),
             'div' => DivisiModel::get(),
         ]);
     }
@@ -122,9 +121,9 @@ class DataKarywanController extends Controller
             'id_divisi' => 'required',
             'nama_emp' => 'required|max:20',
             'jk_emp' => 'required',
-            'jabatan' => 'karyawan',
+            'jabatan' => 'manajer',
             'alamat' => 'required',
-            'hak_akses' => 'karyawan',
+            'hak_akses' => 'manajer',
             'jml_cuti' => 'nullable|max:11',
             'password' => 'nullable',
             'foto_emp' => 'nullable|file|mimes:jpeg,png,jpg,gif|max:2048',
@@ -144,14 +143,14 @@ class DataKarywanController extends Controller
 
         // Handle file upload if a new file is provided
         if ($request->hasFile('foto_emp')) {
-            $fotoPath = $request->file('foto_emp')->store('karyawan');
+            $fotoPath = $request->file('foto_emp')->store('manajer');
             $validatedData['foto_emp'] = $fotoPath;
         }
 
         // Update the employee data
         Employee::where('npp', $npp)->update($validatedData);
 
-        return redirect()->route('hrd.karyawan')->with('success', 'Data has been updated');
+        return redirect()->route('hrd.manajer')->with('success', 'Data has been updated');
     }
 
 
@@ -164,18 +163,18 @@ class DataKarywanController extends Controller
     public function destroy($npp)
     {
         Employee::where('npp', $npp)->delete();
-        return redirect()->route('hrd.karyawan')->with('success', 'Data has ben deleted');
+        return redirect()->route('hrd.manajer')->with('success', 'Data has ben deleted');
     }
 
     public function pdf()
     {
         $data = [
             'title' => 'Data Karayawan',
-            'karyawan' => Employee::with('divisi')->get(),
+            'manajer' => Employee::with('divisi')->get(),
         ];
 
         $customPaper = [0, 0, 567.00, 500.80];
-        $pdf = Pdf::loadView('hrd.karyawan.pdf', $data)->setPaper('customPaper', 'potrait');
-        return $pdf->stream('laporan-data-karyawan.pdf');
+        $pdf = Pdf::loadView('hrd.manajer.pdf', $data)->setPaper('customPaper', 'potrait');
+        return $pdf->stream('laporan-data-manajer.pdf');
     }
 }

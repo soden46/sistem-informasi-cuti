@@ -13,6 +13,7 @@ use App\Http\Controllers\Hrd\DataCutiControllerl;
 use App\Http\Controllers\Hrd\DataDivisiController;
 use App\Http\Controllers\Hrd\DataJenisCutiController;
 use App\Http\Controllers\Hrd\DataKarywanController;
+use App\Http\Controllers\Hrd\DataManajerController;
 use App\Http\Controllers\Hrd\HrdController;
 use App\Http\Controllers\Karyawan\CutiController;
 use App\Http\Controllers\Karyawan\KaryawanController;
@@ -60,6 +61,15 @@ Route::group(['prefix' => 'hrd', 'as' => 'hrd.'], function () {
     Route::put('/karyawan/update/{npp}', [DataKarywanController::class, 'update'])->name('karyawan.update');
     Route::delete('/karyawan/{npp}', [DataKarywanController::class, 'destroy'])->name('karyawan.destroy');
     Route::get('/karyawan/cetak', [DataKarywanController::class, 'pdf'])->name('karyawan.cetak');
+
+    // Data Manajer
+    Route::get('/manajer', [DataManajerController::class, 'index'])->name('manajer');
+    Route::get('/manajer/create', [DataManajerController::class, 'create'])->name('manajer.create');
+    Route::post('/manajer/save', [DataManajerController::class, 'store'])->name('manajer.save');
+    Route::get('/manajer/edit/{npp}', [DataManajerController::class, 'edit'])->name('manajer.edit');
+    Route::put('/manajer/update/{npp}', [DataManajerController::class, 'update'])->name('manajer.update');
+    Route::delete('/manajer/{npp}', [DataManajerController::class, 'destroy'])->name('manajer.destroy');
+    Route::get('/manajer/cetak', [DataManajerController::class, 'pdf'])->name('manajer.cetak');
 
     // Data Divisi
     Route::get('/divisi', [DataDivisiController::class, 'index'])->name('divisi');

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Hrd;
 
 use App\Http\Controllers\Controller;
 use App\Models\CutiModel;
+use App\Models\Employee;
 use App\Models\JenisCutiModel;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
@@ -42,6 +43,7 @@ class DataCutiControllerl extends Controller
         return view('hrd.cuti.create', [
             'title' => 'Tambah Jenis Cuti',
             'jenisCuti' => JenisCutiModel::get(),
+            'employee' => Employee::get(),
         ]);
     }
 
@@ -86,6 +88,7 @@ class DataCutiControllerl extends Controller
             'title' => 'Edit Data Cuti',
             'cuti' => CutiModel::with('jenisCuti')->where('no_cuti', $no_cuti)->first(),
             'jenisCuti' => JenisCutiModel::get(),
+            'employee' => Employee::get(),
         ]);
     }
 
