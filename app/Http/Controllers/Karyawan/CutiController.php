@@ -57,15 +57,13 @@ class CutiController extends Controller
             'tgl_akhir' => 'required|date',
             'durasi' => 'required|integer',
             'keterangan' => 'required|string|max:255',
-            'stt_cuti' => 'required|string|max:10',
-            'ket_reject' => 'required|string',
         ];
 
         $validatedData = $request->validate($rules);
 
         CutiModel::create($validatedData);
 
-        return redirect()->route('karyawan.jeniscuti')->with('success', 'Data has ben created');
+        return redirect()->route('karyawan.cuti')->with('success', 'Data has ben created');
     }
 
     /**
@@ -103,8 +101,6 @@ class CutiController extends Controller
             'tgl_akhir' => 'required|date',
             'durasi' => 'required|integer',
             'keterangan' => 'required|string|max:255',
-            'stt_cuti' => 'required|string|max:10',
-            'ket_reject' => 'required|string',
         ];
 
         $validatedData = $request->validate($rules);
