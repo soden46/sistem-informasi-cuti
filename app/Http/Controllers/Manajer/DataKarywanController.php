@@ -60,18 +60,14 @@ class DataKarywanController extends Controller
     {
 
         $rules = [
-            'npp ' => 'required|max:5',
-            'id_divisi ' => 'required',
-            'nama_emp ' => 'required|max:20',
-            'jk_emp ' => 'required',
-            'jabatan ' => 'required|max:50',
-            'alamat ' => 'required',
-            'hak_akses ' => 'required|max:20',
-            'jml_cuti ' => 'required|max:11',
-            'password ' => 'required',
-            'foto_emp ' => 'required|png,jpg,jpeg|max:2048',
-            'active ' => 'required',
-            'telp_emp ' => 'required|20',
+            'id_divisi' => 'required',
+            'nama_emp' => 'required',
+            'jk_emp' => 'required',
+            'alamat' => 'required',
+            'jml_cuti' => 'nullable|max:11',
+            'password' => 'nullable',
+            'foto_emp' => 'nullable|file|mimes:jpeg,png,jpg,gif|max:2048',
+            'telp_emp' => 'nullable|max:20',
         ];
 
         $validatedData = $request->validate($rules);
@@ -87,10 +83,20 @@ class DataKarywanController extends Controller
             $validatedData['foto_emp'] = null; // Set default jika tidak ada foto diupload
         }
 
-        Employee::create($validatedData);
-
-        // dd($validatedData);
-        Employee::create($validatedData);
+        Employee::create([
+            'npp' => $validatedData['npp'],
+            'id_divisi' => $validatedData['id_divisi'],
+            'nama_emp' => $validatedData['nama_emp'],
+            'jk_emp' => $validatedData['jk_emp'],
+            'jabatan' => 'karyawan',
+            'alamat' => $validatedData['alamat'],
+            'hak_akses' => 'karyawan',
+            'jml_cuti' => $validatedData['jml_cuti'],
+            'password' => $validatedData['password'],
+            'foto_emp' => $validatedData['foto_emp'],
+            'active' => $validatedData['active'],
+            'telp_emp' => $validatedData['telp_emp']
+        ]);
 
         return redirect()->route('manajer.karyawan.index')->with('success', 'Data has ben created');
     }
@@ -121,18 +127,14 @@ class DataKarywanController extends Controller
     public function update(Request $request, $npp)
     {
         $rules = [
-            'npp ' => 'required|max:5',
-            'id_divisi ' => 'required',
-            'nama_emp ' => 'required|max:20',
-            'jk_emp ' => 'required',
-            'jabatan ' => 'required|max:50',
-            'alamat ' => 'required',
-            'hak_akses ' => 'required|max:20',
-            'jml_cuti ' => 'required|max:11',
-            'password ' => 'required',
-            'foto_emp ' => 'required|png,jpg,jpeg|max:2048',
-            'active ' => 'required',
-            'telp_emp ' => 'required|20',
+            'id_divisi' => 'required',
+            'nama_emp' => 'required',
+            'jk_emp' => 'required',
+            'alamat' => 'required',
+            'jml_cuti' => 'nullable|max:11',
+            'password' => 'nullable',
+            'foto_emp' => 'nullable|file|mimes:jpeg,png,jpg,gif|max:2048',
+            'telp_emp' => 'nullable|max:20',
         ];
 
         $validatedData = $request->validate($rules);
@@ -154,7 +156,20 @@ class DataKarywanController extends Controller
             $validatedData['foto_emp'] = $fotoPath;
         }
 
-        $employee->update($validatedData);
+        $employee->update([
+            'npp' => $validatedData['npp'],
+            'id_divisi' => $validatedData['id_divisi'],
+            'nama_emp' => $validatedData['nama_emp'],
+            'jk_emp' => $validatedData['jk_emp'],
+            'jabatan' => 'karyawan',
+            'alamat' => $validatedData['alamat'],
+            'hak_akses' => 'karyawan',
+            'jml_cuti' => $validatedData['jml_cuti'],
+            'password' => $validatedData['password'],
+            'foto_emp' => $validatedData['foto_emp'],
+            'active' => $validatedData['active'],
+            'telp_emp' => $validatedData['telp_emp']
+        ]);
 
         return redirect()->route('manajer.karyawan')->with('success', 'Data has ben updated');
     }

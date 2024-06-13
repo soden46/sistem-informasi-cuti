@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Karyawan;
 
 use App\Http\Controllers\Controller;
 use App\Models\CutiModel;
+use App\Models\Employee;
 use App\Models\JenisCutiModel;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
@@ -18,11 +19,13 @@ class CutiController extends Controller
             return view('karyawan.cuti.index', [
                 'title' => 'Data Cuti',
                 'cuti' => CutiModel::with('jenisCuti')->where('npp', auth()->user()->npp)->where('no_cuti', 'like', "%{$cari}%")->paginate(10),
+                'karyawan' => Employee::where('npp', auth()->user()->npp)->first()
             ]);
         } else {
             return view('karyawan.cuti.index', [
                 'title' => 'Data Cuti',
                 'cuti' => CutiModel::with('jenisCuti')->where('npp', auth()->user()->npp)->paginate(10),
+                'karyawan' => Employee::where('npp', auth()->user()->npp)->first()
             ]);
         }
     }
@@ -37,6 +40,7 @@ class CutiController extends Controller
         return view('karyawan.cuti.create', [
             'title' => 'Tambah Jenis Cuti',
             'jenisCuti' => JenisCutiModel::get(),
+            'karyawan' => Employee::where('npp', auth()->user()->npp)->first()
         ]);
     }
 
@@ -48,10 +52,10 @@ class CutiController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
         $rules = [
-            'id_jenis_cuti' => 'required',
             'npp' => 'required|max:10',
-            'id_jenis_cuti' => 'required|integer',
+            'id_jenis_cuti' => 'required',
             'tgl_pengajuan' => 'required|date',
             'tgl_awal' => 'required|date',
             'tgl_akhir' => 'required|date',
@@ -79,6 +83,7 @@ class CutiController extends Controller
             'title' => 'Edit Data Cuti',
             'cuti' => CutiModel::with('jenisCuti')->where('no_cuti', $no_cuti)->first(),
             'jenisCuti' => JenisCutiModel::get(),
+            'karyawan' => Employee::where('npp', auth()->user()->npp)->first()
         ]);
     }
 
@@ -93,11 +98,11 @@ class CutiController extends Controller
     {
         // dd($request->all());
         $rules = [
-            'npp' => 'nullable|max:10',
-            'id_jenis_cuti' => 'nullable',
-            'tgl_pengajuan' => 'nullable|date',
-            'tgl_awal' => 'nullable|date',
-            'tgl_akhir' => 'nullable|date',
+            'npp' => 'required|max:10',
+            'id_jenis_cuti' => 'required',
+            'tgl_pengajuan' => 'required|date',
+            'tgl_awal' => 'required|date',
+            'tgl_akhir' => 'required|date',
             'durasi' => 'nullable|integer',
             'keterangan' => 'nullable|string|max:255',
         ];

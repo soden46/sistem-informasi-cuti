@@ -85,7 +85,20 @@ class DataKarywanController extends Controller
         }
 
         // Buat data karyawan
-        Employee::create($validatedData);
+        Employee::create([
+            'npp' => $validatedData['npp'],
+            'id_divisi' => $validatedData['id_divisi'],
+            'nama_emp' => $validatedData['nama_emp'],
+            'jk_emp' => $validatedData['jk_emp'],
+            'jabatan' => 'karyawan',
+            'alamat' => $validatedData['alamat'],
+            'hak_akses' => 'karyawan',
+            'jml_cuti' => $validatedData['jml_cuti'],
+            'password' => $validatedData['password'],
+            'foto_emp' => $validatedData['foto_emp'],
+            'active' => $validatedData['active'],
+            'telp_emp' => $validatedData['telp_emp']
+        ]);
 
         return redirect()->route('hrd.karyawan')->with('success', 'Data has ben created');
     }
@@ -118,15 +131,12 @@ class DataKarywanController extends Controller
         // Define validation rules
         $rules = [
             'id_divisi' => 'required',
-            'nama_emp' => 'required|max:20',
+            'nama_emp' => 'required',
             'jk_emp' => 'required',
-            'jabatan' => 'karyawan',
             'alamat' => 'required',
-            'hak_akses' => 'karyawan',
             'jml_cuti' => 'nullable|max:11',
             'password' => 'nullable',
             'foto_emp' => 'nullable|file|mimes:jpeg,png,jpg,gif|max:2048',
-            'active' => 'required',
             'telp_emp' => 'nullable|max:20',
         ];
 
@@ -147,7 +157,20 @@ class DataKarywanController extends Controller
         }
 
         // Update the employee data
-        Employee::where('npp', $npp)->update($validatedData);
+        Employee::where('npp', $npp)->update([
+            'npp' => $validatedData['npp'],
+            'id_divisi' => $validatedData['id_divisi'],
+            'nama_emp' => $validatedData['nama_emp'],
+            'jk_emp' => $validatedData['jk_emp'],
+            'jabatan' => 'karyawan',
+            'alamat' => $validatedData['alamat'],
+            'hak_akses' => 'karyawan',
+            'jml_cuti' => $validatedData['jml_cuti'],
+            'password' => $validatedData['password'],
+            'foto_emp' => $validatedData['foto_emp'],
+            'active' => $validatedData['active'],
+            'telp_emp' => $validatedData['telp_emp']
+        ]);
 
         return redirect()->route('hrd.karyawan')->with('success', 'Data has been updated');
     }
