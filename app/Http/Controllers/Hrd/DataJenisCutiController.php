@@ -119,7 +119,7 @@ class DataJenisCutiController extends Controller
         ];
 
         $customPaper = [0, 0, 567.00, 500.80];
-        $pdf = Pdf::loadView('hrd.laporan.jenis-cuti', $data)->setPaper('customPaper', 'potrait');
+        $pdf = Pdf::loadView('hrd.jenis-cuti.pdf', $data)->setPaper('customPaper', 'potrait');
         return $pdf->stream('laporan-data-jenis-cuti.pdf');
     }
 }

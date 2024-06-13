@@ -179,7 +179,7 @@ class DataKarywanController extends Controller
         ];
 
         $customPaper = [0, 0, 567.00, 500.80];
-        $pdf = Pdf::loadView('manajer.laporan.karyawan', $data)->setPaper('customPaper', 'potrait');
+        $pdf = Pdf::loadView('manajer.karyawan.pdf', $data)->setPaper('customPaper', 'potrait');
         return $pdf->stream('laporan-data-karyawan.pdf');
     }
 }

@@ -128,29 +128,13 @@
 
             <table class="table table-bordered table-responsive">
                 <tr class="font-12">
-                    <th style="width: 150px">NPP</th>
-                    <th style="width: 150px">Divisi</th>
-                    <th style="width: 150px">Nama Karyawan</th>
-                    <th style="width: 100px">Jenis Kelamin</th>
-                    <th style="width: 150px">Jabatan</th>
-                    <th style="width: 150px">Alamat</th>
-                    <th style="width: 150px">Hak Akses</th>
-                    <th style="width: 100px">Jumlah Cuti</th>
-                    <th style="width: 100px">Aktif</th>
-                    <th style="width: 150px">Telepon</th>
+                    <th style="width: 150px">Id Divisi</th>
+                    <th style="width: 150px">Nama Divisi</th>
                 </tr>
                 @foreach ($cuti as $data)
                     <tr class="font-12">
-                        <td style="width: 150px">{{ $data->npp ?? '' }}</td>
-                        <td style="width: 150px">{{ $data->divisi->nama_divisi ?? '' }}</td>
-                        <td style="width: 150px">{{ $data->nama_emp ?? '' }}</td>
-                        <td style="width: 100px">{{ $data->jk_emp ?? '' }}</td>
-                        <td style="width: 150px">{{ $data->jabatan ?? '' }}</td>
-                        <td style="width: 150px">{{ $data->alamat ?? '' }}</td>
-                        <td style="width: 150px">{{ $data->hak_akses ?? '' }}</td>
-                        <td style="width: 100px">{{ $data->jml_cuti ?? '' }}</td>
-                        <td style="width: 100px">{{ $data->active ?? '' }}</td>
-                        <td style="width: 150px">{{ $data->telp_emp ?? '' }}</td>
+                        <td style="width: 150px">{{ $data->id_divisi }}</td>
+                        <td style="width: 150px">{{ $data->nama_divisi ?? '' }}</td>
                     </tr>
                 @endforeach
             </table>

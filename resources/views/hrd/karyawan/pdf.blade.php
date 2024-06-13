@@ -139,7 +139,7 @@
                     <th style="width: 100px">Aktif</th>
                     <th style="width: 150px">Telepon</th>
                 </tr>
-                @foreach ($cuti as $data)
+                @foreach ($karyawan as $data)
                     <tr class="font-12">
                         <td style="width: 150px">{{ $data->npp ?? '' }}</td>
                         <td style="width: 150px">{{ $data->divisi->nama_divisi ?? '' }}</td>

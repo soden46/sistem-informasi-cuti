@@ -132,11 +132,11 @@ class DataCutiControllerl extends Controller
     {
         $data = [
             'title' => 'Data Cuti',
-            'jenis' => CutiModel::with('jenisCuti')->get(),
+            'cuti' => CutiModel::with('jenisCuti')->get(),
         ];
 
         $customPaper = [0, 0, 567.00, 500.80];
-        $pdf = Pdf::loadView('manajer.laporan.jenis-cuti', $data)->setPaper('customPaper', 'potrait');
+        $pdf = Pdf::loadView('manajer.cuti.pdf', $data)->setPaper('customPaper', 'potrait');
         return $pdf->stream('laporan-data-jenis-cuti.pdf');
     }
 }

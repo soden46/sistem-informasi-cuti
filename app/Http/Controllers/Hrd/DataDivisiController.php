@@ -112,13 +112,12 @@ class DataDivisiController extends Controller
 
     public function pdf()
     {
-        $data = [
-            'title' => 'Data Divisi',
-            'divisi' => DivisiModel::get(),
-        ];
+
+        $divisi = DivisiModel::get();
+
 
         $customPaper = [0, 0, 567.00, 500.80];
-        $pdf = Pdf::loadView('hrd.laporan.divisi', $data)->setPaper('customPaper', 'potrait');
-        return $pdf->stream('surat-keterangan-biasa.pdf');
+        $pdf = Pdf::loadView('hrd.divisi.pdf', ['divisi' => $divisi])->setPaper('customPaper', 'potrait');
+        return $pdf->download('Data-Divisi.pdf');
     }
 }
