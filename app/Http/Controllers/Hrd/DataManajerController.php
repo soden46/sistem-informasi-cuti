@@ -61,9 +61,7 @@ class DataManajerController extends Controller
             'id_divisi' => 'required',
             'nama_emp' => 'required|max:20',
             'jk_emp' => 'required',
-            'jabatan' => 'manajer',
             'alamat' => 'required',
-            'hak_akses' => 'manajer',
             'jml_cuti' => 'nullable|max:11',
             'password' => 'required',
             'foto_emp' => 'nullable|file|mimes:jpeg,png,jpg,gif|max:2048',
@@ -76,6 +74,8 @@ class DataManajerController extends Controller
 
         // Hash password
         $validatedData['password'] = Hash::make($validatedData['password']);
+        $hak_akses = "manajer";
+        $jabatan = "manajer";
 
         // Proses upload foto
         if ($request->hasFile('foto_emp')) {
@@ -86,7 +86,20 @@ class DataManajerController extends Controller
         }
 
         // Buat data karyawan
-        Employee::create($validatedData);
+        Employee::create([
+            'npp' => $validatedData['npp'],
+            'id_divisi' => $validatedData['id_divisi'],
+            'nama_emp' => $validatedData['nama_emp'],
+            'jk_emp' => $$validatedData['jk_emp'],
+            'jabatan' => 'manajer',
+            'alamat' => $validatedData['alamat'],
+            'hak_akses' => 'manajer',
+            'jml_cuti' => $validatedData['jml_cuti'],
+            'password' => $validatedData['password'],
+            'foto_emp' => $validatedData['foto_emp'],
+            'active' => $validatedData['active'],
+            'telp_emp' => $fotoPath
+        ]);
 
         return redirect()->route('hrd.manajer')->with('success', 'Data has ben created');
     }
@@ -119,15 +132,12 @@ class DataManajerController extends Controller
         // Define validation rules
         $rules = [
             'id_divisi' => 'required',
-            'nama_emp' => 'required|max:20',
+            'nama_emp' => 'required',
             'jk_emp' => 'required',
-            'jabatan' => 'manajer',
             'alamat' => 'required',
-            'hak_akses' => 'manajer',
             'jml_cuti' => 'nullable|max:11',
             'password' => 'nullable',
             'foto_emp' => 'nullable|file|mimes:jpeg,png,jpg,gif|max:2048',
-            'active' => 'required',
             'telp_emp' => 'nullable|max:20',
         ];
 
@@ -148,7 +158,20 @@ class DataManajerController extends Controller
         }
 
         // Update the employee data
-        Employee::where('npp', $npp)->update($validatedData);
+        Employee::where('npp', $npp)->update([
+            'npp' => $validatedData['npp'],
+            'id_divisi' => $validatedData['id_divisi'],
+            'nama_emp' => $validatedData['nama_emp'],
+            'jk_emp' => $$validatedData['jk_emp'],
+            'jabatan' => 'manajer',
+            'alamat' => $validatedData['alamat'],
+            'hak_akses' => 'manajer',
+            'jml_cuti' => $validatedData['jml_cuti'],
+            'password' => $validatedData['password'],
+            'foto_emp' => $validatedData['foto_emp'],
+            'active' => $validatedData['active'],
+            'telp_emp' => $fotoPath
+        ]);
 
         return redirect()->route('hrd.manajer')->with('success', 'Data has been updated');
     }

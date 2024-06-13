@@ -30,7 +30,6 @@
             <th style="width: 150px">Jabatan</th>
             <th style="width: 150px">Alamat</th>
             <th style="width: 150px">Hak Akses</th>
-            <th style="width: 100px">Jumlah Cuti</th>
             <th style="width: 150px">Foto</th>
             <th style="width: 100px">Aktif</th>
             <th style="width: 150px">Telepon</th>
@@ -45,8 +44,7 @@
                 <td style="width: 150px">{{ $data->jabatan ?? '' }}</td>
                 <td style="width: 150px">{{ $data->alamat ?? '' }}</td>
                 <td style="width: 150px">{{ $data->hak_akses ?? '' }}</td>
-                <td style="width: 100px">{{ $data->jml_cuti ?? '' }}</td>
-                <td style="width: 150px">{{ $data->foto_emp ?? '' }}</td>
+                <td style="width: 150px">{{ asset('storage/', $data->foto_emp ?? 'belum ada foto') }}</td>
                 <td style="width: 100px">{{ $data->active ?? '' }}</td>
                 <td style="width: 150px">{{ $data->telp_emp ?? '' }}</td>
                 <td>
