@@ -13,10 +13,6 @@
                         <form action="{{ route('karyawan.cuti.save') }}" method="POST">
                             @csrf
                             <div class="form-group">
-                                <label for="no_cuti">No Cuti</label>
-                                <input type="text" name="no_cuti" class="form-control" placeholder="No Cuti" required>
-                            </div>
-                            <div class="form-group">
                                 <label for="npp">NPP</label>
                                 <input type="text" name="npp" class="form-control" placeholder="NPP" required>
                             </div>
