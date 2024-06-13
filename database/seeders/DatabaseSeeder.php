@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
         //     'role' => 'admin',
         // ]);
         $this->call(EmployeeSeeder::class);
+        $this->call(DivisiSeeder::class);
         $this->call(JenisCutiSeeder::class);
         $this->call(CutiSeeder::class);
     }
