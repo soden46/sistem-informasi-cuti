@@ -88,7 +88,7 @@
             </div>
             <div class="divider py-1 bg-dark mb-3 mt-2"></div>
 
-            <table class="table table-bordered table-responsive">
+            <table class="table table-bordered">
                 <tr class="font-12">
                     <th style="width: 150px">No Cuti</th>
                     <th style="width: 150px">Npp</th>
