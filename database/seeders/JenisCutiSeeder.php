@@ -2,11 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\DivisiModel;
+use App\Models\JenisCutiModel;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class DivisiSeeder extends Seeder
+class JenisCutiSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,23 +15,21 @@ class DivisiSeeder extends Seeder
      */
     public function run()
     {
-        // Menyimpan data pertama
-        DivisiModel::create([
-            'nama_divisi' => 'hrd',
+        JenisCutiModel::create([
+            'nama_cuti' => 'melahirkan',
+            'lama_cuti' => '2',
             'created_at' => '2024-02-04 10:30:27',
             'updated_at' => '2024-02-04 10:30:27'
         ]);
-
-        // Menyimpan data kedua
-        DivisiModel::create([
-            'nama_divisi' => 'manajer',
+        JenisCutiModel::create([
+            'nama_cuti' => 'acara keluarga',
+            'lama_cuti' => '2',
             'created_at' => '2024-02-04 10:30:27',
             'updated_at' => '2024-02-04 10:30:27'
         ]);
-
-        // Menyimpan data ketiga
-        DivisiModel::create([
-            'nama_divisi' => 'karyawan',
+        JenisCutiModel::create([
+            'nama_cuti' => 'liburan',
+            'lama_cuti' => '2',
             'created_at' => '2024-02-04 10:30:27',
             'updated_at' => '2024-02-04 10:30:27'
         ]);

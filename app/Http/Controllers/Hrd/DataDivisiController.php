@@ -59,7 +59,7 @@ class DataDivisiController extends Controller
         // dd($validatedData);
         DivisiModel::create($validatedData);
 
-        return redirect()->route('hrd.divisi.index')->with('success', 'Data has ben created');
+        return redirect()->route('hrd.divisi')->with('success', 'Data has ben created');
     }
 
     /**
@@ -107,7 +107,7 @@ class DataDivisiController extends Controller
     public function destroy($id_divisi)
     {
         DivisiModel::where('id_divisi', $id_divisi)->delete();
-        return redirect()->route('hrd.siswa')->with('success', 'Data has ben deleted');
+        return redirect()->route('hrd.divisi')->with('success', 'Data has ben deleted');
     }
 
     public function pdf()

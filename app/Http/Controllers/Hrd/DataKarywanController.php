@@ -57,22 +57,22 @@ class DataKarywanController extends Controller
      */
     public function store(Request $request)
     {
-
         $rules = [
-            'npp ' => 'required|max:5',
-            'id_divisi ' => 'required',
-            'nama_emp ' => 'required|max:20',
-            'jk_emp ' => 'required',
-            'jabatan ' => 'required|max:50',
-            'alamat ' => 'required',
-            'hak_akses ' => 'required|max:20',
-            'jml_cuti ' => 'required|max:11',
-            'password ' => 'required',
-            'foto_emp ' => 'required|png,jpg,jpeg|max:2048',
-            'active ' => 'required',
-            'telp_emp ' => 'required|20',
+            'npp' => 'required|max:5',
+            'id_divisi' => 'required',
+            'nama_emp' => 'required|max:20',
+            'jk_emp' => 'required',
+            'jabatan' => 'required|max:50',
+            'alamat' => 'required',
+            'hak_akses' => 'required|max:20',
+            'jml_cuti' => 'nullable|max:11',
+            'password' => 'required',
+            'foto_emp' => 'nullable|file|mimes:jpeg,png,jpg,gif|max:2048',
+            'active' => 'required',
+            'telp_emp' => 'nullable|max:20',
         ];
 
+        // dd($request->all());
         $validatedData = $request->validate($rules);
 
         // Hash password
@@ -86,12 +86,10 @@ class DataKarywanController extends Controller
             $validatedData['foto_emp'] = null; // Set default jika tidak ada foto diupload
         }
 
+        // Buat data karyawan
         Employee::create($validatedData);
 
-        // dd($validatedData);
-        Employee::create($validatedData);
-
-        return redirect()->route('hrd.karyawan.index')->with('success', 'Data has ben created');
+        return redirect()->route('hrd.karyawan')->with('success', 'Data has ben created');
     }
 
     /**
@@ -119,44 +117,43 @@ class DataKarywanController extends Controller
      */
     public function update(Request $request, $npp)
     {
+        // Define validation rules
         $rules = [
-            'npp ' => 'required|max:5',
-            'id_divisi ' => 'required',
-            'nama_emp ' => 'required|max:20',
-            'jk_emp ' => 'required',
-            'jabatan ' => 'required|max:50',
-            'alamat ' => 'required',
-            'hak_akses ' => 'required|max:20',
-            'jml_cuti ' => 'required|max:11',
-            'password ' => 'required',
-            'foto_emp ' => 'required|png,jpg,jpeg|max:2048',
-            'active ' => 'required',
-            'telp_emp ' => 'required|20',
+            'id_divisi' => 'required',
+            'nama_emp' => 'required|max:20',
+            'jk_emp' => 'required',
+            'jabatan' => 'required|max:50',
+            'alamat' => 'required',
+            'hak_akses' => 'required|max:20',
+            'jml_cuti' => 'nullable|max:11',
+            'password' => 'nullable',
+            'foto_emp' => 'nullable|file|mimes:jpeg,png,jpg,gif|max:2048',
+            'active' => 'required',
+            'telp_emp' => 'nullable|max:20',
         ];
 
+        // Validate request data
         $validatedData = $request->validate($rules);
 
-        $validatedData['password'] = Hash::make($validatedData['password']);
+        // Hash password if it is provided
+        if (!empty($validatedData['password'])) {
+            $validatedData['password'] = Hash::make($validatedData['password']);
+        } else {
+            unset($validatedData['password']); // Remove password from validated data if it's empty
+        }
 
-        // Proses update data karyawan
-        $employee = Employee::where('npp', $npp)->first();
-
-        // Jika ada file foto yang diupload
+        // Handle file upload if a new file is provided
         if ($request->hasFile('foto_emp')) {
-            // Hapus foto lama jika ada
-            if ($employee->foto_emp) {
-                Storage::delete($employee->foto_emp);
-            }
-
-            // Simpan foto baru
             $fotoPath = $request->file('foto_emp')->store('karyawan');
             $validatedData['foto_emp'] = $fotoPath;
         }
 
-        $employee->update($validatedData);
+        // Update the employee data
+        Employee::where('npp', $npp)->update($validatedData);
 
-        return redirect()->route('hrd.karyawan')->with('success', 'Data has ben updated');
+        return redirect()->route('hrd.karyawan')->with('success', 'Data has been updated');
     }
+
 
     /**
      * Remove the specified resource from storage.

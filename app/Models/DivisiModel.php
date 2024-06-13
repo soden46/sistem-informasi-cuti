@@ -10,15 +10,17 @@ use Illuminate\Support\Facades\DB;
 class DivisiModel extends Model
 {
     use HasFactory;
-    public $table = "divisi";
-    protected $primary = 'id_divisi';
-    protected $guarded = [];
+
+    protected $table = 'divisi';
+    protected $primaryKey = 'id_divisi'; // Corrected property name
     public $incrementing = false; // Disable auto-incrementing
     protected $keyType = 'string'; // Use string as primary key type
+    protected $guarded = [];
 
     protected static function boot()
     {
         parent::boot();
+
         static::creating(function ($model) {
             if (empty($model->{$model->getKeyName()})) {
                 $model->{$model->getKeyName()} = self::generateUniqueId();
@@ -33,6 +35,6 @@ class DivisiModel extends Model
         $newId = $latestId + 1;
 
         // Format the new ID with leading zeros to make it 5 characters long
-        return str_pad($newId, 5, '0', STR_PAD_LEFT);
+        return $newId;
     }
 }

@@ -54,15 +54,16 @@ class DataCutiControllerl extends Controller
     public function store(Request $request)
     {
         $rules = [
-            'no_cuti' => 'required|unique:cutis|max:5',
+            'id_jenis_cuti' => 'required',
             'npp' => 'required|max:10',
-            'jenis_cuti_id' => 'required|integer',
+            'id_jenis_cuti' => 'required|integer',
             'tgl_pengajuan' => 'required|date',
             'tgl_awal' => 'required|date',
             'tgl_akhir' => 'required|date',
             'durasi' => 'required|integer',
             'keterangan' => 'required|string|max:255',
             'stt_cuti' => 'required|string|max:10',
+            'ket_reject' => 'required|string',
         ];
 
         $validatedData = $request->validate($rules);
@@ -78,7 +79,7 @@ class DataCutiControllerl extends Controller
      * @param  \App\Models\Penduduk  $masyarakat
      * @return \Illuminate\Http\Response
      */
-    public function edit(JenisCutiModel  $no_cuti)
+    public function edit($no_cuti)
     {
 
         return view('hrd.cuti.edit', [
@@ -97,15 +98,18 @@ class DataCutiControllerl extends Controller
      */
     public function update(Request $request, $no_cuti)
     {
+        // dd($request->all());
         $rules = [
+            'id_jenis_cuti' => 'required',
             'npp' => 'required|max:10',
-            'jenis_cuti_id' => 'required|integer',
+            'id_jenis_cuti' => 'required|integer',
             'tgl_pengajuan' => 'required|date',
             'tgl_awal' => 'required|date',
             'tgl_akhir' => 'required|date',
             'durasi' => 'required|integer',
             'keterangan' => 'required|string|max:255',
             'stt_cuti' => 'required|string|max:10',
+            'ket_reject' => 'required|string',
         ];
 
         $validatedData = $request->validate($rules);

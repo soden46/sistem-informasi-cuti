@@ -11,11 +11,16 @@ class CutiModel extends Model
 {
     use HasFactory;
 
-    public $table = "cuti";
-    protected $primary = 'no_cuti';
+    public $table = 'cuti';
+    protected $primaryKey = 'no_cuti';
     protected $guarded = [];
     public $incrementing = false; // Disable auto-incrementing
     protected $keyType = 'string'; // Use string as primary key type
+
+    public function jenisCuti()
+    {
+        return $this->hasOne(JenisCutiModel::class, 'id_jenis_cuti', 'id_jenis_cuti');
+    }
 
     protected static function boot()
     {
@@ -34,6 +39,6 @@ class CutiModel extends Model
         $newId = $latestId + 1;
 
         // Format the new ID with leading zeros to make it 5 characters long
-        return str_pad($newId, 5, '0', STR_PAD_LEFT);
+        return $newId;
     }
 }

@@ -55,7 +55,7 @@ Route::group(['prefix' => 'hrd', 'as' => 'hrd.'], function () {
     Route::get('/karyawan/create', [DataKarywanController::class, 'create'])->name('karyawan.create');
     Route::post('/karyawan/save', [DataKarywanController::class, 'store'])->name('karyawan.save');
     Route::get('/karyawan/edit/{npp}', [DataKarywanController::class, 'edit'])->name('karyawan.edit');
-    Route::post('/karyawan/update/{npp}', [DataKarywanController::class, 'update'])->name('karyawan.update');
+    Route::put('/karyawan/update/{npp}', [DataKarywanController::class, 'update'])->name('karyawan.update');
     Route::delete('/karyawan/{npp}', [DataKarywanController::class, 'destroy'])->name('karyawan.destroy');
     Route::get('/karyawan/cetak', [DataKarywanController::class, 'pdf'])->name('karyawan.cetak');
 
@@ -81,9 +81,9 @@ Route::group(['prefix' => 'hrd', 'as' => 'hrd.'], function () {
     Route::get('/cuti', [DataCutiControllerl::class, 'index'])->name('cuti');
     Route::get('/cuti/create', [DataCutiControllerl::class, 'create'])->name('cuti.create');
     Route::post('/cuti/save', [DataCutiControllerl::class, 'store'])->name('cuti.save');
-    Route::get('/cuti/edit/{id_jenis}', [DataCutiControllerl::class, 'edit'])->name('cuti.edit');
-    Route::post('/cuti/update/{id_jenis}', [DataCutiControllerl::class, 'update'])->name('cuti.update');
-    Route::delete('/cuti/{id_jenis}', [DataCutiControllerl::class, 'destroy'])->name('cuti.destroy');
+    Route::get('/cuti/edit/{no_cuti}', [DataCutiControllerl::class, 'edit'])->name('cuti.edit');
+    Route::put('/cuti/update/{no_cuti}', [DataCutiControllerl::class, 'update'])->name('cuti.update');
+    Route::delete('/cuti/{no_cuti}', [DataCutiControllerl::class, 'destroy'])->name('cuti.destroy');
     Route::get('/cuti/cetak', [DataCutiControllerl::class, 'pdf'])->name('cuti.cetak');
 });
 

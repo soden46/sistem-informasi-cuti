@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
         //     'password' => Hash::make('Admin123'),
         //     'role' => 'admin',
         // ]);
-        $this->call(DivisiSeeder::class);
-        $this->call(EmployeeSeeder::class);
+        $this->call(JenisCutiSeeder::class);
+        $this->call(CutiSeeder::class);
     }
 }
