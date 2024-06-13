@@ -16,17 +16,11 @@
             font-family: Verdana, Tahoma, "DejaVu Sans", sans-serif;
         }
 
-        .table,
         .td,
         .th,
         thead {
             border: 1px solid black;
             text-align: center
-        }
-
-        .table {
-            width: 100%;
-            border-collapse: collapse;
         }
 
         .text-center {
@@ -62,13 +56,6 @@
             background: transparent;
         }
 
-        #foto2 {
-            justify-content: center;
-            width: 60%;
-            height: 30px;
-            background: transparent;
-        }
-
         .header h1 {
             font-size: 18px;
             font-family: sans-serif;
@@ -85,31 +72,6 @@
             margin: 0;
             padding: 0;
             top: 1px;
-        }
-
-        .header2 h1 {
-            font-size: 14px;
-            font-family: sans-serif;
-            position: relative;
-            margin: 0;
-            padding: 0;
-            top: 2px;
-            text-decoration: underline;
-        }
-
-        .header2 p {
-            font-size: 12px;
-            font-family: sans-serif;
-            position: relative;
-            margin: 0;
-            padding: 0;
-            top: 2px;
-        }
-
-        .header2 p {
-            text-align: justify;
-            /* For Edge */
-            text-align-last: right;
         }
     </style>
 </head>
@@ -128,13 +90,13 @@
 
             <table class="table table-bordered table-responsive">
                 <tr class="font-12">
-                    <th style="width: 150px">Id Divisi</th>
-                    <th style="width: 150px">Nama Divisi</th>
+                    <th>Id Divisi</th>
+                    <th>Nama Divisi</th>
                 </tr>
                 @foreach ($divisi as $data)
                     <tr class="font-12">
-                        <td style="width: 150px">{{ $data->id_divisi }}</td>
-                        <td style="width: 150px">{{ $data->nama_divisi ?? '' }}</td>
+                        <td>{{ $data->id_divisi }}</td>
+                        <td>{{ $data->nama_divisi ?? '' }}</td>
                     </tr>
                 @endforeach
             </table>
