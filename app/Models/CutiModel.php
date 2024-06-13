@@ -22,6 +22,11 @@ class CutiModel extends Model
         return $this->hasOne(JenisCutiModel::class, 'id_jenis_cuti', 'id_jenis_cuti');
     }
 
+    public function employee()
+    {
+        return $this->hasOne(Employee::class, 'npp', 'npp');
+    }
+
     protected static function boot()
     {
         parent::boot();

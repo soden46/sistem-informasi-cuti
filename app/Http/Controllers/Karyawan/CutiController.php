@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Manajer;
+namespace App\Http\Controllers\Karyawan;
 
 use App\Http\Controllers\Controller;
 use App\Models\CutiModel;
@@ -8,32 +8,21 @@ use App\Models\JenisCutiModel;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 
-class DataCutiControllerl extends Controller
+class CutiController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index(Request $request)
     {
         $cari = $request->cari;
 
         if ($cari != NULL) {
-            return view('manajer.cuti.index', [
+            return view('karyawan.cuti.index', [
                 'title' => 'Data Cuti',
-                'cuti' => CutiModel::with('jenisCuti', 'employee')
-                    ->join('employee', 'cuti.npp', '=', 'employee.npp')
-                    ->where('employee.id_divisi', auth()->user()->id_divisi)
-                    ->where('no_cuti', 'like', "%{$cari}%")->paginate(10),
+                'cuti' => CutiModel::with('jenisCuti')->where('npp', auth()->user()->npp)->where('no_cuti', 'like', "%{$cari}%")->paginate(10),
             ]);
         } else {
-            return view('manajer.cuti.index', [
+            return view('karyawan.cuti.index', [
                 'title' => 'Data Cuti',
-                'cuti' => CutiModel::with('jenisCuti', 'employee')
-                    ->join('employee', 'cuti.npp', '=', 'employee.npp')
-                    ->where('employee.id_divisi', auth()->user()->id_divisi)
-                    ->paginate(10),
+                'cuti' => CutiModel::with('jenisCuti')->where('npp', auth()->user()->npp)->paginate(10),
             ]);
         }
     }
@@ -45,7 +34,7 @@ class DataCutiControllerl extends Controller
      */
     public function create()
     {
-        return view('manajer.cuti.create', [
+        return view('karyawan.cuti.create', [
             'title' => 'Tambah Jenis Cuti',
             'jenisCuti' => JenisCutiModel::get(),
         ]);
@@ -60,7 +49,7 @@ class DataCutiControllerl extends Controller
     public function store(Request $request)
     {
         $rules = [
-            'no_cuti' => 'required|unique:cutis|max:5',
+            'id_jenis_cuti' => 'required',
             'npp' => 'required|max:10',
             'id_jenis_cuti' => 'required|integer',
             'tgl_pengajuan' => 'required|date',
@@ -69,13 +58,14 @@ class DataCutiControllerl extends Controller
             'durasi' => 'required|integer',
             'keterangan' => 'required|string|max:255',
             'stt_cuti' => 'required|string|max:10',
+            'ket_reject' => 'required|string',
         ];
 
         $validatedData = $request->validate($rules);
 
         CutiModel::create($validatedData);
 
-        return redirect()->route('manajer.jeniscuti')->with('success', 'Data has ben created');
+        return redirect()->route('karyawan.jeniscuti')->with('success', 'Data has ben created');
     }
 
     /**
@@ -86,7 +76,8 @@ class DataCutiControllerl extends Controller
      */
     public function edit($no_cuti)
     {
-        return view('manajer.cuti.edit', [
+
+        return view('karyawan.cuti.edit', [
             'title' => 'Edit Data Cuti',
             'cuti' => CutiModel::with('jenisCuti')->where('no_cuti', $no_cuti)->first(),
             'jenisCuti' => JenisCutiModel::get(),
@@ -102,9 +93,18 @@ class DataCutiControllerl extends Controller
      */
     public function update(Request $request, $no_cuti)
     {
+        // dd($request->all());
         $rules = [
-            'stt_cuti' => 'required|string|max:255',
-            'ket_reject' => 'nullable|string|max:10',
+            'id_jenis_cuti' => 'required',
+            'npp' => 'required|max:10',
+            'id_jenis_cuti' => 'required|integer',
+            'tgl_pengajuan' => 'required|date',
+            'tgl_awal' => 'required|date',
+            'tgl_akhir' => 'required|date',
+            'durasi' => 'required|integer',
+            'keterangan' => 'required|string|max:255',
+            'stt_cuti' => 'required|string|max:10',
+            'ket_reject' => 'required|string',
         ];
 
         $validatedData = $request->validate($rules);
@@ -113,7 +113,7 @@ class DataCutiControllerl extends Controller
 
         $cuti->update($validatedData);
 
-        return redirect()->route('manajer.cuti')->with('success', 'Data has ben updated');
+        return redirect()->route('karyawan.cuti')->with('success', 'Data has ben updated');
     }
 
     /**
@@ -125,7 +125,7 @@ class DataCutiControllerl extends Controller
     public function destroy($no_cuti)
     {
         CutiModel::with('jenisCuti')->where('no_cuti', $no_cuti)->delete();
-        return redirect()->route('manajer.cuti')->with('success', 'Data has ben deleted');
+        return redirect()->route('karyawan.cuti')->with('success', 'Data has ben deleted');
     }
 
     public function pdf()
@@ -136,7 +136,7 @@ class DataCutiControllerl extends Controller
         ];
 
         $customPaper = [0, 0, 567.00, 500.80];
-        $pdf = Pdf::loadView('manajer.laporan.jenis-cuti', $data)->setPaper('customPaper', 'potrait');
+        $pdf = Pdf::loadView('karyawan.laporan.jenis-cuti', $data)->setPaper('customPaper', 'potrait');
         return $pdf->stream('laporan-data-jenis-cuti.pdf');
     }
 }

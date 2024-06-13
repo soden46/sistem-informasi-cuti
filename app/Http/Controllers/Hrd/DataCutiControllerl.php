@@ -70,7 +70,7 @@ class DataCutiControllerl extends Controller
 
         CutiModel::create($validatedData);
 
-        return redirect()->route('hrd.jeniscuti')->with('success', 'Data has ben created');
+        return redirect()->route('hrd.cuti')->with('success', 'Data has ben created');
     }
 
     /**

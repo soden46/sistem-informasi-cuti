@@ -10,14 +10,14 @@
     @endif
     <div class="d-flex justify-content-between mb-3">
         <div>
-            <form action="{{ route('manajer.cuti') }}" method="GET" class="d-flex">
+            <form action="{{ route('hrd.cuti') }}" method="GET" class="d-flex">
                 <input type="text" name="cari" class="form-control" placeholder="Cari Data" value="{{ request('cari') }}">
                 <button type="submit" class="btn btn-md btn-primary ml-2">Search</button>
             </form>
         </div>
         <div>
-            <!-- <a class="btn btn-md btn-primary" href="{{ route('manajer.cuti.create') }}">Tambah Cuti</a> -->
-            <a class="btn btn-md btn-success" href="{{ route('manajer.cuti.cetak') }}" target="_blank"><i
+            <!-- <a class="btn btn-md btn-primary" href="{{ route('hrd.cuti.create') }}">Tambah Cuti</a> -->
+            <a class="btn btn-md btn-success" href="{{ route('hrd.cuti.cetak') }}" target="_blank"><i
                     class="fa fa-print"></i> Cetak PDF</a>
         </div>
     </div>
@@ -49,8 +49,8 @@
                 <td style="width: 150px">{{ $data->ket_reject ?? '' }}</td>
                 <td>
                     <div class="btn-group" style="width:135px">
-                        <form action="{{ route('manajer.cuti.destroy', $data->no_cuti) }}" method="Post">
-                            <a class="btn btn-primary" href="{{ route('manajer.cuti.edit', $data->no_cuti) }}">Edit</a>
+                        <form action="{{ route('hrd.cuti.destroy', $data->no_cuti) }}" method="Post">
+                            <a class="btn btn-primary" href="{{ route('hrd.cuti.edit', $data->no_cuti) }}">Edit</a>
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger">Delete</button>

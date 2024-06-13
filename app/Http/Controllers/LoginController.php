@@ -45,7 +45,7 @@ class LoginController extends Controller
             } elseif ($user->hak_akses == 'hrd') {
                 return redirect()->route('hrd.index');
             } elseif ($user->hak_akses == 'karyawan') {
-                return redirect()->route('siswa.index');
+                return redirect()->route('karyawan.index');
             }
         } else {
             Log::warning('Failed login attempt: ', ['nama_emp' => $request->input('nama_emp')]);

@@ -14,6 +14,8 @@ use App\Http\Controllers\Hrd\DataDivisiController;
 use App\Http\Controllers\Hrd\DataJenisCutiController;
 use App\Http\Controllers\Hrd\DataKarywanController;
 use App\Http\Controllers\Hrd\HrdController;
+use App\Http\Controllers\Karyawan\CutiController;
+use App\Http\Controllers\Karyawan\KaryawanController;
 use App\Http\Controllers\Manajer\DataCutiControllerl as ManajerDataCutiControllerl;
 use App\Http\Controllers\Manajer\DataDivisiController as ManajerDataDivisiController;
 use App\Http\Controllers\Manajer\DataJenisCutiController as ManajerDataJenisCutiController;
@@ -90,7 +92,7 @@ Route::group(['prefix' => 'hrd', 'as' => 'hrd.'], function () {
 //Manajer Divisi
 Route::group(['prefix' => 'manajer', 'as' => 'manajer.'], function () {
     Route::get('/dashbord', [ManajerController::class, 'index'])->name('index');
-    // Admin
+    // Manajer Divisi
     Route::controller(ManajerController::class)->group(function () {
         Route::get('/manajer', 'index')->name('manajer');
     });
@@ -125,15 +127,26 @@ Route::group(['prefix' => 'manajer', 'as' => 'manajer.'], function () {
     Route::get('/cuti', [ManajerDataCutiControllerl::class, 'index'])->name('cuti');
     Route::get('/cuti/create', [ManajerDataCutiControllerl::class, 'create'])->name('cuti.create');
     Route::post('/cuti/save', [ManajerDataCutiControllerl::class, 'store'])->name('cuti.save');
-    Route::get('/cuti/edit/{id_jenis}', [ManajerDataCutiControllerl::class, 'edit'])->name('cuti.edit');
-    Route::post('/cuti/update/{id_jenis}', [ManajerDataCutiControllerl::class, 'update'])->name('cuti.update');
-    Route::delete('/cuti/{id_jenis}', [ManajerDataCutiControllerl::class, 'destroy'])->name('cuti.destroy');
+    Route::get('/cuti/edit/{no_cuti}', [ManajerDataCutiControllerl::class, 'edit'])->name('cuti.edit');
+    Route::put('/cuti/update/{no_cuti}', [ManajerDataCutiControllerl::class, 'update'])->name('cuti.update');
+    Route::delete('/cuti/{no_cuti}', [ManajerDataCutiControllerl::class, 'destroy'])->name('cuti.destroy');
     Route::get('/cuti/cetak', [ManajerDataCutiControllerl::class, 'pdf'])->name('cuti.cetak');
 });
 
 //Karyawan
-Route::group(['prefix' => 'siswa', 'as' => 'siswa.'], function () {
-    Route::get('/dashbord', [AdminController::class, 'index'])->name('siswa');
+Route::group(['prefix' => 'karyawan', 'as' => 'karyawan.'], function () {
+    Route::get('/dashboard', [KaryawanController::class, 'index'])->name('index');
 
+    Route::controller(KaryawanController::class)->group(function () {
+        Route::get('/karyawan', 'index')->name('karyawan');
+    });
+
+    Route::get('/cuti', [CutiController::class, 'index'])->name('cuti');
+    Route::get('/cuti/create', [CutiController::class, 'create'])->name('cuti.create');
+    Route::post('/cuti/save', [CutiController::class, 'store'])->name('cuti.save');
+    Route::get('/cuti/edit/{no_cuti}', [CutiController::class, 'edit'])->name('cuti.edit');
+    Route::post('/cuti/update/{no_cuti}', [CutiController::class, 'update'])->name('cuti.update');
+    Route::delete('/cuti/{no_cuti}', [CutiController::class, 'destroy'])->name('cuti.destroy');
+    Route::get('/cuti/cetak', [CutiController::class, 'pdf'])->name('cuti.cetak');
     // Route Resource
 });
