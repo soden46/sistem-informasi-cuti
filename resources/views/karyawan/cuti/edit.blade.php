@@ -25,10 +25,10 @@
                             </div>
                             <div class="form-group">
                                 <label for="id_jenis_cuti">Jenis Cuti</label>
-                                <select name="id_jenis_cuti" class="form-control" required>
+                                <select name="id_jenis_cuti" class="form-control">
                                     @foreach ($jenisCuti as $jenis)
-                                        <option value="{{ $jenis->id }}"
-                                            {{ $cuti->id_jenis_cuti == $jenis->id ? 'selected' : '' }}>
+                                        <option value="{{ $jenis->id_jenis_cuti }}"
+                                            {{ isset($cuti) && $cuti->id_jenis_cuti == $jenis->id_jenis_cuti ? 'selected' : '' }}>
                                             {{ $jenis->nama_cuti }}
                                         </option>
                                     @endforeach

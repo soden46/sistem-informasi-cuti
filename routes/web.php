@@ -115,24 +115,6 @@ Route::group(['prefix' => 'manajer', 'as' => 'manajer.'], function () {
     Route::delete('/karyawan/{npp}', [ManajerDataKarywanController::class, 'destroy'])->name('karyawan.destroy');
     Route::get('/karyawan/cetak', [ManajerDataKarywanController::class, 'pdf'])->name('karyawan.cetak');
 
-    // Data Divisi
-    Route::get('/divisi', [ManajerDataDivisiController::class, 'index'])->name('divisi');
-    Route::get('/divisi/create', [ManajerDataDivisiController::class, 'create'])->name('divisi.create');
-    Route::post('/divisi/save', [ManajerDataDivisiController::class, 'store'])->name('divisi.save');
-    Route::get('/divisi/edit/{id_divisi}', [ManajerDataDivisiController::class, 'edit'])->name('divisi.edit');
-    Route::post('/divisi/update/{id_divisi}', [ManajerDataDivisiController::class, 'update'])->name('divisi.update');
-    Route::delete('/divisi/{id_divisi}', [ManajerDataDivisiController::class, 'destroy'])->name('divisi.destroy');
-    Route::get('/divisi/cetak', [ManajerDataDivisiController::class, 'pdf'])->name('divisi.cetak');
-
-    // Data Jenis Cuti
-    Route::get('/jenis-cuti', [ManajerDataJenisCutiController::class, 'index'])->name('jeniscuti');
-    Route::get('/jenis-cuti/create', [ManajerDataJenisCutiController::class, 'create'])->name('jeniscuti.create');
-    Route::post('/jenis-cuti/save', [ManajerDataJenisCutiController::class, 'store'])->name('jeniscuti.save');
-    Route::get('/jenis-cuti/edit/{id_jenis_cuti}', [ManajerDataJenisCutiController::class, 'edit'])->name('jeniscuti.edit');
-    Route::post('/jenis-cuti/update/{id_jenis_cuti}', [ManajerDataJenisCutiController::class, 'update'])->name('jeniscuti.update');
-    Route::delete('/jenis-cuti/{id_jenis_cuti}', [ManajerDataJenisCutiController::class, 'destroy'])->name('jeniscuti.destroy');
-    Route::get('/jenis-cuti/cetak', [ManajerDataJenisCutiController::class, 'pdf'])->name('jeniscuti.cetak');
-
     // Data Cuti
     Route::get('/cuti', [ManajerDataCutiControllerl::class, 'index'])->name('cuti');
     Route::get('/cuti/create', [ManajerDataCutiControllerl::class, 'create'])->name('cuti.create');
@@ -155,7 +137,7 @@ Route::group(['prefix' => 'karyawan', 'as' => 'karyawan.'], function () {
     Route::get('/cuti/create', [CutiController::class, 'create'])->name('cuti.create');
     Route::post('/cuti/save', [CutiController::class, 'store'])->name('cuti.save');
     Route::get('/cuti/edit/{no_cuti}', [CutiController::class, 'edit'])->name('cuti.edit');
-    Route::post('/cuti/update/{no_cuti}', [CutiController::class, 'update'])->name('cuti.update');
+    Route::PUT('/cuti/update/{no_cuti}', [CutiController::class, 'update'])->name('cuti.update');
     Route::delete('/cuti/{no_cuti}', [CutiController::class, 'destroy'])->name('cuti.destroy');
     Route::get('/cuti/cetak', [CutiController::class, 'pdf'])->name('cuti.cetak');
     // Route Resource

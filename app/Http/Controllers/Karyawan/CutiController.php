@@ -93,14 +93,13 @@ class CutiController extends Controller
     {
         // dd($request->all());
         $rules = [
-            'id_jenis_cuti' => 'required',
-            'npp' => 'required|max:10',
-            'id_jenis_cuti' => 'required|integer',
-            'tgl_pengajuan' => 'required|date',
-            'tgl_awal' => 'required|date',
-            'tgl_akhir' => 'required|date',
-            'durasi' => 'required|integer',
-            'keterangan' => 'required|string|max:255',
+            'npp' => 'nullable|max:10',
+            'id_jenis_cuti' => 'nullable',
+            'tgl_pengajuan' => 'nullable|date',
+            'tgl_awal' => 'nullable|date',
+            'tgl_akhir' => 'nullable|date',
+            'durasi' => 'nullable|integer',
+            'keterangan' => 'nullable|string|max:255',
         ];
 
         $validatedData = $request->validate($rules);
