@@ -18,7 +18,7 @@ class CutiSeeder extends Seeder
         //
         CutiModel::create([
             'no_cuti' => '1',
-            'npp' => '1223',
+            'npp' => '1244',
             'id_jenis_cuti' => '1',
             'tgl_pengajuan' => '2024-02-04',
             'tgl_awal' => '2024-02-05',
@@ -47,7 +47,7 @@ class CutiSeeder extends Seeder
 
         CutiModel::create([
             'no_cuti' => '3',
-            'npp' => '1244',
+            'npp' => '1223',
             'id_jenis_cuti' => '3',
             'tgl_pengajuan' => '2024-02-04',
             'tgl_awal' => '2024-02-05',
