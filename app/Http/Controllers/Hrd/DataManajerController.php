@@ -23,7 +23,10 @@ class DataManajerController extends Controller
         if ($cari != NULL) {
             return view('hrd.manajer.index', [
                 'title' => 'Data Manajer',
-                'manajer' => Employee::with('divisi')->where('hak_akses', 'manajer')->orWhere('nama_emp', 'like', "%{$cari}%")->orWhere('npp', 'like', "%{$cari}%")->paginate(10),
+                'manajer' => Employee::with('divisi')->where('hak_akses', 'manajer')->where(function ($query) use ($cari) {
+                    $query->where('nama_emp', 'like', "%{$cari}%")
+                        ->orWhere('npp', 'like', "%{$cari}%");
+                })->paginate(10),
                 'div' => DivisiModel::get(),
             ]);
         } else {

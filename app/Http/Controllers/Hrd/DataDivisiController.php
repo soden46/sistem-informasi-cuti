@@ -21,7 +21,9 @@ class DataDivisiController extends Controller
         if ($cari != NULL) {
             return view('hrd.divisi.index', [
                 'title' => 'Data Divisi',
-                'divisi' => DivisiModel::where('nama_divisi', 'like', "%{$cari}%")->paginate(10),
+                'divisi' => DivisiModel::where(function ($query) use ($cari) {
+                    $query->where('nama_divisi', 'like', "%{$cari}%");
+                })->paginate(10),
             ]);
         } else {
             return view('hrd.divisi.index', [

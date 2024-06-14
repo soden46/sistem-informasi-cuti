@@ -25,7 +25,10 @@ class DataKarywanController extends Controller
         if ($cari != NULL) {
             return view('manajer.karyawan.index', [
                 'title' => 'Data aryawan',
-                'karyawan' => Employee::with('divisi')->where('hak_akses', 'karyawan')->where('id_divisi', $manajer->id_divisi)->orWhere('nama_emp', 'like', "%{$cari}%")->orWhere('npp', 'like', "%{$cari}%")->paginate(10),
+                'karyawan' => Employee::with('divisi')->where('hak_akses', 'karyawan')->where('id_divisi', $manajer->id_divisi)->where(function ($query) use ($cari) {
+                    $query->where('nama_emp', 'like', "%{$cari}%")
+                        ->orWhere('npp', 'like', "%{$cari}%");
+                })->paginate(10),
                 'div' => DivisiModel::get(),
             ]);
         } else {

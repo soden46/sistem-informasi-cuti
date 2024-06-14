@@ -26,8 +26,11 @@ class DataCutiControllerl extends Controller
                 'cuti' => CutiModel::with('jenisCuti', 'employee')
                     ->join('employee', 'cuti.npp', '=', 'employee.npp')
                     ->where('employee.id_divisi', auth()->user()->id_divisi)
-                    ->where('no_cuti', 'like', "%{$cari}%")
-                    ->orWhere('stt_cuti', 'like', "%{$cari}%")->paginate(10),
+                    ->where(function ($query) use ($cari) {
+                        $query->where('no_cuti', 'like', "%{$cari}%")
+                            ->orWhere('stt_cuti', 'like', "%{$cari}%")
+                            ->orWhere('npp', 'like', "%{$cari}%");
+                    })->paginate(10),
             ]);
         } else {
             return view('manajer.cuti.index', [

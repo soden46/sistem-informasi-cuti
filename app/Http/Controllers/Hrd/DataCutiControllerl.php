@@ -23,7 +23,11 @@ class DataCutiControllerl extends Controller
         if ($cari != NULL) {
             return view('hrd.cuti.index', [
                 'title' => 'Data Cuti',
-                'cuti' => CutiModel::with('jenisCuti')->where('no_cuti', 'like', "%{$cari}%")->orWhere('npp', 'like', "%{$cari}%")->paginate(10),
+                'cuti' => CutiModel::with('jenisCuti')->where(function ($query) use ($cari) {
+                    $query->where('no_cuti', 'like', "%{$cari}%")
+                        ->orWhere('stt_cuti', 'like', "%{$cari}%")
+                        ->orWhere('npp', 'like', "%{$cari}%");
+                })->paginate(10),
             ]);
         } else {
             return view('hrd.cuti.index', [

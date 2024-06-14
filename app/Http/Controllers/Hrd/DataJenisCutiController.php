@@ -21,7 +21,9 @@ class DataJenisCutiController extends Controller
         if ($cari != NULL) {
             return view('hrd.jenis-cuti.index', [
                 'title' => 'Data Jenis Cuti',
-                'jenis' => JenisCutiModel::where('nama_cuti', 'like', "%{$cari}%")->paginate(10),
+                'jenis' => JenisCutiModel::where(function ($query) use ($cari) {
+                    $query->where('nama_cuti', 'like', "%{$cari}%");
+                })->paginate(10),
             ]);
         } else {
             return view('hrd.jenis-cuti.index', [
