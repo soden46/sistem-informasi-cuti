@@ -29,7 +29,7 @@ class DataCutiControllerl extends Controller
                     ->where(function ($query) use ($cari) {
                         $query->where('no_cuti', 'like', "%{$cari}%")
                             ->orWhere('stt_cuti', 'like', "%{$cari}%")
-                            ->orWhere('npp', 'like', "%{$cari}%");
+                            ->orWhere('cuti.npp', 'like', "%{$cari}%");
                     })->paginate(10),
             ]);
         } else {

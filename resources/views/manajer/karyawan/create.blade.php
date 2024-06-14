@@ -16,7 +16,7 @@
             <h5 class="card-title">Tambah Karyawan</h5>
         </div>
         <div class="card-body">
-            <form method="post" action="{{ route('hrd.keryawan.save') }}" enctype="multipart/form-data">
+            <form method="post" action="{{ route('manajer.keryawan.save') }}" enctype="multipart/form-data">
                 @csrf
 
                 <div class="form-group">

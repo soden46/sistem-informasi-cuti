@@ -16,8 +16,8 @@
         </form>
     </div>
     <div>
-        <!-- <a class="btn btn-md btn-primary" href="{{ route('hrd.karyawan.create') }}">Tambah Karyawan</a> -->
-        <a class="btn btn-md btn-success" href="{{ route('hrd.karyawan.cetak') }}" target="_blank"><i class="fa fa-print"></i> Cetak PDF</a>
+        <!-- <a class="btn btn-md btn-primary" href="{{ route('hrd.karyawan.create') }}">Tambah Karyawan</a>-->
+        <!--<a class="btn btn-md btn-success" href="{{ route('hrd.karyawan.cetak') }}" target="_blank"><i class="fa fa-print"></i> Cetak PDF</a> -->
     </div>
 </div>
 <table class="table table-bordered table-responsive">

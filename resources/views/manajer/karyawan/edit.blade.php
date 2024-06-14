@@ -16,7 +16,7 @@
             <h5 class="card-title">Edit Divisi</h5>
         </div>
         <div class="card-body">
-            <form method="post" action="{{ route('hrd.divisi.update', $karyawan->npp) }}" enctype="multipart/form-data">
+            <form method="post" action="{{ route('manajer.karyawan.update', $karyawan->npp) }}" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
 
