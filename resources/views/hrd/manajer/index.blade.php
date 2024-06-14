@@ -17,8 +17,8 @@
         </div>
         <div>
             <a class="btn btn-md btn-primary" href="{{ route('hrd.manajer.create') }}">Tambah Manajer</a>
-            <a class="btn btn-md btn-success" href="{{ route('hrd.manajer.cetak') }}" target="_blank"><i
-                    class="fa fa-print"></i> Cetak PDF</a>
+            {{-- <a class="btn btn-md btn-success" href="{{ route('hrd.manajer.cetak') }}" target="_blank"><i
+                    class="fa fa-print"></i> Cetak PDF</a> --}}
         </div>
     </div>
     <table class="table table-bordered table-responsive">
