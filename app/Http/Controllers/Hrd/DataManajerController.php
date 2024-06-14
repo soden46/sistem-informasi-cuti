@@ -100,9 +100,9 @@ class DataManajerController extends Controller
      * @param  \App\Models\Penduduk  $masyarakat
      * @return \Illuminate\Http\Response
      */
-    public function edit(Employee $divisi, $npp)
+    public function edit($npp)
     {
-
+        // dd($npp);
         return view('hrd.manajer.edit', [
             'title' => 'Edit Data Manajer',
             'manajer' => Employee::with('divisi')->where('npp', $npp)->first(),
@@ -114,11 +114,12 @@ class DataManajerController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Penduduk  $masyarakat
+     * @param  \App\Models\Manajer  $masyarakat
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $npp)
     {
+        // dd($request->all());
         // Define validation rules
         $rules = [
             'id_divisi' => 'required',
@@ -127,12 +128,13 @@ class DataManajerController extends Controller
             'alamat' => 'required',
             'jml_cuti' => 'nullable|max:11',
             'password' => 'nullable',
+            'active' => 'nullable',
             'telp_emp' => 'nullable|max:20',
         ];
 
         // Validate request data
         $validatedData = $request->validate($rules);
-
+        // dd($validatedData);
         // Hash password if it is provided
         if (!empty($validatedData['password'])) {
             $validatedData['password'] = Hash::make($validatedData['password']);
@@ -140,20 +142,21 @@ class DataManajerController extends Controller
             unset($validatedData['password']); // Remove password from validated data if it's empty
         }
 
+        $employee = Employee::where('npp', $npp)->first();
         // Update the employee data
         Employee::where('npp', $npp)->update([
-            'npp' => $validatedData['npp'],
             'id_divisi' => $validatedData['id_divisi'],
             'nama_emp' => $validatedData['nama_emp'],
             'jk_emp' => $validatedData['jk_emp'],
-            'jabatan' => 'manajer',
+            'jabatan' => "manajer",
             'alamat' => $validatedData['alamat'],
-            'hak_akses' => 'manajer',
+            'hak_akses' => "manajer",
             'jml_cuti' => $validatedData['jml_cuti'],
-            'password' => $validatedData['password'],
+            'password' => $validatedData['password'] ?? $employee->password,
             'active' => $validatedData['active'],
-            $validatedData['telp_emp']
+            'telp_emp' => $validatedData['telp_emp']
         ]);
+
 
         return redirect()->route('hrd.manajer')->with('success', 'Data has been updated');
     }
@@ -174,7 +177,7 @@ class DataManajerController extends Controller
     public function pdf()
     {
         $data = [
-            'title' => 'Data Karayawan',
+            'title' => 'Data Manajer',
             'manajer' => Employee::with('divisi')->get(),
         ];
 

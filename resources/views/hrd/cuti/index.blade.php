@@ -33,7 +33,7 @@
             <th style="width: 150px">Keterangan</th>
             <th style="width: 150px">Status Cuti</th>
             <th style="width: 150px">Keterangan Reject</th>
-            <th style="width: 100px">Aksi</th>
+            {{-- <th style="width: 100px">Aksi</th> --}}
         </tr>
         @foreach ($cuti as $data)
             <tr>
@@ -47,7 +47,7 @@
                 <td style="width: 150px">{{ $data->keterangan ?? '' }}</td>
                 <td style="width: 150px">{{ $data->stt_cuti ?? '' }}</td>
                 <td style="width: 150px">{{ $data->ket_reject ?? '' }}</td>
-                <td>
+                {{-- <td>
                     <div class="btn-group" style="width:135px">
                         <form action="{{ route('hrd.cuti.destroy', $data->no_cuti) }}" method="Post">
                             <a class="btn btn-primary" href="{{ route('hrd.cuti.edit', $data->no_cuti) }}">Edit</a>
@@ -56,7 +56,7 @@
                             <button type="submit" class="btn btn-danger">Delete</button>
                         </form>
                     </div>
-                </td>
+                </td> --}}
             </tr>
         @endforeach
     </table>
