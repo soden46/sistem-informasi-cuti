@@ -9,7 +9,7 @@
         <meta content="Bento Group Indonesia merupakan gabungan dari beberapa perusahaan bergerak sebagai pengelola dari berbagai dana investasi dari para investor. Kami bergerak di bidang Real Estate hingga kafe & Co-working. Saat ini sudah banyak cabang usaha di bawah pengelolaan Bento Group Indonesia." name="description">
 
         <!-- Favicon -->
-        <link rel="shortcut icon" type="image/x-generic" href="/favicon.ico">
+        <link rel="shortcut icon" type="image/x-generic" href="{{asset('assets/img/favicon.ico')}}">
         <link rel="manifest" href="/site.webmanifest">
 
         <!-- Google Font -->
