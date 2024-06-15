@@ -14,7 +14,7 @@ class KaryawanController extends Controller
     {
         $user = Auth::user();
         // dd(auth()->user());
-        $cuti = Employee::with('jenisCuti')->where('npp', auth()->user()->npp)->first();
+        $cuti = Employee::with('divisi')->where('npp', auth()->user()->npp)->first();
         return view('karyawan.index', compact('cuti'));
     }
 }
