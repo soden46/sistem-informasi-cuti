@@ -67,7 +67,6 @@ class DataKarywanController extends Controller
             'nama_emp' => 'required',
             'jk_emp' => 'required',
             'alamat' => 'required',
-            'jml_cuti' => 'nullable|max:11',
             'password' => 'nullable',
             'telp_emp' => 'nullable|max:20',
         ];
@@ -85,7 +84,6 @@ class DataKarywanController extends Controller
             'jabatan' => 'karyawan',
             'alamat' => $validatedData['alamat'],
             'hak_akses' => 'karyawan',
-            'jml_cuti' => $validatedData['jml_cuti'],
             'password' => $validatedData['password'],
             'active' => $validatedData['active'],
             'telp_emp' => $validatedData['telp_emp']
@@ -124,7 +122,6 @@ class DataKarywanController extends Controller
             'nama_emp' => 'required',
             'jk_emp' => 'required',
             'alamat' => 'required',
-            'jml_cuti' => 'nullable|max:11',
             'password' => 'nullable',
             'telp_emp' => 'nullable|max:20',
         ];
@@ -144,7 +141,6 @@ class DataKarywanController extends Controller
             'jabatan' => 'karyawan',
             'alamat' => $validatedData['alamat'],
             'hak_akses' => 'karyawan',
-            'jml_cuti' => $validatedData['jml_cuti'],
             'password' => $validatedData['password'] ?? $employee->password,
             'active' => $validatedData['active'],
             'telp_emp' => $validatedData['telp_emp']
