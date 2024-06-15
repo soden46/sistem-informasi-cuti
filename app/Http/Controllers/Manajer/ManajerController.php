@@ -42,7 +42,6 @@ class ManajerController extends Controller
             ->where('stt_cuti', '=', 'Reject')
             ->count();
 
-        dd($pending);
         return view('manajer.index', compact('user', 'karyawan', 'pending', 'approve', 'reject'));
     }
 }
