@@ -115,14 +115,31 @@ class DataCutiControllerl extends Controller
 
         $validatedData = $request->validate($rules);
 
-        $cuti = CutiModel::where('no_cuti', $no_cuti)->update($validatedData);
+        $cuti = CutiModel::where('no_cuti', $no_cuti)->first();
+        // dd($cuti);
+        if (!$cuti) {
+            return redirect()->route('manajer.cuti')->with('error', 'Data cuti tidak ditemukan');
+        }
 
-        // Perbarui kolom stt_cuti di tabel Employee
-        Employee::where('npp', $cuti->npp)->update(['stt_cuti' => $validatedData['stt_cuti']]);
 
-        // Tambahkan jml_cuti jika status berubah menjadi "Approve"
-        if ($request->stt_cuti === 'Approve') {
-            Employee::where('npp', $cuti->npp)->increment('jml_cuti', 1);
+        // Perbarui data cuti di tabel CutiModel
+        $cuti->update($validatedData);
+
+        $employee = Employee::where('npp', $cuti->npp)->first();
+
+        if (!$employee) {
+            return redirect()->route('manajer.cuti')->with('error', 'Data karyawan tidak ditemukan');
+        }
+
+
+        // Tambahkan jml_cuti jika status cuti menjadi "Approve"
+        if ($request->stt_cuti === "Approved") {
+            // Ambil nilai jml_cuti saat ini
+            $currentJmlCuti = $employee->jml_cuti;
+            // Tambahkan 1 ke nilai saat ini
+            $newJmlCuti = $currentJmlCuti + 1;
+            // Simpan nilai yang diperbarui ke database
+            $employee->update(['jml_cuti' => $newJmlCuti]);
         }
 
         return redirect()->route('manajer.cuti')->with('success', 'Data has ben updated');
