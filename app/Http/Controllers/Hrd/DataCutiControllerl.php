@@ -18,23 +18,44 @@ class DataCutiControllerl extends Controller
      */
     public function index(Request $request)
     {
+
+        $query = CutiModel::with('jenisCuti');
+
+        // Ambil nilai dari input pencarian
         $cari = $request->cari;
 
+        // Filter berdasarkan pencarian teks jika ada nilai pencarian
         if ($cari != NULL) {
-            return view('hrd.cuti.index', [
-                'title' => 'Data Cuti',
-                'cuti' => CutiModel::with('jenisCuti')->where(function ($query) use ($cari) {
-                    $query->where('no_cuti', 'like', "%{$cari}%")
-                        ->orWhere('stt_cuti', 'like', "%{$cari}%")
-                        ->orWhere('npp', 'like', "%{$cari}%");
-                })->paginate(10),
-            ]);
-        } else {
-            return view('hrd.cuti.index', [
-                'title' => 'Data Cuti',
-                'cuti' => CutiModel::with('jenisCuti')->paginate(10),
-            ]);
+            $query->where(function ($query) use ($cari) {
+                $query->where('no_cuti', 'like', "%{$cari}%")
+                    ->orWhere('stt_cuti', 'like', "%{$cari}%")
+                    ->orWhere('npp', 'like', "%{$cari}%");
+            });
         }
+
+        // Filter berdasarkan tanggal
+        if ($request->filled('start_date') && $request->filled('end_date')) {
+            $query->where(function ($query) use ($request) {
+                $query->whereDate('tgl_awal', '>=', $request->start_date)
+                    ->whereDate('tgl_akhir', '<=', $request->end_date);
+            });
+        } elseif ($request->filled('start_date')) {
+            $query->where(function ($query) use ($request) {
+                $query->whereDate('tgl_awal', '>=', $request->start_date);
+            });
+        } elseif ($request->filled('end_date')) {
+            $query->where(function ($query) use ($request) {
+                $query->whereDate('tgl_akhir', '<=', $request->end_date);
+            });
+        }
+
+        // Ambil data dengan pagination
+        $cuti = $query->paginate(10);
+
+        return view('hrd.cuti.index', [
+            'title' => 'Data Cuti',
+            'cuti' => $cuti,
+        ]);
     }
 
     /**
@@ -140,15 +161,43 @@ class DataCutiControllerl extends Controller
         return redirect()->route('hrd.cuti')->with('success', 'Data has ben deleted');
     }
 
-    public function pdf()
+    public function pdf(Request $request)
     {
+        // dd($request);
+        // Ambil nilai start_date dan end_date dari request
+        $start_date = $request->input('start_date');
+        $end_date = $request->input('end_date');
+
+        // Query untuk mengambil data cuti
+        $query = CutiModel::with('jenisCuti');
+
+        // Filter berdasarkan tanggal jika start_date dan end_date terisi
+        if ($start_date && $end_date) {
+            $query->whereBetween('tgl_awal', [$start_date, $end_date])
+                ->orWhereBetween('tgl_akhir', [$start_date, $end_date]);
+        } elseif ($start_date) {
+            $query->where('tgl_awal', '>=', $start_date)
+                ->orWhere('tgl_akhir', '>=', $start_date);
+        } elseif ($end_date) {
+            $query->where('tgl_awal', '<=', $end_date)
+                ->orWhere('tgl_akhir', '<=', $end_date);
+        }
+
+        // Ambil data cuti sesuai filter
+        $cuti = $query->get();
+
+        // Data untuk dikirim ke view PDF
         $data = [
-            'title' => 'Data Cuti',
-            'cuti' => CutiModel::with('jenisCuti')->get(),
+            'title' => 'Laporan Data Cuti',
+            'cuti' => $cuti,
+            'start_date' => $start_date, // Tambahkan start_date untuk ditampilkan di PDF
+            'end_date' => $end_date,     // Tambahkan end_date untuk ditampilkan di PDF
         ];
 
-        $customPaper = [0, 0, 567.00, 500.80];
-        $pdf = Pdf::loadView('hrd.cuti.pdf', $data)->setPaper('customPaper', 'potrait');
-        return $pdf->stream("laporan-data-jenis-cuti.pdf");
+        // Load view PDF dengan menggunakan library DomPDF
+        $pdf = PDF::loadView('hrd.pdf.cuti', $data)->setPaper('A4', 'landscape');
+
+        // Menggunakan stream untuk menampilkan PDF di browser
+        return $pdf->stream("laporan-data-cuti.pdf");
     }
 }

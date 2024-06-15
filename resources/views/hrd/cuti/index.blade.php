@@ -11,13 +11,14 @@
     <div class="d-flex justify-content-between mb-3">
         <div>
             <form action="{{ route('hrd.cuti') }}" method="GET" class="d-flex">
-                <input type="text" name="cari" class="form-control" placeholder="Cari Data" value="{{ request('cari') }}">
-                <button type="submit" class="btn btn-md btn-primary ml-2">Search</button>
-            </form>
+        <input type="text" name="cari" class="form-control" placeholder="Cari Data" value="{{ request('cari') }}">
+        <input type="date" name="start_date" class="form-control ml-2" value="{{ request('start_date') }}" placeholder="Tanggal Awal">
+        <input type="date" name="end_date" class="form-control ml-2" value="{{ request('end_date') }}" placeholder="Tanggal Akhir">
+        <button type="submit" class="btn btn-md btn-primary ml-2">Search</button>
+    </form>
         </div>
         <div>
-            <!-- <a class="btn btn-md btn-primary" href="{{ route('hrd.cuti.create') }}">Tambah Cuti</a> -->
-            <a class="btn btn-md btn-success" href="{{ route('hrd.cuti.cetak') }}" target="_blank"><i
+            <a class="btn btn-md btn-success" href="{{ route('hrd.cuti.cetak', ['start_date' => request('start_date'), 'end_date' => request('end_date')]) }}" target="_blank"><i
                     class="fa fa-print"></i> Cetak PDF</a>
         </div>
     </div>

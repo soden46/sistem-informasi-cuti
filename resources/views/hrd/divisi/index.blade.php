@@ -18,7 +18,7 @@
     </div>
     <div>
         <a class="btn btn-md btn-primary" href="{{ route('hrd.divisi.create') }}">Tambah Divisi</a>
-        <a class="btn btn-md btn-success" href="{{ route('hrd.divisi.cetak') }}" target="_blank"><i class="fa fa-print"></i> Cetak PDF</a>
+       
     </div>
 </div>
 <table class="table table-bordered">

@@ -168,13 +168,25 @@ class DataKarywanController extends Controller
 
     public function pdf()
     {
+        // Retrieve employees with their division (divisi) relationship
+        $karyawan = Employee::with('divisi')->get();
+
+        // Iterate over each employee to access their division
+        foreach ($karyawan as $employee) {
+            // Accessing the 'divisi' relationship of each employee
+            $divisi = $employee->divisi; // This assumes 'divisi' is the correct relationship method name
+            // dd($divisi);
+        }
+
+        // Prepare data to be passed to the view
         $data = [
-            'title' => 'Data Karayawan',
-            'karyawan' => Employee::with('divisi')->get(),
+            'title' => 'Laporan Data Karyawan',
+            'karyawan' => $karyawan,
         ];
 
+        // Load the view and generate the PDF
         $customPaper = [0, 0, 567.00, 500.80];
-        $pdf = Pdf::loadView('hrd.karyawan.pdf', $data)->setPaper('customPaper', 'potrait');
+        $pdf = Pdf::loadView('hrd.pdf.karyawan', $data)->setPaper('customPaper', 'landscape');
         return $pdf->stream('laporan-data-karyawan.pdf');
     }
 }
