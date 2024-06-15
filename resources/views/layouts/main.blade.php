@@ -3,13 +3,13 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Rekrutmen Ekstrakulikuler</title>
+    <title>Sistem Informasi Cuti Karyawan</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
 
     <!-- Favicon -->
-    <link href="{{asset('assets/img/favicon.ico')}}" rel="icon">
+    <link href="/favicon.ico" rel="icon">
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@1,600;1,700;1,800&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
