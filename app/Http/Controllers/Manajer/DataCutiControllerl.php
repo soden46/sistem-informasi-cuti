@@ -117,8 +117,6 @@ class DataCutiControllerl extends Controller
 
         $cuti = CutiModel::where('no_cuti', $no_cuti)->update($validatedData);
 
-        $statusSebelumnya = $cuti->stt_cuti;
-
         // Perbarui kolom stt_cuti di tabel Employee
         Employee::where('npp', $cuti->npp)->update(['stt_cuti' => $validatedData['stt_cuti']]);
 
