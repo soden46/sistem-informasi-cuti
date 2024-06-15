@@ -117,7 +117,18 @@ class DataCutiControllerl extends Controller
 
         $cuti = CutiModel::where('no_cuti', $no_cuti)->first();
 
+        $statusSebelumnya = $cuti->stt_cuti;
+
+        // Perbarui data cuti
         $cuti->update($validatedData);
+
+        // Perbarui kolom stt_cuti di tabel Employee
+        Employee::where('npp', $cuti->npp)->update(['stt_cuti' => $validatedData['stt_cuti']]);
+
+        // Tambahkan jml_cuti jika status berubah menjadi "Approve"
+        if ($request->stt_cuti === 'Approve') {
+            Employee::where('npp', $cuti->npp)->increment('jml_cuti', 1);
+        }
 
         return redirect()->route('manajer.cuti')->with('success', 'Data has ben updated');
     }
