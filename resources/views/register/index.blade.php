@@ -6,11 +6,10 @@
 
     <div class="text-center mb-4">
         <img class="mb-4" src="{{ asset('assets/img/logo.png') }}" alt="" style="max-width: 250px; height: auto;">
-        <h1 class="h3 mb-3 fw-normal">MASUK</h1>
+        <h1 class="h3 mb-3 fw-normal">DAFTAR</h1>
     </div>
     <form action="/register" method="POST">
         @csrf
-        <h1 class="h3 mb-3 fw-normal">DAFTAR</h1>
 
         <div class="form-floating">
             <label for="floatingInput">Nama</label>
