@@ -2,8 +2,13 @@
 
 @section('content')
 <main class="form-signin w-100 m-auto">
+    @include('component.alert-dismissible')
+
+    <div class="text-center mb-4">
+        <img class="mb-4" src="{{ asset('assets/img/logo.png') }}" alt="" style="max-width: 250px; height: auto;">
+        <h1 class="h3 mb-3 fw-normal">MASUK</h1>
+    </div>
     <form action="/register" method="POST">
-        @include('component.alert-dismissible')
         @csrf
         <h1 class="h3 mb-3 fw-normal">DAFTAR</h1>
 
