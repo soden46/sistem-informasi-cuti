@@ -22,7 +22,7 @@
                     <div class="d-flex">
                         <div style="width: 100%;">
                             <h6 style="color: #1746a2;">Jumlah Cuti</h6>
-                            <h4>{{ $cuti }}</h4>
+                            <h4>{{ $cuti->jml_cuti }}</h4>
                         </div>
                         <div style="width: auto;">
                             <h1><span style="color: black; vertical-align: middle;" class="bi bi-file-earmark-text"></span>
