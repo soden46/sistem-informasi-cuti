@@ -28,20 +28,20 @@ class ManajerController extends Controller
         $pending = CutiModel::join('employee', 'cuti.npp', '=', 'employee.npp')
             ->where('employee.id_divisi', auth()->user()->id_divisi)
             ->where('stt_cuti', '=',  'Pending')
-            ->distinct('cuti.id')
-            ->count('cuti.id');
+            ->distinct('cuti.no_cuti')
+            ->count('cuti.no_cuti');
 
         $approve = CutiModel::join('employee', 'cuti.npp', '=', 'employee.npp')
             ->where('employee.id_divisi', auth()->user()->id_divisi)
             ->where('stt_cuti', '=', 'Approved')
-            ->distinct('cuti.id')
-            ->count('cuti.id');
+            ->distinct('cuti.no_cuti')
+            ->count('cuti.no_cuti');
 
         $reject = CutiModel::join('employee', 'cuti.npp', '=', 'employee.npp')
             ->where('employee.id_divisi', auth()->user()->id_divisi)
             ->where('stt_cuti', '=', 'Reject')
-            ->distinct('cuti.id')
-            ->count('cuti.id');
+            ->distinct('cuti.no_cuti')
+            ->count('cuti.no_cuti');
         return view('manajer.index', compact('user', 'karyawan', 'pending', 'approve', 'reject'));
     }
 }
