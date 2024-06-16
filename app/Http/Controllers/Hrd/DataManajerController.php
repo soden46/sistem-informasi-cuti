@@ -23,7 +23,10 @@ class DataManajerController extends Controller
         if ($cari != NULL) {
             return view('hrd.manajer.index', [
                 'title' => 'Data Manajer',
-                'manajer' => Employee::with('divisi')->where('hak_akses', 'manajer')->orWhere('nama_emp', 'like', "%{$cari}%")->orWhere('npp', 'like', "%{$cari}%")->paginate(10),
+                'manajer' => Employee::with('divisi')->where('hak_akses', 'manajer')->where(function ($query) use ($cari) {
+                    $query->where('nama_emp', 'like', "%{$cari}%")
+                        ->orWhere('npp', 'like', "%{$cari}%");
+                })->paginate(10),
                 'div' => DivisiModel::get(),
             ]);
         } else {
@@ -62,7 +65,6 @@ class DataManajerController extends Controller
             'nama_emp' => 'required|max:20',
             'jk_emp' => 'required',
             'alamat' => 'required',
-            'jml_cuti' => 'nullable|max:11',
             'password' => 'required',
             'active' => 'required',
             'telp_emp' => 'nullable|max:20',
@@ -85,7 +87,6 @@ class DataManajerController extends Controller
             'jabatan' => 'manajer',
             'alamat' => $validatedData['alamat'],
             'hak_akses' => 'manajer',
-            'jml_cuti' => $validatedData['jml_cuti'],
             'password' => $validatedData['password'],
             'active' => $validatedData['active'],
             'telp_emp' => $validatedData['telp_emp']
@@ -126,7 +127,6 @@ class DataManajerController extends Controller
             'nama_emp' => 'required',
             'jk_emp' => 'required',
             'alamat' => 'required',
-            'jml_cuti' => 'nullable|max:11',
             'password' => 'nullable',
             'active' => 'nullable',
             'telp_emp' => 'nullable|max:20',
@@ -151,7 +151,6 @@ class DataManajerController extends Controller
             'jabatan' => "manajer",
             'alamat' => $validatedData['alamat'],
             'hak_akses' => "manajer",
-            'jml_cuti' => $validatedData['jml_cuti'],
             'password' => $validatedData['password'] ?? $employee->password,
             'active' => $validatedData['active'],
             'telp_emp' => $validatedData['telp_emp']

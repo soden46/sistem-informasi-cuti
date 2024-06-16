@@ -46,6 +46,7 @@ Route::get('/login', [LoginController::class, 'index'])->name('login')->middlewa
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::post('/authenticate', [LoginController::class, 'authenticate']);
 Route::post('/register', [RegisterController::class, 'store'])->name('register');
+Route::get('/register', [RegisterController::class, 'index'])->name('register');
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth')->name('dashboard');
 

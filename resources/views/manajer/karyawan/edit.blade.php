@@ -16,7 +16,7 @@
             <h5 class="card-title">Edit Divisi</h5>
         </div>
         <div class="card-body">
-            <form method="post" action="{{ route('hrd.divisi.update', $karyawan->npp) }}" enctype="multipart/form-data">
+            <form method="post" action="{{ route('manajer.karyawan.update', $karyawan->npp) }}" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
 
@@ -66,11 +66,6 @@
                         <option value="hrd" {{ $karyawan->hak_akses == 'hrd' ? 'selected' : '' }}>HRD</option>
                         <option value="karyawan" {{ $karyawan->hak_akses == 'karyawan' ? 'selected' : '' }}>Karyawan</option>
                     </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="jml_cuti">Jumlah Cuti</label>
-                    <input type="text" class="form-control" id="jml_cuti" name="jml_cuti" value="{{ $karyawan->jml_cuti }}">
                 </div>
 
                 <div class="form-group">

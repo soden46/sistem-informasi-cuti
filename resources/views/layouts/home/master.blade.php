@@ -8,7 +8,7 @@
         <meta content="Bento Group Indonesia" name="keywords">
         <meta content="Bento Group Indonesia merupakan gabungan dari beberapa perusahaan bergerak sebagai pengelola dari berbagai dana investasi dari para investor. Kami bergerak di bidang Real Estate hingga kafe & Co-working. Saat ini sudah banyak cabang usaha di bawah pengelolaan Bento Group Indonesia." name="description">
         <!-- Favicon -->
-        <link rel="shortcut icon" type="image/x-generic" href="/favicon.ico">
+        <link rel="shortcut icon" type="image/x-generic" href="{{asset('assets/img/favicon.ico')}}">
         <link rel="manifest" href="/site.webmanifest">
 
         <!-- Google Font -->
@@ -26,59 +26,12 @@
     </head>
 
     <body>
-        <!-- Nav Bar Start -->
-        @include('layouts.home.navbar')
         <!-- Nav Bar End -->
         <!-- Content Start-->
         <div class="container-fluid">
             @yield('content')
         </div>
         <!-- Content End -->
-        <!-- Footer Start -->
-        <div class="footer">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6 col-lg-4">
-                        <div class="footer-about">
-                            <h2>About Us</h2>
-                            <p>
-                                Berdiri sejak awal tahun 2012 diawali dengan merintis Bento Kopi. Hingga saat ini, kami berkembang menjadi group usaha yang menaungi beberapa brand meliputi Food & Beverage, Properti, Budidaya, Kecantikan, dan Digital Marketing Agency.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-4 d-flex justify-content-center">
-                        <div class="footer-link">
-                            <h2>Menu</h2>
-                            <a href="">Terms of use</a>
-                            <a href="">Privacy policy</a>
-                            <a href="">Cookies</a>
-                            <a href="">Help</a>
-                            <a href="">FQAs</a>
-                            <div name="syarifsoden" style="text-align:center;display: none;"><a href="https://syarifsoden.blogspot.com/">Syarif Soden</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-4">
-                        <div class="footer-contact">
-                            <h2>Get In Touch</h2>
-                            <p><i class="fa fa-map-marker-alt"></i><a href="https://goo.gl/maps/6edT9xCVWra5Q4bb7">Sentrum Space. Jl. S. Hartono Jl. Kaliurang Timur No.KM 10, Gondangan, Sardonoharjo, Kec. Ngaglik, Kabupaten Sleman, Daerah Istimewa Yogyakarta</a></p>
-                            <p><i class="fa fa-phone-alt"></i>0813-2719-2837</p>
-                            <p><i class="fa fa-envelope"></i>info@bentogroupindonesia.com</p>
-                            <div class="footer-social">
-                                <a href=""><i class="fab fa-twitter"></i></a>
-                                <a href=""><i class="fab fa-facebook-f"></i></a>
-                                <a href=""><i class="fab fa-youtube"></i></a>
-                                <a href=""><i class="fab fa-instagram"></i></a>
-                                <a href=""><i class="fab fa-linkedin-in"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="d-flex justify-content-center">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15814.442879205526!2d110.4018482!3d-7.7248477!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb93133ac1166d07c!2sSentrum%20Space!5e0!3m2!1sid!2sid!4v1671466824319!5m2!1sid!2sid" width="800" height="200" style="border:0;" allowfullscreen="false" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></center>
-                </div>
-            </div>
-        </div>
         </div>
         <!-- Footer End -->
 

@@ -26,8 +26,11 @@ class DataCutiControllerl extends Controller
                 'cuti' => CutiModel::with('jenisCuti', 'employee')
                     ->join('employee', 'cuti.npp', '=', 'employee.npp')
                     ->where('employee.id_divisi', auth()->user()->id_divisi)
-                    ->where('no_cuti', 'like', "%{$cari}%")
-                    ->orWhere('stt_cuti', 'like', "%{$cari}%")->paginate(10),
+                    ->where(function ($query) use ($cari) {
+                        $query->where('no_cuti', 'like', "%{$cari}%")
+                            ->orWhere('stt_cuti', 'like', "%{$cari}%")
+                            ->orWhere('cuti.npp', 'like', "%{$cari}%");
+                    })->paginate(10),
             ]);
         } else {
             return view('manajer.cuti.index', [
@@ -113,8 +116,31 @@ class DataCutiControllerl extends Controller
         $validatedData = $request->validate($rules);
 
         $cuti = CutiModel::where('no_cuti', $no_cuti)->first();
+        // dd($cuti);
+        if (!$cuti) {
+            return redirect()->route('manajer.cuti')->with('error', 'Data cuti tidak ditemukan');
+        }
 
+
+        // Perbarui data cuti di tabel CutiModel
         $cuti->update($validatedData);
+
+        $employee = Employee::where('npp', $cuti->npp)->first();
+
+        if (!$employee) {
+            return redirect()->route('manajer.cuti')->with('error', 'Data karyawan tidak ditemukan');
+        }
+
+
+        // Tambahkan jml_cuti jika status cuti menjadi "Approve"
+        if ($request->stt_cuti === "Approved") {
+            // Ambil nilai jml_cuti saat ini
+            $currentJmlCuti = $employee->jml_cuti;
+            // Tambahkan 1 ke nilai saat ini
+            $newJmlCuti = $currentJmlCuti + 1;
+            // Simpan nilai yang diperbarui ke database
+            $employee->update(['jml_cuti' => $newJmlCuti]);
+        }
 
         return redirect()->route('manajer.cuti')->with('success', 'Data has ben updated');
     }

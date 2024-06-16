@@ -24,7 +24,10 @@ class DataKarywanController extends Controller
         if ($cari != NULL) {
             return view('hrd.karyawan.index', [
                 'title' => 'Data aryawan',
-                'karyawan' => Employee::with('divisi')->where('hak_akses', 'karyawan')->orWhere('nama_emp', 'like', "%{$cari}%")->orWhere('npp', 'like', "%{$cari}%")->paginate(10),
+                'karyawan' => Employee::with('divisi')->where('hak_akses', 'karyawan')->where(function ($query) use ($cari) {
+                    $query->where('nama_emp', 'like', "%{$cari}%")
+                        ->orWhere('npp', 'like', "%{$cari}%");
+                })->paginate(10),
                 'div' => DivisiModel::get(),
             ]);
         } else {
@@ -63,7 +66,6 @@ class DataKarywanController extends Controller
             'nama_emp' => 'required|max:20',
             'jk_emp' => 'required',
             'alamat' => 'required',
-            'jml_cuti' => 'nullable|max:11',
             'password' => 'required',
             'active' => 'required',
             'telp_emp' => 'nullable|max:20',
@@ -84,7 +86,6 @@ class DataKarywanController extends Controller
             'jabatan' => 'karyawan',
             'alamat' => $validatedData['alamat'],
             'hak_akses' => 'karyawan',
-            'jml_cuti' => $validatedData['jml_cuti'],
             'password' => $validatedData['password'],
             'active' => $validatedData['active'],
             'telp_emp' => $validatedData['telp_emp']
@@ -124,7 +125,6 @@ class DataKarywanController extends Controller
             'nama_emp' => 'required',
             'jk_emp' => 'required',
             'alamat' => 'required',
-            'jml_cuti' => 'nullable|max:11',
             'password' => 'nullable',
             'active' => 'required',
             'telp_emp' => 'nullable|max:20',
@@ -145,7 +145,6 @@ class DataKarywanController extends Controller
             'jabatan' => 'karyawan',
             'alamat' => $validatedData['alamat'],
             'hak_akses' => 'karyawan',
-            'jml_cuti' => $validatedData['jml_cuti'],
             'password' => $validatedData['password'] ?? $employee->password,
             'active' => $validatedData['active'],
             'telp_emp' => $validatedData['telp_emp']
@@ -169,13 +168,25 @@ class DataKarywanController extends Controller
 
     public function pdf()
     {
+        // Retrieve employees with their division (divisi) relationship
+        $karyawan = Employee::with('divisi')->get();
+
+        // Iterate over each employee to access their division
+        foreach ($karyawan as $employee) {
+            // Accessing the 'divisi' relationship of each employee
+            $divisi = $employee->divisi; // This assumes 'divisi' is the correct relationship method name
+            // dd($divisi);
+        }
+
+        // Prepare data to be passed to the view
         $data = [
-            'title' => 'Data Karayawan',
-            'karyawan' => Employee::with('divisi')->get(),
+            'title' => 'Laporan Data Karyawan',
+            'karyawan' => $karyawan,
         ];
 
+        // Load the view and generate the PDF
         $customPaper = [0, 0, 567.00, 500.80];
-        $pdf = Pdf::loadView('hrd.karyawan.pdf', $data)->setPaper('customPaper', 'potrait');
+        $pdf = Pdf::loadView('hrd.pdf.karyawan', $data)->setPaper('customPaper', 'landscape');
         return $pdf->stream('laporan-data-karyawan.pdf');
     }
 }

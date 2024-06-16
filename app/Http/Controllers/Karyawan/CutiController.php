@@ -65,7 +65,17 @@ class CutiController extends Controller
 
         $validatedData = $request->validate($rules);
 
-        CutiModel::create($validatedData);
+        CutiModel::create([
+            'npp' => $validatedData['npp'],
+            'id_jenis_cuti' => $validatedData['id_jenis_cuti'],
+            'tgl_pengajuan' => $validatedData['tgl_pengajuan'],
+            'tgl_awal' => $validatedData['tgl_awal'],
+            'tgl_akhir' => $validatedData['tgl_akhir'],
+            'durasi' => $validatedData['durasi'],
+            'keterangan' => $validatedData['keterangan'],
+            'stt_cuti' => 'Pending',
+
+        ]);
 
         return redirect()->route('karyawan.cuti')->with('success', 'Data has ben created');
     }

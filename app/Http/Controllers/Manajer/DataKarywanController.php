@@ -25,7 +25,10 @@ class DataKarywanController extends Controller
         if ($cari != NULL) {
             return view('manajer.karyawan.index', [
                 'title' => 'Data aryawan',
-                'karyawan' => Employee::with('divisi')->where('hak_akses', 'karyawan')->where('id_divisi', $manajer->id_divisi)->orWhere('nama_emp', 'like', "%{$cari}%")->orWhere('npp', 'like', "%{$cari}%")->paginate(10),
+                'karyawan' => Employee::with('divisi')->where('hak_akses', 'karyawan')->where('id_divisi', $manajer->id_divisi)->where(function ($query) use ($cari) {
+                    $query->where('nama_emp', 'like', "%{$cari}%")
+                        ->orWhere('npp', 'like', "%{$cari}%");
+                })->paginate(10),
                 'div' => DivisiModel::get(),
             ]);
         } else {
@@ -64,7 +67,6 @@ class DataKarywanController extends Controller
             'nama_emp' => 'required',
             'jk_emp' => 'required',
             'alamat' => 'required',
-            'jml_cuti' => 'nullable|max:11',
             'password' => 'nullable',
             'telp_emp' => 'nullable|max:20',
         ];
@@ -82,7 +84,6 @@ class DataKarywanController extends Controller
             'jabatan' => 'karyawan',
             'alamat' => $validatedData['alamat'],
             'hak_akses' => 'karyawan',
-            'jml_cuti' => $validatedData['jml_cuti'],
             'password' => $validatedData['password'],
             'active' => $validatedData['active'],
             'telp_emp' => $validatedData['telp_emp']
@@ -121,7 +122,6 @@ class DataKarywanController extends Controller
             'nama_emp' => 'required',
             'jk_emp' => 'required',
             'alamat' => 'required',
-            'jml_cuti' => 'nullable|max:11',
             'password' => 'nullable',
             'telp_emp' => 'nullable|max:20',
         ];
@@ -141,7 +141,6 @@ class DataKarywanController extends Controller
             'jabatan' => 'karyawan',
             'alamat' => $validatedData['alamat'],
             'hak_akses' => 'karyawan',
-            'jml_cuti' => $validatedData['jml_cuti'],
             'password' => $validatedData['password'] ?? $employee->password,
             'active' => $validatedData['active'],
             'telp_emp' => $validatedData['telp_emp']
