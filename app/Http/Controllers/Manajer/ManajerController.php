@@ -39,7 +39,7 @@ class ManajerController extends Controller
 
         $reject = CutiModel::join('employee', 'cuti.npp', '=', 'employee.npp')
             ->where('employee.id_divisi', auth()->user()->id_divisi)
-            ->where('stt_cuti', '=', 'Reject')
+            ->where('stt_cuti', '=', 'Rejected')
             ->distinct('cuti.no_cuti')
             ->count('cuti.no_cuti');
         return view('manajer.index', compact('user', 'karyawan', 'pending', 'approve', 'reject'));
