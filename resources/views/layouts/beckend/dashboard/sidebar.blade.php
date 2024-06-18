@@ -5,11 +5,16 @@
         <div class="sidebar-brand-icon d-flex align-items-center justify-content-center mt-0 bg-white">
             <img src="{{ asset('assets/img/logo.png') }}" alt="Logo" width="" height="30"></img>
         </div>
-        <a class="sidebar-brand d-flex align-items-center justify-content-center">
-            <div class="sidebar-brand-text mx-3">
-                <div class="sidebar-brand-text mx-3">{{ Auth::user()->nama_emp }}</br>Akun HRD</br>Sistem Informasi spanengajuan Cuti Online</br>PT Gastro Gizi Sarana</br>{{ date('l, j F Y') }}</div>
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
+        <div class="sidebar-brand-text mx-3">
+            <div class="sidebar-brand-text mx-3">{{ Auth::user()->nama_emp }}</div>
+            <div class="text-sm-center">
+                    <p>Akun HRD</p>
+                    <p>Sistem Informasi pengajuan Cuti Online</p>
+                    <p>PT Gastro Gizi Sarana</p>
+                    <p>{{ date('l, j F Y') }}</p>
+                </div>
             </div>
-            
         </a>
 
         <!-- Divider -->
