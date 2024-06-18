@@ -2,13 +2,16 @@
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
         <!-- Sidebar - Brand -->
-        <div class="sidebar-brand-icon d-flex align-items-center justify-content-center mt-2 bg-white">
+        <div class="sidebar-brand-icon d-flex align-items-center justify-content-center mt-0 bg-white">
             <img src="{{ asset('assets/img/logo.png') }}" alt="Logo" width="" height="30"></img>
         </div>
         <a class="sidebar-brand d-flex align-items-center justify-content-center">
             <div class="sidebar-brand-text mx-3">
                 <div class="sidebar-brand-text mx-3">{{ Auth::user()->nama_emp }}</div>
                 <p>Akun HRD</p>
+                <p>Sistem Inormasi Pengajuan Cuti Online</p>
+                <p>PT Gastro Gizi Sarana</p>
+                <p>{{ date('l, j F Y') }}</p>
             </div>
         </a>
 
@@ -62,7 +65,7 @@
 @endcan
 @can('manajer')
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-        <div class="sidebar-brand-icon d-flex align-items-center justify-content-center mt-2 bg-white">
+        <div class="sidebar-brand-icon d-flex align-items-center justify-content-center mt-0 bg-white">
             <img src="{{ asset('assets/img/logo.png') }}" alt="Logo" width="" height="30"></img>
         </div>
         <!-- Sidebar - Brand -->
@@ -70,6 +73,9 @@
             <div class="sidebar-brand-text mx-3">
                 <div class="sidebar-brand-text mx-3">{{ Auth::user()->nama_emp }}</div>
                 <p>Akun Manajer</p>
+                <p>Sistem Inormasi Pengajuan Cuti Online</p>
+                <p>PT Gastro Gizi Sarana</p>
+                <p>{{ date('l, j F Y') }}</p>
             </div>
         </a>
         <hr class="sidebar-divider my-0">
@@ -105,7 +111,7 @@
 @endcan
 @can('karyawan')
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-        <div class="sidebar-brand-icon d-flex align-items-center justify-content-center mt-2 bg-white">
+        <div class="sidebar-brand-icon d-flex align-items-center justify-content-center mt-0 bg-white">
             <img src="{{ asset('assets/img/logo.png') }}" alt="Logo" width="" height="30"></img>
         </div>
         <!-- Sidebar - Brand -->
@@ -113,6 +119,9 @@
             <div class="sidebar-brand-text mx-3">
                 <div class="sidebar-brand-text mx-3">{{ Auth::user()->nama_emp }}</div>
                 <p>Akun Karyawan</p>
+                <p>Sistem Inormasi Pengajuan Cuti Online</p>
+                <p>PT Gastro Gizi Sarana</p>
+                <p>{{ date('l, j F Y') }}</p>
             </div>
         </a>
         <hr class="sidebar-divider my-0">
