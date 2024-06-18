@@ -9,7 +9,7 @@
             <div class="sidebar-brand-text mx-3">{{ Auth::user()->nama_emp }}</div>
         </a>
         <div class="sidebar-brand-brand mx-3 mt-0 " height="20">
-                    <p class="sidebar-brand-text align-items-left justify-content-left text-left text-white text-sm">Akun HRD</br>
+                    <p class="sidebar-brand-text align-items-left justify-content-center text-left text-white text-sm">Akun HRD</br>
                     Sistem Informasi pengajuan Cuti Online</br>
                     <b>PT Gastro Gizi Sarana</b></br>
                     {{ \Carbon\Carbon::now()->translatedFormat('l, j F Y') }}</p>
