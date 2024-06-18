@@ -8,7 +8,7 @@
         <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
         <div class="sidebar-brand-text mx-3">
             <div class="sidebar-brand-text mx-3">{{ Auth::user()->nama_emp }}</div>
-            <div class="text-sm-center">
+            <div class="text-sm-center" height="30">
                     <p>Akun HRD</p>
                     <p>Sistem Informasi pengajuan Cuti Online</p>
                     <p>PT Gastro Gizi Sarana</p>
