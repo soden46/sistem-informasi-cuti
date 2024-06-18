@@ -8,9 +8,7 @@
         <a class="sidebar-brand d-flex align-items-center justify-content-center">
             <div class="sidebar-brand-text mx-3">
                 <div class="sidebar-brand-text mx-3">{{ Auth::user()->nama_emp }}</div>
-                <p>Akun HRD</p>
-                <p>Sistem Inormasi Pengajuan Cuti Online</p>
-                <p>PT Gastro Gizi Sarana</p>
+                <p>Akun HRD</br>Sistem Inormasi Pengajuan Cuti Online</br>PT Gastro Gizi Sarana</p>
                 <p>{{ date('l, j F Y') }}</p>
             </div>
         </a>
