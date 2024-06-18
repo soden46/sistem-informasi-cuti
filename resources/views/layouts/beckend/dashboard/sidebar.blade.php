@@ -1,12 +1,11 @@
 @can('hrd')
-    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+    < class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
         <!-- Sidebar - Brand -->
         <div class="sidebar-brand-icon d-flex align-items-center justify-content-center mt-0 bg-white">
             <img src="{{ asset('assets/img/logo.png') }}" alt="Logo" width="" height="30"></img>
         </div>
         <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
-        <div class="sidebar-brand-text mx-3">
             <div class="sidebar-brand-text mx-3">{{ Auth::user()->nama_emp }}</div>
             <div class="text-sm-center" height="30">
                     <p>Akun HRD</p>
@@ -14,9 +13,7 @@
                     <p>PT Gastro Gizi Sarana</p>
                     <p>{{ date('l, j F Y') }}</p>
                 </div>
-            </div>
         </a>
-
         <!-- Divider -->
         <hr class="sidebar-divider my-0">
         <li class="nav-item">
