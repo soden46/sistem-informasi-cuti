@@ -32,6 +32,6 @@ class JenisCutiModel extends Model
         $latestId = $latestId ? intval($latestId) : 0;
         $newId = $latestId + 1;
 
-        return $newId;
+        return str_pad($newId, 5, '0', STR_PAD_LEFT);
     }
 }

@@ -35,6 +35,6 @@ class DivisiModel extends Model
         $newId = $latestId + 1;
 
         // Format the new ID with leading zeros to make it 5 characters long
-        return $newId;
+        return str_pad($newId, 5, '0', STR_PAD_LEFT);
     }
 }

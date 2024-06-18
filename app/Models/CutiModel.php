@@ -39,11 +39,21 @@ class CutiModel extends Model
 
     private static function generateUniqueId()
     {
-        $latestId = self::max('no_cuti');
-        $latestId = $latestId ? intval($latestId) : 0;
+        // Dapatkan ID terbaru
+        $latestId = self::orderBy('no_cuti', 'desc')->first();
+        $latestId = $latestId ? intval($latestId->no_cuti) : 0;
+
+        // Tambahkan 1 ke ID terbaru
         $newId = $latestId + 1;
 
-        // Format the new ID with leading zeros to make it 5 characters long
+        // Format ID baru dengan padding nol di depan
+        $newId = str_pad($newId, 5, '0', STR_PAD_LEFT);
+
+        // Pastikan tidak ada duplikat
+        while (self::where('no_cuti', $newId)->exists()) {
+            $newId = str_pad(intval($newId) + 1, 5, '0', STR_PAD_LEFT);
+        }
+
         return $newId;
     }
 }
