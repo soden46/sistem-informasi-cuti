@@ -8,8 +8,9 @@
         <a class="sidebar-brand d-flex align-items-center justify-content-center">
             <div class="sidebar-brand-text mx-3">
                 <div class="sidebar-brand-text mx-3">{{ Auth::user()->nama_emp }}</div>
-                <span>Akun HRD</br>Sistem Inormasi spanengajuan Cuti Online</br>PT Gastro Gizi Sarana</br>{{ date('l, j F Y') }}</p>
+                
             </div>
+            <span>Akun HRD</br>Sistem Informasi spanengajuan Cuti Online</br>PT Gastro Gizi Sarana</br>{{ date('l, j F Y') }}</span>
         </a>
 
         <!-- Divider -->
