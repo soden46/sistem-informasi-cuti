@@ -8,11 +8,11 @@
         <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
             <div class="sidebar-brand-text mx-3">{{ Auth::user()->nama_emp }}</div>
         </a>
-        <div class="sidebar-brand-text mx-3 mt-0" height="30">
-                    <p>Akun HRD</p>
-                    <p>Sistem Informasi pengajuan Cuti Online</p>
-                    <p>PT Gastro Gizi Sarana</p>
-                    <p>{{ date('l, j F Y') }}</p>
+        <div class="sidebar-brand-text mx-3 mt-0 d-flex align-items-center justify-content-center" height="30">
+                    <p>Akun HRD</br>
+                    Sistem Informasi pengajuan Cuti Online</br>
+                    PT Gastro Gizi Sarana</br>
+                    {{ date('l, j F Y') }}</p>
         </div>
 
         <!-- Divider -->
