@@ -11,7 +11,7 @@
               <h1 class="m-0">404</h1>
               <img src="{{asset('assets/img/bgi.png')}}" alt="Logo" width="" height="46">
                             </a>
-              <h6>Halaman Tidak Ditemukan - Bento Group Indonesia</h6>
+              <h6>Halaman Tidak Ditemukan</h6>
               <p>Halaman Yang Anda Tuju<span class="text-info">Tidak Ditemukan</span></p>
             </div>
           </div>

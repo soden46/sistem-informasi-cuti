@@ -7,11 +7,13 @@ use App\Models\Pelamar;
 use App\Models\Caffe;
 use App\Models\LowonganPekerjaan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 
 class DashboardController extends Controller
 {
     public function index()
     {
+        App::setLocale('id');
         dd(auth()->user());
         if (!auth()->check()) {
             abort(403);

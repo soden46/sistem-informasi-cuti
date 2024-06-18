@@ -3,12 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 
+
 class LoginController extends Controller
 {
+
     // public function __construct()
     // {
     //     $this->middleware(['auth', 'verified']);
@@ -16,6 +19,7 @@ class LoginController extends Controller
 
     public function index()
     {
+        App::setLocale('id');
         if (Auth::check()) {
             return redirect('dashboard');
         } else {
@@ -28,6 +32,7 @@ class LoginController extends Controller
 
     public function authenticate(Request $request)
     {
+        App::setLocale('id');
         $this->validate($request, [
             'nama_emp' => 'required',
             'password' => 'required',
@@ -56,6 +61,7 @@ class LoginController extends Controller
 
     public function logout(Request $request)
     {
+        App::setLocale('id');
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
