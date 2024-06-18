@@ -11,8 +11,8 @@
         <div class="sidebar-brand-brand mx-3 mt-0 " height="30">
                     <p class="sidebar-brand-text d-flex align-items-center justify-content-center text-center text-white">Akun HRD</br>
                     Sistem Informasi pengajuan Cuti Online</br>
-                    PT Gastro Gizi Sarana</br>
-                    {{ date('l, j F Y') }}</p>
+                    <b>PT Gastro Gizi Sarana</b></br>
+                    {{ \Carbon\Carbon::now()->translatedFormat('l, j F Y') }}</p>
         </div>
 
         <!-- Divider -->
@@ -72,10 +72,10 @@
          <a class="sidebar-brand d-flex align-items-center justify-content-center">
             <div class="sidebar-brand-text mx-3">
                 <div class="sidebar-brand-text mx-3">{{ Auth::user()->nama_emp }}</div>
-                <p>Akun Manajer</p>
-                <p>Sistem Inormasi Pengajuan Cuti Online</p>
-                <p>PT Gastro Gizi Sarana</p>
-                <p>{{ date('l, j F Y') }}</p>
+                <p>Akun Manajer</br>
+                Sistem Informasi pengajuan Cuti Online</br>
+                    <b>PT Gastro Gizi Sarana</b></br>
+                {{ date('l, j F Y') }}</p>
             </div>
         </a>
         <hr class="sidebar-divider my-0">
@@ -118,9 +118,9 @@
         <a class="sidebar-brand d-flex align-items-center justify-content-center">
             <div class="sidebar-brand-text mx-3">
                 <div class="sidebar-brand-text mx-3">{{ Auth::user()->nama_emp }}</div>
-                <p>Akun Karyawan</p>
-                <p>Sistem Inormasi Pengajuan Cuti Online</p>
-                <p>PT Gastro Gizi Sarana</p>
+                <p>Akun Karyawan</br>
+                Sistem Informasi pengajuan Cuti Online</br>
+                    <b>PT Gastro Gizi Sarana</b></br>
                 <p>{{ date('l, j F Y') }}</p>
             </div>
         </a>
