@@ -7,12 +7,13 @@
         </div>
         <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
             <div class="sidebar-brand-text mx-3">{{ Auth::user()->nama_emp }}</div>
-        </a>
-        <div class="sidebar-brand-brand mx-3 mt-0 " height="30">
-                    <p class="sidebar-brand-text align-items-center justify-content-center text-center text-white">Akun HRD</br>
+            <p class="sidebar-brand-text align-items-center justify-content-center text-center text-white">Akun HRD</br>
                     Sistem Informasi pengajuan Cuti Online</br>
                     <b>PT Gastro Gizi Sarana</b></br>
                     {{ \Carbon\Carbon::now()->translatedFormat('l, j F Y') }}</p>
+        </a>
+        <div class="sidebar-brand-brand mx-3 mt-0 " height="30">
+                    
         </div>
 
         <!-- Divider -->
