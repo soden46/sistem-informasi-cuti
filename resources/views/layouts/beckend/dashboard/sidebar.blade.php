@@ -8,8 +8,8 @@
         <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
             <div class="sidebar-brand-text mx-3">{{ Auth::user()->nama_emp }}</div>
         </a>
-        <div class="sidebar-brand-brand mx-3 mt-0 " height="20">
-                    <p class="sidebar-brand-text align-items-left justify-content-center text-left text-white text-small">Akun HRD</br>
+        <div class="sidebar-brand-brand mx-3 mt-0 " height="15">
+                    <p class="sidebar-brand-text align-items-left justify-content-center text-left text-white text-small">
                     Sistem Informasi pengajuan Cuti Online</br>
                     <b>PT Gastro Gizi Sarana</b></br>
                     {{ \Carbon\Carbon::now()->translatedFormat('l, j F Y') }}</p>
@@ -75,8 +75,8 @@
                 
             </div>
         </a>
-        <div class="sidebar-brand-brand mx-3 mt-0 " height="20">
-                <p class="sidebar-brand-text align-items-center justify-content-center text-center text-white">Akun Manajer</br>
+        <div class="sidebar-brand-brand mx-3 mt-0 " height="15">
+                <p class="sidebar-brand-text align-items-left justify-content-center text-left text-white text-small">
                 Sistem Informasi pengajuan Cuti Online</br>
                    <b>PT Gastro Gizi Sarana</b></br>
                     {{ \Carbon\Carbon::now()->translatedFormat('l, j F Y') }}</p>
@@ -124,9 +124,8 @@
                 
             </div>
         </a>
-        <div class="sidebar-brand-brand mx-3 mt-0 " height="20">
-            <p class="sidebar-brand-text align-items-center justify-content-center text-center text-white">
-                Akun Karyawan</br>
+        <div class="sidebar-brand-brand mx-3 mt-0 " height="15">
+            <p class="sidebar-brand-text align-items-left justify-content-center text-left text-white text-small">
                 Sistem Informasi pengajuan Cuti Online</br>
                    <b>PT Gastro Gizi Sarana</b></br>
                     {{ \Carbon\Carbon::now()->translatedFormat('l, j F Y') }}</p>
