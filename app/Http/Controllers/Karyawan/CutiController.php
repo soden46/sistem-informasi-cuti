@@ -52,28 +52,32 @@ class CutiController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
-        $rules = [
-            'npp' => 'required|max:10',
-            'id_jenis_cuti' => 'required',
+        $request->validate([
+            'npp' => 'required|string|max:255',
+            'id_jenis_cuti' => 'required|integer',
             'tgl_awal' => 'required|date',
             'tgl_akhir' => 'required|date',
             'durasi' => 'required|integer',
+            'bukti_cuti' => 'nullable|file|mimes:jpg,jpeg,png,pdf',
             'keterangan' => 'required|string|max:255',
-        ];
-
-        $validatedData = $request->validate($rules);
-
-        CutiModel::create([
-            'npp' => $validatedData['npp'],
-            'id_jenis_cuti' => $validatedData['id_jenis_cuti'],
-            'tgl_awal' => $validatedData['tgl_awal'],
-            'tgl_akhir' => $validatedData['tgl_akhir'],
-            'durasi' => $validatedData['durasi'],
-            'keterangan' => $validatedData['keterangan'],
-            'stt_cuti' => 'Pending',
-
         ]);
+
+        $cuti = new CutiModel();
+        $cuti->npp = $request->npp;
+        $cuti->id_jenis_cuti = $request->id_jenis_cuti;
+        $cuti->tgl_awal = $request->tgl_awal;
+        $cuti->tgl_akhir = $request->tgl_akhir;
+        $cuti->durasi = $request->durasi;
+
+        if ($request->hasFile('bukti_cuti')) {
+            $file = $request->file('bukti_cuti');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $path = $file->storeAs('public/bukti_cuti', $filename);
+            $cuti->bukti_cuti = $filename;
+        }
+
+        $cuti->keterangan = $request->keterangan;
+        $cuti->save();
 
         return redirect()->route('karyawan.cuti')->with('success', 'Data has ben created');
     }
@@ -104,21 +108,32 @@ class CutiController extends Controller
      */
     public function update(Request $request, $no_cuti)
     {
-        // dd($request->all());
-        $rules = [
-            'npp' => 'required|max:10',
-            'id_jenis_cuti' => 'required',
+        $request->validate([
+            'npp' => 'required|string|max:255',
+            'id_jenis_cuti' => 'required|integer',
             'tgl_awal' => 'required|date',
             'tgl_akhir' => 'required|date',
-            'durasi' => 'nullable|integer',
-            'keterangan' => 'nullable|string|max:255',
-        ];
+            'durasi' => 'required|integer',
+            'bukti_cuti' => 'nullable|file|mimes:jpg,jpeg,png,pdf',
+            'keterangan' => 'required|string|max:255',
+        ]);
 
-        $validatedData = $request->validate($rules);
+        $cuti = CutiModel::findOrFail($no_cuti);
+        $cuti->npp = $request->npp;
+        $cuti->id_jenis_cuti = $request->id_jenis_cuti;
+        $cuti->tgl_awal = $request->tgl_awal;
+        $cuti->tgl_akhir = $request->tgl_akhir;
+        $cuti->durasi = $request->durasi;
 
-        $cuti = CutiModel::where('no_cuti', $no_cuti)->first();
+        if ($request->hasFile('bukti_cuti')) {
+            $file = $request->file('bukti_cuti');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $path = $file->storeAs('public/bukti_cuti', $filename);
+            $cuti->bukti_cuti = $filename;
+        }
 
-        $cuti->update($validatedData);
+        $cuti->keterangan = $request->keterangan;
+        $cuti->save();
 
         return redirect()->route('karyawan.cuti')->with('success', 'Data has ben updated');
     }

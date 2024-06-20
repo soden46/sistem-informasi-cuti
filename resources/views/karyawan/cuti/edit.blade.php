@@ -10,7 +10,7 @@
             <div class="card">
                 <div class="card-header">Edit Data Cuti</div>
                 <div class="card-body">
-                    <form action="{{ route('karyawan.cuti.update', $cuti->id) }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('karyawan.cuti.update', $cuti->no_cuti) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="form-group">
