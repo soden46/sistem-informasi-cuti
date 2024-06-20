@@ -8,6 +8,7 @@ use App\Models\Employee;
 use App\Models\JenisCutiModel;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class CutiController extends Controller
 {
@@ -70,10 +71,8 @@ class CutiController extends Controller
         $cuti->durasi = $request->durasi;
 
         if ($request->hasFile('bukti_cuti')) {
-            $file = $request->file('bukti_cuti');
-            $filename = time() . '_' . $file->getClientOriginalName();
-            $path = $file->storeAs('public/bukti_cuti', $filename);
-            $cuti->bukti_cuti = $filename;
+            $bukti_cuti = $request->file('bukti_cuti')->store('karyawan/cuti');
+            $cuti->bukti_cuti = $bukti_cuti;
         }
 
         $cuti->keterangan = $request->keterangan;
@@ -125,12 +124,20 @@ class CutiController extends Controller
         $cuti->tgl_akhir = $request->tgl_akhir;
         $cuti->durasi = $request->durasi;
 
+        // Menghapus file lampiran yang lama jika ada file baru diupload
         if ($request->hasFile('bukti_cuti')) {
-            $file = $request->file('bukti_cuti');
-            $filename = time() . '_' . $file->getClientOriginalName();
-            $path = $file->storeAs('public/bukti_cuti', $filename);
-            $cuti->bukti_cuti = $filename;
+            // Hapus file lampiran lama dari penyimpanan
+            if ($cuti->bukti_cuti) {
+                Storage::delete($cuti->bukti_cuti);
+            }
+
+            // Simpan file baru ke penyimpanan
+            $bukti_cuti = $request->file('bukti_cuti')->store('karyawan/cuti');
+            $cuti->bukti_cuti = $bukti_cuti;
         }
+
+        $cuti->keterangan = $request->keterangan;
+        $cuti->save();
 
         $cuti->keterangan = $request->keterangan;
         $cuti->save();
