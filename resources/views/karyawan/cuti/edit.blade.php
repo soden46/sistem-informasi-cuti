@@ -1,6 +1,6 @@
 @extends('dashboard', [
-'title' => 'Edit Data Cuti',
-'pageTitle' => 'Edit Data Cuti',
+    'title' => 'Edit Data Cuti',
+    'pageTitle' => 'Edit Data Cuti',
 ])
 
 @section('content')
@@ -73,12 +73,12 @@
             }
         }
 
+        // Panggil calculateEndDate() saat pertama kali halaman dimuat
+        calculateEndDate();
+
+        // Event listener untuk input tgl_awal dan durasi
         tglAwalInput.addEventListener('input', calculateEndDate);
         durasiInput.addEventListener('input', calculateEndDate);
-
-        if (tglAwalInput.value && durasiInput.value) {
-            calculateEndDate();
-        }
     });
 </script>
 @endsection

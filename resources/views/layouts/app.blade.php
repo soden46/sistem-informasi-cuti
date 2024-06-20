@@ -85,26 +85,6 @@
             @yield('content')
         </main>
     </div>
-    <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const tglAwalInput = document.getElementById('tgl_awal');
-        const durasiInput = document.getElementById('durasi');
-        const tglAkhirInput = document.getElementById('tgl_akhir');
-
-        function calculateEndDate() {
-            const tglAwal = new Date(tglAwalInput.value);
-            const durasi = parseInt(durasiInput.value);
-
-            if (!isNaN(tglAwal) && !isNaN(durasi)) {
-                tglAwal.setDate(tglAwal.getDate() + durasi);
-                tglAkhirInput.value = tglAwal.toISOString().split('T')[0];
-            }
-        }
-
-        tglAwalInput.addEventListener('input', calculateEndDate);
-        durasiInput.addEventListener('input', calculateEndDate);
-    });
-</script>
 </body>
 
 </html>

@@ -60,26 +60,6 @@
     <!-- Custom scripts for all pages-->
     <script src="{{ asset('assets/template/backend/sb-admin-2/js/sb-admin-2.min.js') }}"></script>
 
-    <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const tglAwalInput = document.getElementById('tgl_awal');
-        const durasiInput = document.getElementById('durasi');
-        const tglAkhirInput = document.getElementById('tgl_akhir');
-
-        function calculateEndDate() {
-            const tglAwal = new Date(tglAwalInput.value);
-            const durasi = parseInt(durasiInput.value);
-
-            if (!isNaN(tglAwal) && !isNaN(durasi)) {
-                tglAwal.setDate(tglAwal.getDate() + durasi);
-                tglAkhirInput.value = tglAwal.toISOString().split('T')[0];
-            }
-        }
-
-        tglAwalInput.addEventListener('input', calculateEndDate);
-        durasiInput.addEventListener('input', calculateEndDate);
-    });
-</script>
 </body>
 
 </html>
