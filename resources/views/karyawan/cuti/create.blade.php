@@ -30,7 +30,7 @@
                         </div>
                         <div class="form-group">
                             <label for="tgl_akhir" class="required">Tanggal Akhir</label>
-                            <input type="date" name="tgl_akhir" id="tgl_akhir" class="form-control" required readonly>
+                            <input type="date" name="tgl_akhir" id="tgl_akhir" class="form-control" required>
                         </div>
                         <div class="form-group">
                             <label for="durasi" class="required">Durasi Cuti</label>
