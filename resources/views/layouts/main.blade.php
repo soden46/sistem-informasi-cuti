@@ -25,6 +25,13 @@
     <!-- Custom styles for this template-->
     <link href="{{ asset('assets/template/backend/sb-admin-2/css/sb-admin-2.min.css') }}" rel="stylesheet">
     <link href="{{asset('assets/css/style.css')}}" rel="stylesheet">
+    <style>
+    .required::after {
+        content: "*";
+        color: red;
+        margin-left: 5px;
+    }
+</style>
 
 
 </head>

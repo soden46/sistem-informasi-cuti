@@ -5,8 +5,8 @@
         <meta charset="utf-8">
         <title>{{ $pageTitle ?? '' }}</title>
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
-        <meta content="Bento Group Indonesia" name="keywords">
-        <meta content="Bento Group Indonesia merupakan gabungan dari beberapa perusahaan bergerak sebagai pengelola dari berbagai dana investasi dari para investor. Kami bergerak di bidang Real Estate hingga kafe & Co-working. Saat ini sudah banyak cabang usaha di bawah pengelolaan Bento Group Indonesia." name="description">
+        <meta content="Sistem Informasi Pengajuan Cuti Karyawan" name="keywords">
+        <meta content="Sistem Informasi Pengajuan Cuti Karyawan" name="description">
         <!-- Favicon -->
         <link rel="shortcut icon" type="image/x-generic" href="{{asset('assets/img/favicon.ico')}}">
         <link rel="manifest" href="/site.webmanifest">
@@ -23,6 +23,13 @@
         <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet" />
         <!-- Template Stylesheet -->
         <link href="{{asset('assets/css/style.css')}}" rel="stylesheet">
+        <style>
+    .required::after {
+        content: "*";
+        color: red;
+        margin-left: 5px;
+    }
+</style>
     </head>
 
     <body>

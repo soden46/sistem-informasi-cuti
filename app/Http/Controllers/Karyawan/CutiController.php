@@ -56,7 +56,6 @@ class CutiController extends Controller
         $rules = [
             'npp' => 'required|max:10',
             'id_jenis_cuti' => 'required',
-            'tgl_pengajuan' => 'required|date',
             'tgl_awal' => 'required|date',
             'tgl_akhir' => 'required|date',
             'durasi' => 'required|integer',
@@ -68,7 +67,6 @@ class CutiController extends Controller
         CutiModel::create([
             'npp' => $validatedData['npp'],
             'id_jenis_cuti' => $validatedData['id_jenis_cuti'],
-            'tgl_pengajuan' => $validatedData['tgl_pengajuan'],
             'tgl_awal' => $validatedData['tgl_awal'],
             'tgl_akhir' => $validatedData['tgl_akhir'],
             'durasi' => $validatedData['durasi'],
@@ -110,7 +108,6 @@ class CutiController extends Controller
         $rules = [
             'npp' => 'required|max:10',
             'id_jenis_cuti' => 'required',
-            'tgl_pengajuan' => 'required|date',
             'tgl_awal' => 'required|date',
             'tgl_akhir' => 'required|date',
             'durasi' => 'nullable|integer',
