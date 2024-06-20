@@ -59,57 +59,6 @@
 
     <!-- Custom scripts for all pages-->
     <script src="{{ asset('assets/template/backend/sb-admin-2/js/sb-admin-2.min.js') }}"></script>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const tglAwalInput = document.getElementById('tgl_awal');
-        const durasiInput = document.getElementById('durasi');
-        const tglAkhirInput = document.getElementById('tgl_akhir');
-        const jenisCutiSelect = document.getElementById('id_jenis_cuti');
-
-        function calculateEndDate() {
-            const tglAwal = new Date(tglAwalInput.value);
-            const durasi = parseInt(durasiInput.value);
-
-            if (!isNaN(tglAwal) && !isNaN(durasi)) {
-                // Ambil durasi cuti berdasarkan jenis cuti yang dipilih
-                const selectedJenisCuti = jenisCutiSelect.options[jenisCutiSelect.selectedIndex].text;
-                const durasiCuti = getDurasiCuti(selectedJenisCuti); // Fungsi untuk mendapatkan durasi cuti dari jenis cuti
-
-                if (durasiCuti !== null) {
-                    durasiInput.value = durasiCuti;
-                    tglAwal.setDate(tglAwal.getDate() + durasiCuti);
-                } else {
-                    durasiInput.value = durasi;
-                    tglAwal.setDate(tglAwal.getDate() + durasi);
-                }
-
-                tglAkhirInput.value = tglAwal.toISOString().split('T')[0];
-            }
-        }
-
-        function getDurasiCuti(jenisCuti) {
-            // Tambahkan logika untuk mendapatkan durasi cuti berdasarkan jenis cuti
-            // Contoh sederhana, Anda bisa mengganti dengan logika sesuai dengan jenis cuti yang tersedia
-            switch (jenisCuti) {
-                case 'Cuti Tahunan':
-                    return 14; // Contoh: Cuti Tahunan memiliki durasi 14 hari
-                case 'Cuti Sakit':
-                    return 7; // Contoh: Cuti Sakit memiliki durasi 7 hari
-                default:
-                    return null; // Jika jenis cuti tidak dikenali, kembalikan null atau durasi default
-            }
-        }
-
-        // Event listener untuk perubahan tanggal awal dan durasi cuti
-        tglAwalInput.addEventListener('input', calculateEndDate);
-        durasiInput.addEventListener('input', calculateEndDate);
-
-        // Event listener untuk perubahan jenis cuti
-        jenisCutiSelect.addEventListener('change', function () {
-            calculateEndDate(); // Panggil calculateEndDate() saat jenis cuti berubah
-        });
-    });
-</script>
 </body>
 
 </html>

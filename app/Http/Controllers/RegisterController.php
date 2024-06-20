@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Pelamar;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\EmailVerifikasi;
+use App\Models\Employee;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
@@ -29,7 +30,7 @@ class RegisterController extends Controller
             'password' => 'required|min:6|max:12',
             'verify_key' => $str
         ]);
-        $id = User::create([
+        $id = Employee::create([
             'nama' => $ValidatedData['nama'],
             'username' => $ValidatedData['username'],
             'email' => $ValidatedData['email'],
@@ -47,26 +48,7 @@ class RegisterController extends Controller
             'url' => request()->getHttpHost() . '/register/verify/' . $str
         ];
 
-        Mail::to($request->email)->send(new EmailVerifikasi($details));
-        return redirect('/register')
+        return redirect('/login')
             ->with('success', 'Email Verifikasi telah dikrim. Silahkan Cek Email Anda untuk Mengaktifkan Akun');
-    }
-
-    public function verify($verify_key)
-    {
-        $keyCheck = User::select('verify_key')
-            ->where('verify_key', $verify_key)
-            ->exists();
-
-        if ($keyCheck) {
-            $user = User::where('verify_key', $verify_key)
-                ->update([
-                    'active' => 1
-                ]);
-
-            return "Verifikasi Berhasil. Akun Anda sudah aktif.";
-        } else {
-            return "Key tidak valid!";
-        }
     }
 }

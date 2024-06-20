@@ -7,6 +7,7 @@ use App\Models\CutiModel;
 use App\Models\Employee;
 use App\Models\JenisCutiModel;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -53,28 +54,29 @@ class CutiController extends Controller
      */
     public function store(Request $request)
     {
+        // Validasi data dari form
         $request->validate([
-            'npp' => 'required|string|max:255',
-            'id_jenis_cuti' => 'required|integer',
+            'id_jenis_cuti' => 'required',
             'tgl_awal' => 'required|date',
-            'tgl_akhir' => 'required|date',
-            'durasi' => 'required|integer',
-            'bukti_cuti' => 'nullable|file|mimes:jpg,jpeg,png,pdf',
-            'keterangan' => 'required|string|max:255',
+            'keterangan' => 'required',
         ]);
 
+        // Ambil jenis cuti berdasarkan id_jenis_cuti dari request
+        $jenisCuti = JenisCutiModel::findOrFail($request->id_jenis_cuti);
+
+        // Hitung tanggal akhir (tgl_akhir) berdasarkan tgl_awal dan lama_cuti dari jenis cuti yang dipilih
+        $tgl_awal = $request->tgl_awal;
+        $lamaCuti = $jenisCuti->lama_cuti;
+
+        $tgl_akhir = Carbon::parse($tgl_awal)->addDays($lamaCuti)->toDateString();
+
+        // Simpan data cuti baru
         $cuti = new CutiModel();
-        $cuti->npp = $request->npp;
+        $cuti->npp = auth()->user()->npp; // Ganti dengan logika sesuai dengan model dan relasi Anda
         $cuti->id_jenis_cuti = $request->id_jenis_cuti;
-        $cuti->tgl_awal = $request->tgl_awal;
-        $cuti->tgl_akhir = $request->tgl_akhir;
-        $cuti->durasi = $request->durasi;
-
-        if ($request->hasFile('bukti_cuti')) {
-            $bukti_cuti = $request->file('bukti_cuti')->store('karyawan/cuti');
-            $cuti->bukti_cuti = $bukti_cuti;
-        }
-
+        $cuti->tgl_awal = $tgl_awal;
+        $cuti->tgl_akhir = $tgl_akhir;
+        $cuti->durasi = $lamaCuti; // Simpan durasi sesuai lama_cuti dari jenis cuti
         $cuti->keterangan = $request->keterangan;
         $cuti->save();
 
@@ -107,35 +109,28 @@ class CutiController extends Controller
      */
     public function update(Request $request, $no_cuti)
     {
+        // Validasi data dari form
         $request->validate([
-            'npp' => 'required|string|max:255',
-            'id_jenis_cuti' => 'required|integer',
+            'id_jenis_cuti' => 'required',
             'tgl_awal' => 'required|date',
-            'tgl_akhir' => 'required|date',
-            'durasi' => 'required|integer',
-            'bukti_cuti' => 'nullable|file|mimes:jpg,jpeg,png,pdf',
-            'keterangan' => 'required|string|max:255',
+            'keterangan' => 'required',
         ]);
 
+        // Ambil data cuti berdasarkan $no_cuti
         $cuti = CutiModel::findOrFail($no_cuti);
-        $cuti->npp = $request->npp;
+
+        // Hitung ulang tanggal akhir (tgl_akhir) jika ada perubahan tgl_awal atau durasi
+        $tgl_awal = $request->tgl_awal;
+        $lamaCuti = $request->lama_cuti; // Disesuaikan dengan logika aplikasi Anda
+
+        // Hitung tanggal akhir baru berdasarkan tgl_awal dan lama_cuti dari jenis cuti yang dipilih
+        $tgl_akhir = Carbon::parse($tgl_awal)->addDays($lamaCuti)->toDateString();
+
+        // Update data cuti
         $cuti->id_jenis_cuti = $request->id_jenis_cuti;
-        $cuti->tgl_awal = $request->tgl_awal;
-        $cuti->tgl_akhir = $request->tgl_akhir;
-        $cuti->durasi = $request->durasi;
-
-        // Menghapus file lampiran yang lama jika ada file baru diupload
-        if ($request->hasFile('bukti_cuti')) {
-            // Hapus file lampiran lama dari penyimpanan
-            if ($cuti->bukti_cuti) {
-                Storage::delete($cuti->bukti_cuti);
-            }
-
-            // Simpan file baru ke penyimpanan
-            $bukti_cuti = $request->file('bukti_cuti')->store('karyawan/cuti');
-            $cuti->bukti_cuti = $bukti_cuti;
-        }
-
+        $cuti->tgl_awal = $tgl_awal;
+        $cuti->tgl_akhir = $tgl_akhir;
+        $cuti->durasi = $lamaCuti; // Simpan durasi sesuai lama_cuti dari jenis cuti
         $cuti->keterangan = $request->keterangan;
         $cuti->save();
 
