@@ -139,9 +139,6 @@ class CutiController extends Controller
         $cuti->keterangan = $request->keterangan;
         $cuti->save();
 
-        $cuti->keterangan = $request->keterangan;
-        $cuti->save();
-
         return redirect()->route('karyawan.cuti')->with('success', 'Data has ben updated');
     }
 
