@@ -60,6 +60,7 @@ class CutiController extends Controller
             'tgl_awal' => 'required|date',
             'tgl_akhir' => 'required|date|after_or_equal:tgl_awal',
             'keterangan' => 'required',
+            'bukti_cuti' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         // Ambil jenis cuti berdasarkan id_jenis_cuti dari request
@@ -84,25 +85,31 @@ class CutiController extends Controller
         if ($totalDurasiDiambil == 0) {
             $sisaCuti = $lamaCuti - $durasiCutiBaru;
             if ($durasiCutiBaru > $lamaCuti) {
-                return redirect()->back()->withErrors(['error' => 'Durasi cuti yang diajukan melebihi lama cuti yang tersedia.']);
+                return redirect()->route('karyawan.cuti')->with('error', 'Durasi cuti yang diajukan melebihi lama cuti yang tersedia.');
             }
         } else {
             $sisaCuti = $lamaCuti - $totalDurasiDiambil;
             if ($durasiCutiBaru > $sisaCuti) {
-                return redirect()->back()->withErrors(['error' => 'Durasi cuti yang diajukan melebihi sisa cuti yang tersedia.']);
+                return redirect()->route('karyawan.cuti')->with('error', 'Durasi cuti yang diajukan melebihi sisa cuti yang tersedia.');
             }
         }
 
         // Simpan data cuti baru
         $cuti = new CutiModel();
-        $cuti->npp = auth()->user()->npp; // Ganti dengan logika sesuai dengan model dan relasi Anda
+        $cuti->npp = auth()->user()->npp;
         $cuti->id_jenis_cuti = $request->id_jenis_cuti;
         $cuti->tgl_awal = $tgl_awal->toDateString();
         $cuti->tgl_akhir = $tgl_akhir->toDateString();
         $cuti->durasi = $durasiCutiBaru;
-        $cuti->kuota_cuti = $sisaCuti; // Update sisa cuti setelah cuti diajukan
+        $cuti->kuota_cuti = $sisaCuti;
         $cuti->keterangan = $request->keterangan;
         $cuti->stt_cuti = "Pending";
+
+        if ($request->hasFile('bukti_cuti')) {
+            $bukti_cuti = $request->file('bukti_cuti')->store('karyawan/cuti');
+            $cuti->bukti_cuti = $bukti_cuti;
+        }
+
         $cuti->save();
 
         return redirect()->route('karyawan.cuti')->with('success', 'Data has ben created');
@@ -175,9 +182,20 @@ class CutiController extends Controller
         $cuti->tgl_awal = $tgl_awal->toDateString();
         $cuti->tgl_akhir = $tgl_akhir->toDateString();
         $cuti->durasi = $durasiCutiBaru;
-        $cuti->kuota_cuti = $sisaCuti; // Perlu disesuaikan berdasarkan logika bisnis Anda
+        $cuti->kuota_cuti = $sisaCuti;
         $cuti->keterangan = $request->keterangan;
-        $cuti->stt_cuti = "Pending"; // Jika diperlukan, sesuaikan dengan logika bisnis Anda
+        $cuti->stt_cuti = "Pending";
+        // Menghapus file lampiran yang lama jika ada file baru diupload
+        if ($request->hasFile('bukti_cuti')) {
+            // Hapus file lampiran lama dari penyimpanan
+            if ($cuti->bukti_cuti) {
+                Storage::delete($cuti->bukti_cuti);
+            }
+
+            // Simpan file baru ke penyimpanan
+            $bukti_cuti = $request->file('bukti_cuti')->store('karyawan/cuti/lampiran');
+            $cuti->bukti_cuti = $bukti_cuti;
+        }
         $cuti->save();
 
         return redirect()->route('karyawan.cuti')->with('success', 'Data has ben updated');

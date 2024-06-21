@@ -98,6 +98,7 @@
                         <th style="width: 80px">Tanggal Awal</th>
                         <th style="width: 80px">Tanggal Akhir</th>
                         <th style="width: 70px">Durasi Cuti</th>
+                        <th style="width: 70px">Kuota Cuti</th>
                         <th style="width: 80px">Keterangan</th>
                         <th style="width: 80px">Status Cuti</th>
                         <th style="width: 80px">Keterangan Reject</th>
@@ -113,6 +114,7 @@
                             <td>{{ date('d/m/Y', strtotime($data->tgl_awal ?? '')) }}</td>
                             <td>{{ date('d/m/Y', strtotime($data->tgl_akhir ?? '')) }}</td>
                             <td>{{ $data->durasi ?? '' }}</td>
+                            <td>{{ $data->kuota_cuti ?? '' }}</td>
                             <td>{{ $data->keterangan ?? '' }}</td>
                             <td>{{ $data->stt_cuti ?? '' }}</td>
                             <td>{{ $data->ket_reject ?? '' }}</td>

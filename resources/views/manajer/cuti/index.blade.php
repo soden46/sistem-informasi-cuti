@@ -32,6 +32,7 @@
             <th style="width: 150px">Durasi Cuti</th>
             <th style="width: 150px">Kuota Cuti</th>
             <th style="width: 150px">Keterangan</th>
+            <th style="width: 150px">Bukti Cuti</th>
             <th style="width: 150px">Status Cuti</th>
             <th style="width: 150px">Keterangan Reject</th>
             <th style="width: 100px">Aksi</th>
@@ -47,6 +48,15 @@
                 <td style="width: 150px">{{ $data->durasi ?? '' }}</td>
                 <td style="width: 150px">{{ $data->kuota_cuti ?? '' }}</td>
                 <td style="width: 150px">{{ $data->keterangan ?? '' }}</td>
+                <td style="width: 150px">
+                    @if ($data->bukti_cuti)
+                        <a href="{{ asset('storage/'.$data->bukti_cuti) }}" data-lightbox="gallery" target="_blank">
+                            <img src="{{ asset('storage/'.$data->bukti_cuti) }}" style="max-width: 100px; max-height: 100px;" alt="Gambar Cuti">
+                        </a>
+                    @else
+                        -
+                    @endif
+                </td>
                 <td style="width: 150px">{{ $data->stt_cuti ?? '' }}</td>
                 <td style="width: 150px">{{ $data->ket_reject ?? '' }}</td>
                 <td>
