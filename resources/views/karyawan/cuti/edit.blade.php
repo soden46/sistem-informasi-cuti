@@ -21,7 +21,7 @@
 
                         <div class="form-group">
                             <label for="id_jenis_cuti" class="required">Jenis Cuti</label>
-                            <select name="id_jenis_cuti" id="id_jenis_cuti" class="form-control" required onchange="calculateEndDate()">
+                            <select name="id_jenis_cuti" id="id_jenis_cuti" class="form-control" required onchange="calculateDuration()">
                                 @foreach ($jenisCuti as $jenis)
                                     <option value="{{ $jenis->id_jenis_cuti }}" data-lama-cuti="{{ $jenis->lama_cuti }}" {{ $cuti->id_jenis_cuti == $jenis->id_jenis_cuti ? 'selected' : '' }}>{{ $jenis->nama_cuti }}</option>
                                 @endforeach
@@ -30,17 +30,17 @@
 
                         <div class="form-group">
                             <label for="tgl_awal" class="required">Tanggal Awal</label>
-                            <input type="date" name="tgl_awal" id="tgl_awal" class="form-control" value="{{ $cuti->tgl_awal }}" required onchange="calculateEndDate()">
+                            <input type="date" name="tgl_awal" id="tgl_awal" class="form-control" value="{{ $cuti->tgl_awal }}" required onchange="calculateDuration()">
                         </div>
 
                         <div class="form-group">
                             <label for="tgl_akhir" class="required">Tanggal Akhir</label>
-                            <input type="date" name="tgl_akhir" id="tgl_akhir" class="form-control" value="{{ $cuti->tgl_akhir }}" readonly>
+                            <input type="date" name="tgl_akhir" id="tgl_akhir" class="form-control" value="{{ $cuti->tgl_akhir }}" required onchange="calculateDuration()">
                         </div>
 
                         <div class="form-group">
                             <label for="durasi" class="required">Durasi Cuti (hari)</label>
-                            <input type="number" name="durasi" id="durasi" class="form-control" value="{{ $cuti->durasi }}" required>
+                            <input type="number" name="durasi" id="durasi" class="form-control" value="{{ $cuti->durasi }}" readonly required>
                         </div>
 
                         <div class="form-group">
@@ -64,20 +64,21 @@
 </div>
 
 <script>
-    function calculateEndDate() {
-        const idJenisCuti = document.getElementById('id_jenis_cuti').value;
+    function calculateDuration() {
         const tglAwal = new Date(document.getElementById('tgl_awal').value);
-        const lamaCuti = parseInt(document.querySelector(`#id_jenis_cuti option[value="${idJenisCuti}"]`).getAttribute('data-lama-cuti'));
-
-        if (!isNaN(tglAwal) && !isNaN(lamaCuti)) {
-            tglAwal.setDate(tglAwal.getDate() + lamaCuti);
-            document.getElementById('tgl_akhir').value = tglAwal.toISOString().split('T')[0];
-            document.getElementById('durasi').value = lamaCuti;
+        const tglAkhir = new Date(document.getElementById('tgl_akhir').value);
+        
+        if (tglAwal && tglAkhir && tglAkhir >= tglAwal) {
+            const timeDiff = Math.abs(tglAkhir - tglAwal);
+            const diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24)) + 1; // +1 to include the start day
+            document.getElementById('durasi').value = diffDays;
+        } else {
+            document.getElementById('durasi').value = '';
         }
     }
 
     document.addEventListener('DOMContentLoaded', function () {
-        calculateEndDate();
+        calculateDuration();
     });
 </script>
 

@@ -31,6 +31,7 @@
             <th style="width: 150px">Tanggal Awal</th>
             <th style="width: 150px">Tanggal Akhir</th>
             <th style="width: 150px">Durasi Cuti</th>
+            <th style="width: 150px">Kuota Cuti</th>
             <th style="width: 150px">Keterangan</th>
             <th style="width: 150px">Status Cuti</th>
             <th style="width: 150px">Keterangan Reject</th>
@@ -45,6 +46,7 @@
                 <td style="width: 150px">{{ Date('d/m/Y', strtotime($data->tgl_awal ?? '')) }}</td>
                 <td style="width: 150px">{{ Date('d/m/Y', strtotime($data->tgl_akhir ?? '')) }}</td>
                 <td style="width: 150px">{{ $data->durasi ?? '' }}</td>
+                <td style="width: 150px">{{ $data->kuota_cuti ?? '' }}</td>
                 <td style="width: 150px">{{ $data->keterangan ?? '' }}</td>
                 <td style="width: 150px">{{ $data->stt_cuti ?? '' }}</td>
                 <td style="width: 150px">{{ $data->ket_reject ?? '' }}</td>

@@ -58,25 +58,40 @@ class CutiController extends Controller
         $request->validate([
             'id_jenis_cuti' => 'required',
             'tgl_awal' => 'required|date',
+            'tgl_akhir' => 'required|date|after_or_equal:tgl_awal',
             'keterangan' => 'required',
         ]);
 
         // Ambil jenis cuti berdasarkan id_jenis_cuti dari request
         $jenisCuti = JenisCutiModel::findOrFail($request->id_jenis_cuti);
 
-        // Hitung tanggal akhir (tgl_akhir) berdasarkan tgl_awal dan lama_cuti dari jenis cuti yang dipilih
-        $tgl_awal = $request->tgl_awal;
-        $lamaCuti = $jenisCuti->lama_cuti;
+        // Hitung tanggal awal dan akhir
+        $tgl_awal = Carbon::parse($request->tgl_awal);
+        $tgl_akhir = Carbon::parse($request->tgl_akhir);
 
-        $tgl_akhir = Carbon::parse($tgl_awal)->addDays($lamaCuti)->toDateString();
+        // Hitung durasi cuti berdasarkan tgl_awal dan tgl_akhir
+        $durasiCutiBaru = $tgl_awal->diffInDays($tgl_akhir) + 1;
+
+        // Ambil total durasi cuti yang sudah diambil oleh karyawan dengan npp dan id_jenis_cuti yang sama
+        $totalDurasiDiambil = CutiModel::where('npp', auth()->user()->npp)
+            ->where('id_jenis_cuti', $request->id_jenis_cuti)
+            ->sum('durasi');
+
+        // Kurangi lama_cuti dengan total durasi cuti yang sudah diambil
+        $lamaCuti = $jenisCuti->lama_cuti;
+        $sisaCuti = $lamaCuti - $totalDurasiDiambil;
+
+        if ($durasiCutiBaru > $sisaCuti) {
+            return redirect()->back()->withErrors(['error' => 'Durasi cuti yang diajukan melebihi sisa cuti yang tersedia.']);
+        }
 
         // Simpan data cuti baru
         $cuti = new CutiModel();
         $cuti->npp = auth()->user()->npp; // Ganti dengan logika sesuai dengan model dan relasi Anda
         $cuti->id_jenis_cuti = $request->id_jenis_cuti;
-        $cuti->tgl_awal = $tgl_awal;
-        $cuti->tgl_akhir = $tgl_akhir;
-        $cuti->durasi = $lamaCuti; // Simpan durasi sesuai lama_cuti dari jenis cuti
+        $cuti->tgl_awal = $tgl_awal->toDateString();
+        $cuti->tgl_akhir = $tgl_akhir->toDateString();
+        $cuti->durasi = $durasiCutiBaru; // Simpan durasi cuti baru
         $cuti->keterangan = $request->keterangan;
         $cuti->save();
 
@@ -113,24 +128,42 @@ class CutiController extends Controller
         $request->validate([
             'id_jenis_cuti' => 'required',
             'tgl_awal' => 'required|date',
+            'tgl_akhir' => 'required|date|after_or_equal:tgl_awal',
             'keterangan' => 'required',
         ]);
 
-        // Ambil data cuti berdasarkan $no_cuti
+        // Ambil data cuti yang akan diupdate
         $cuti = CutiModel::findOrFail($no_cuti);
 
-        // Hitung ulang tanggal akhir (tgl_akhir) jika ada perubahan tgl_awal atau durasi
-        $tgl_awal = $request->tgl_awal;
-        $lamaCuti = $request->lama_cuti; // Disesuaikan dengan logika aplikasi Anda
+        // Ambil jenis cuti berdasarkan id_jenis_cuti dari request
+        $jenisCuti = JenisCutiModel::findOrFail($request->id_jenis_cuti);
 
-        // Hitung tanggal akhir baru berdasarkan tgl_awal dan lama_cuti dari jenis cuti yang dipilih
-        $tgl_akhir = Carbon::parse($tgl_awal)->addDays($lamaCuti)->toDateString();
+        // Hitung tanggal awal dan akhir
+        $tgl_awal = Carbon::parse($request->tgl_awal);
+        $tgl_akhir = Carbon::parse($request->tgl_akhir);
+
+        // Hitung durasi cuti berdasarkan tgl_awal dan tgl_akhir
+        $durasiCutiBaru = $tgl_awal->diffInDays($tgl_akhir) + 1;
+
+        // Ambil total durasi cuti yang sudah diambil oleh karyawan dengan npp dan id_jenis_cuti yang sama, kecuali cuti yang sedang diupdate
+        $totalDurasiDiambil = CutiModel::where('npp', auth()->user()->npp)
+            ->where('id_jenis_cuti', $request->id_jenis_cuti)
+            ->where('no_cuti', '!=', $no_cuti)
+            ->sum('durasi');
+
+        // Kurangi lama_cuti dengan total durasi cuti yang sudah diambil
+        $lamaCuti = $jenisCuti->lama_cuti;
+        $sisaCuti = $lamaCuti - $totalDurasiDiambil;
+
+        if ($durasiCutiBaru > $sisaCuti) {
+            return redirect()->back()->withErrors(['error' => 'Durasi cuti yang diajukan melebihi sisa cuti yang tersedia.']);
+        }
 
         // Update data cuti
         $cuti->id_jenis_cuti = $request->id_jenis_cuti;
-        $cuti->tgl_awal = $tgl_awal;
-        $cuti->tgl_akhir = $tgl_akhir;
-        $cuti->durasi = $lamaCuti; // Simpan durasi sesuai lama_cuti dari jenis cuti
+        $cuti->tgl_awal = $tgl_awal->toDateString();
+        $cuti->tgl_akhir = $tgl_akhir->toDateString();
+        $cuti->durasi = $durasiCutiBaru; // Simpan durasi cuti baru
         $cuti->keterangan = $request->keterangan;
         $cuti->save();
 
