@@ -79,10 +79,18 @@ class CutiController extends Controller
 
         // Kurangi lama_cuti dengan total durasi cuti yang sudah diambil
         $lamaCuti = $jenisCuti->lama_cuti;
-        $sisaCuti = $lamaCuti - $totalDurasiDiambil;
 
-        if ($durasiCutiBaru > $sisaCuti) {
-            return redirect()->back()->withErrors(['error' => 'Durasi cuti yang diajukan melebihi sisa cuti yang tersedia.']);
+        // Pengecekan jika user belum pernah mengajukan cuti dengan id_jenis_cuti yang sama
+        if ($totalDurasiDiambil == 0) {
+            $sisaCuti = $lamaCuti - $durasiCutiBaru;
+            if ($durasiCutiBaru > $lamaCuti) {
+                return redirect()->back()->withErrors(['error' => 'Durasi cuti yang diajukan melebihi lama cuti yang tersedia.']);
+            }
+        } else {
+            $sisaCuti = $lamaCuti - $totalDurasiDiambil;
+            if ($durasiCutiBaru > $sisaCuti) {
+                return redirect()->back()->withErrors(['error' => 'Durasi cuti yang diajukan melebihi sisa cuti yang tersedia.']);
+            }
         }
 
         // Simpan data cuti baru
@@ -92,7 +100,7 @@ class CutiController extends Controller
         $cuti->tgl_awal = $tgl_awal->toDateString();
         $cuti->tgl_akhir = $tgl_akhir->toDateString();
         $cuti->durasi = $durasiCutiBaru;
-        $cuti->kuota_cuti = $sisaCuti;
+        $cuti->kuota_cuti = $sisaCuti - $durasiCutiBaru; // Update sisa cuti setelah cuti diajukan
         $cuti->keterangan = $request->keterangan;
         $cuti->stt_cuti = "Pending";
         $cuti->save();
@@ -157,6 +165,7 @@ class CutiController extends Controller
         $lamaCuti = $jenisCuti->lama_cuti;
         $sisaCuti = $lamaCuti - $totalDurasiDiambil;
 
+        // Validasi jika durasi cuti yang diajukan melebihi sisa cuti yang tersedia
         if ($durasiCutiBaru > $sisaCuti) {
             return redirect()->back()->withErrors(['error' => 'Durasi cuti yang diajukan melebihi sisa cuti yang tersedia.']);
         }
@@ -166,9 +175,9 @@ class CutiController extends Controller
         $cuti->tgl_awal = $tgl_awal->toDateString();
         $cuti->tgl_akhir = $tgl_akhir->toDateString();
         $cuti->durasi = $durasiCutiBaru;
-        $cuti->kuota_cuti = $sisaCuti;
+        $cuti->kuota_cuti = $sisaCuti; // Perlu disesuaikan berdasarkan logika bisnis Anda
         $cuti->keterangan = $request->keterangan;
-        $cuti->stt_cuti = "Pending";
+        $cuti->stt_cuti = "Pending"; // Jika diperlukan, sesuaikan dengan logika bisnis Anda
         $cuti->save();
 
         return redirect()->route('karyawan.cuti')->with('success', 'Data has ben updated');
