@@ -93,6 +93,7 @@ class CutiController extends Controller
         $cuti->tgl_akhir = $tgl_akhir->toDateString();
         $cuti->durasi = $durasiCutiBaru; // Simpan durasi cuti baru
         $cuti->keterangan = $request->keterangan;
+        $cuti->stt_cuti = "Pending";
         $cuti->save();
 
         return redirect()->route('karyawan.cuti')->with('success', 'Data has ben created');
@@ -165,6 +166,7 @@ class CutiController extends Controller
         $cuti->tgl_akhir = $tgl_akhir->toDateString();
         $cuti->durasi = $durasiCutiBaru; // Simpan durasi cuti baru
         $cuti->keterangan = $request->keterangan;
+        $cuti->stt_cuti = "Pending";
         $cuti->save();
 
         return redirect()->route('karyawan.cuti')->with('success', 'Data has ben updated');
