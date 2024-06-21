@@ -91,7 +91,8 @@ class CutiController extends Controller
         $cuti->id_jenis_cuti = $request->id_jenis_cuti;
         $cuti->tgl_awal = $tgl_awal->toDateString();
         $cuti->tgl_akhir = $tgl_akhir->toDateString();
-        $cuti->durasi = $durasiCutiBaru; // Simpan durasi cuti baru
+        $cuti->durasi = $durasiCutiBaru;
+        $cuti->kuota_cuti = $sisaCuti;
         $cuti->keterangan = $request->keterangan;
         $cuti->stt_cuti = "Pending";
         $cuti->save();
@@ -164,7 +165,8 @@ class CutiController extends Controller
         $cuti->id_jenis_cuti = $request->id_jenis_cuti;
         $cuti->tgl_awal = $tgl_awal->toDateString();
         $cuti->tgl_akhir = $tgl_akhir->toDateString();
-        $cuti->durasi = $durasiCutiBaru; // Simpan durasi cuti baru
+        $cuti->durasi = $durasiCutiBaru;
+        $cuti->kuota_cuti = $sisaCuti;
         $cuti->keterangan = $request->keterangan;
         $cuti->stt_cuti = "Pending";
         $cuti->save();
