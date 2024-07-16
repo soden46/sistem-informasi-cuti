@@ -1,35 +1,31 @@
 /*******************************/
 /********* General CSS *********/
 /*******************************/
-.map-responsive{
+.map-responsive {
+    overflow: hidden;
 
-    overflow:hidden;
+    padding-bottom: 56.25%;
 
-    padding-bottom:56.25%;
+    position: relative;
 
-    position:relative;
-
-    height:0;
-
+    height: 0;
 }
 
-.map-responsive iframe{
+.map-responsive iframe {
+    left: 0;
 
-    left:0;
+    top: 0;
 
-    top:0;
+    height: 100%;
 
-    height:100%;
+    width: 100%;
 
-    width:100%;
-
-    position:absolute;
-
+    position: absolute;
 }
 body {
     color: #090909;
     background: #ffffff;
-    font-family: 'Roboto', sans-serif;
+    font-family: "Roboto", sans-serif;
     font-weight: 400;
 }
 
@@ -39,7 +35,7 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: 'Roboto', sans-serif;
+    font-family: "Roboto", sans-serif;
     font-weight: 600;
     font-style: normal;
     color: #121518;
@@ -47,7 +43,7 @@ h6 {
 
 a {
     color: #121518;
-    transition: .3s;
+    transition: 0.3s;
 }
 
 a:hover,
@@ -95,7 +91,6 @@ a:focus {
     padding-top: 10px;
 }
 
-
 /**********************************/
 /********** Top Bar CSS ***********/
 /**********************************/
@@ -108,8 +103,6 @@ a:focus {
     margin-top: -6px;
 }
 
-
-
 @media (max-width: 30px) {
     .logo {
         text-align: center;
@@ -120,14 +113,13 @@ a:focus {
     }
 }
 
-
 /**********************************/
 /*********** Nav Bar CSS **********/
 /**********************************/
 .nav-bar {
     position: relative;
     padding: 20px 0;
-    transition: .3s;
+    transition: 0.3s;
 }
 
 .nav-bar.nav-sticky {
@@ -186,7 +178,7 @@ a:focus {
 
     .nav-bar,
     .nav-bar .navbar {
-        background: #FAD02C !important;
+        background: #fad02c !important;
     }
 
     .nav-bar .navbar-brand {
@@ -201,11 +193,10 @@ a:focus {
 }
 
 @media (max-width: 991.98px) {
-
     .nav-bar,
     .nav-bar .navbar {
         padding: 3px 0;
-        background: #FAD02C !important;
+        background: #fad02c !important;
     }
 
     .nav-bar a.nav-link {
@@ -253,7 +244,7 @@ a:focus {
     height: 100%;
     top: 0;
     left: 0;
-    background: rgba(0, 0, 0, .3);
+    background: rgba(0, 0, 0, 0.3);
     z-index: 1;
 }
 
@@ -291,7 +282,7 @@ a:focus {
     background: #f4f4f5;
     border: 2px solid #fbfcfd;
     border-radius: 0;
-    transition: .3s;
+    transition: 0.3s;
 }
 
 .carousel .carousel-caption .btn:hover {
@@ -339,7 +330,6 @@ a:focus {
     -webkit-animation-duration: 1.5s;
     animation-duration: 1.5s;
 }
-
 
 /*******************************/
 /******* Page Header CSS *******/
@@ -407,7 +397,6 @@ a:focus {
     }
 }
 
-
 /*******************************/
 /******* Section Header ********/
 /*******************************/
@@ -426,8 +415,6 @@ a:focus {
     white-space: nowrap;
     z-index: 1;
 }
-
-
 
 @media (max-width: 767.98px) {
     .section-header h2 {
@@ -470,7 +457,7 @@ a:focus {
     border: 2px solid #050505;
     border-radius: 0;
     background: #f9fafa;
-    transition: .3s;
+    transition: 0.3s;
 }
 
 .about .about-text a.btn:hover {
@@ -501,7 +488,7 @@ a:focus {
     background: #fdfcfc;
 }
 
-@media(max-width: 767.98px) {
+@media (max-width: 767.98px) {
     .faqs {
         margin-bottom: 30px;
         height: auto;
@@ -548,23 +535,23 @@ a:focus {
 }
 
 .faqs .card-header [data-toggle="collapse"]:after {
-    font-family: 'Roboto', sans-serif;
+    font-family: "Roboto", sans-serif;
     content: "\f067";
     float: right;
     color: #121518;
     font-size: 12px;
     font-weight: 900;
-    transition: .3s;
+    transition: 0.3s;
 }
 
 .faqs .card-header [data-toggle="collapse"][aria-expanded="true"]:after {
-    font-family: 'Roboto', sans-serif;
+    font-family: "Roboto", sans-serif;
     content: "\f068";
     float: right;
     color: #121518;
     font-size: 12px;
     font-weight: 900;
-    transition: .3s;
+    transition: 0.3s;
 }
 
 .faqs .card-body {
@@ -586,14 +573,13 @@ a:focus {
     border: 2px solid #fcfcfb;
     border-radius: 0;
     background: #121518;
-    transition: .3s;
+    transition: 0.3s;
 }
 
 .faqs a.btn:hover {
     color: #fab43c;
     background: #f9f8f6;
 }
-
 
 /*******************************/
 /******* Testimonial CSS *******/
@@ -668,7 +654,6 @@ a:focus {
     background: #121518;
 }
 
-
 /*******************************/
 /*********** Blog CSS **********/
 /*******************************/
@@ -737,7 +722,7 @@ a:focus {
     letter-spacing: 1px;
     text-transform: uppercase;
     color: #fcfaf8;
-    transition: .3s;
+    transition: 0.3s;
 }
 
 .blog .blog-item a.btn i {
@@ -767,22 +752,21 @@ a:focus {
     background: #121518;
 }
 
-.blog .pagination .page-link {
+.blog .page-link {
     color: #fab43c;
     border-radius: 0;
     border-color: #fdfdfc;
 }
 
-.blog .pagination .page-link:hover,
-.blog .pagination .page-item.active .page-link {
+.blog .page-link:hover,
+.blog .page-item.active .page-link {
     color: #fab43c;
     background: #fdfcfb;
 }
 
-.blog .pagination .disabled .page-link {
+.blog .disabled .page-link {
     color: #999999;
 }
-
 
 /*******************************/
 /********* Timeline CSS ********/
@@ -816,7 +800,7 @@ a:focus {
 }
 
 .timeline .timeline-container::before {
-    content: '';
+    content: "";
     position: absolute;
     width: 15px;
     height: 5px;
@@ -835,7 +819,7 @@ a:focus {
 }
 
 .timeline .timeline-container::after {
-    content: '';
+    content: "";
     position: absolute;
     width: 15px;
     height: 5px;
@@ -882,7 +866,7 @@ a:focus {
     padding: 5px 10px;
     color: #121518;
     background: #fdfdfc;
-    font-family: 'Roboto', sans-serif;
+    font-family: "Roboto", sans-serif;
     font-style: normal;
 }
 
@@ -925,7 +909,6 @@ a:focus {
     }
 }
 
-
 /*******************************/
 /******** Portfolio CSS ********/
 /*******************************/
@@ -956,7 +939,7 @@ a:focus {
     border-radius: 0;
     background: #121518;
     border: 2px solid #fdfdfb;
-    transition: .3s;
+    transition: 0.3s;
 }
 
 .portfolio #portfolio-flters li:hover,
@@ -972,7 +955,7 @@ a:focus {
 .portfolio .load-more .btn {
     padding: 15px 35px;
     font-size: 16px;
-    transition: .3s;
+    transition: 0.3s;
 }
 
 .portfolio .load-more .btn:hover {
@@ -984,7 +967,7 @@ a:focus {
     position: relative;
     margin-bottom: 30px;
     overflow: hidden;
-    transition: .5s;
+    transition: 0.5s;
 }
 
 .portfolio .portfolio-item:hover {
@@ -1014,7 +997,11 @@ a:focus {
     align-items: flex-start;
     justify-content: flex-end;
     flex-direction: column;
-    background: linear-gradient(rgba(0, 0, 0, .0), rgba(0, 0, 0, .0), rgba(0, 0, 0, 1) 90%);
+    background: linear-gradient(
+        rgba(0, 0, 0, 0),
+        rgba(0, 0, 0, 0),
+        rgba(0, 0, 0, 1) 90%
+    );
 }
 
 .portfolio figure p {
@@ -1036,12 +1023,12 @@ a:focus {
 }
 
 .portfolio figure a {
-    font-family: 'Roboto', sans-serif;
+    font-family: "Roboto", sans-serif;
     color: #fffdfb;
     font-size: 25px;
     font-weight: 600;
     font-style: normal;
-    transition: .3s;
+    transition: 0.3s;
 }
 
 .portfolio figure a:hover {
@@ -1054,7 +1041,6 @@ a:focus {
     color: #999999;
     font-size: 16px;
 }
-
 
 /*******************************/
 /********* Contact CSS *********/
@@ -1096,7 +1082,7 @@ a:focus {
 }
 .contact a {
     color: #999999;
-    transition: .3s;
+    transition: 0.3s;
 }
 .contact .contact-text {
     position: relative;
@@ -1149,14 +1135,13 @@ a:focus {
     background: #fafafb;
     border: 2px solid #fefefd;
     border-radius: 0;
-    transition: .3s;
+    transition: 0.3s;
 }
 
 .contact .contact-form .btn:hover {
     color: #fab43c;
     background: #fbfbfa;
 }
-
 
 /*******************************/
 /******* Single Page CSS *******/
@@ -1188,7 +1173,7 @@ a:focus {
 .single .ul-group li::before {
     position: relative;
     content: "\f0da";
-    font-family: 'Roboto', sans-serif;
+    font-family: "Roboto", sans-serif;
     font-weight: 900;
     margin-right: 10px;
 }
@@ -1230,7 +1215,7 @@ a:focus {
     display: block;
     margin-bottom: 10px;
     color: #080808;
-    transition: .3s;
+    transition: 0.3s;
 }
 
 .footer .footer-link a::before {
@@ -1299,7 +1284,6 @@ a:focus {
     border-right: none;
 }
 
-
 .footer .copyright {
     padding: 30px 15px;
 }
@@ -1324,7 +1308,6 @@ a:focus {
 }
 
 @media (max-width: 768px) {
-
     .footer .copyright p,
     .footer .copyright .col-md-6:last-child p {
         margin: 5px 0;
@@ -1388,7 +1371,7 @@ a:focus {
     font-size: 60px;
     color: #fbfbfb;
     background: #121518;
-    transition: .5s;
+    transition: 0.5s;
 }
 
 .service .service-item:hover .service-icon i {
@@ -1422,7 +1405,7 @@ a:focus {
     border: 2px solid #090909;
     border-radius: 0;
     background: #121518;
-    transition: .3s;
+    transition: 0.3s;
 }
 
 .service .service-item:hover a.btn {

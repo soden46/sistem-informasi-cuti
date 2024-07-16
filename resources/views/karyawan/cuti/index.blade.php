@@ -53,10 +53,11 @@
                 <td style="width: 150px">{{ $data->durasi ?? '' }}</td>
                 <td style="width: 150px">{{ $data->kuota_cuti ?? '' }}</td>
                 <td style="width: 150px">{{ $data->keterangan ?? '' }}</td>
-                 <td style="width: 150px">
+                <td style="width: 150px">
                     @if ($data->bukti_cuti)
-                        <a href="{{ asset('storage/'.$data->bukti_cuti) }}" data-lightbox="gallery" target="_blank">
-                            <img src="{{ asset('storage/'.$data->bukti_cuti) }}" style="max-width: 100px; max-height: 100px;" alt="Gambar Cuti">
+                        <a href="{{ asset('storage/' . $data->bukti_cuti) }}" data-lightbox="gallery" target="_blank">
+                            <img src="{{ asset('storage/' . $data->bukti_cuti) }}"
+                                style="max-width: 100px; max-height: 100px;" alt="Gambar Cuti">
                         </a>
                     @else
                         -
@@ -77,7 +78,9 @@
             </tr>
         @endforeach
     </table>
-    <div class="row text-center">
-        {!! $cuti->links() !!}
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            {!! $cuti->links() !!}
+        </div>
     </div>
 @endsection

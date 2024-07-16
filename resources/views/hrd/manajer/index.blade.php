@@ -58,7 +58,9 @@
             </tr>
         @endforeach
     </table>
-    <div class="row text-center">
-        {!! $manajer->links() !!}
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            {!! $manajer->links() !!}
+        </div>
     </div>
 @endsection

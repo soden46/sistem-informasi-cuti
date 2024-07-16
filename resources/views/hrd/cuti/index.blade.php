@@ -11,15 +11,18 @@
     <div class="d-flex justify-content-between mb-3">
         <div>
             <form action="{{ route('hrd.cuti') }}" method="GET" class="d-flex">
-        <input type="text" name="cari" class="form-control" placeholder="Cari Data" value="{{ request('cari') }}">
-        <input type="date" name="start_date" class="form-control ml-2" value="{{ request('start_date') }}" placeholder="Tanggal Awal">
-        <input type="date" name="end_date" class="form-control ml-2" value="{{ request('end_date') }}" placeholder="Tanggal Akhir">
-        <button type="submit" class="btn btn-md btn-primary ml-2">Search</button>
-    </form>
+                <input type="text" name="cari" class="form-control" placeholder="Cari Data" value="{{ request('cari') }}">
+                <input type="date" name="start_date" class="form-control ml-2" value="{{ request('start_date') }}"
+                    placeholder="Tanggal Awal">
+                <input type="date" name="end_date" class="form-control ml-2" value="{{ request('end_date') }}"
+                    placeholder="Tanggal Akhir">
+                <button type="submit" class="btn btn-md btn-primary ml-2">Search</button>
+            </form>
         </div>
         <div>
-            <a class="btn btn-md btn-success" href="{{ route('hrd.cuti.cetak', ['start_date' => request('start_date'), 'end_date' => request('end_date')]) }}" target="_blank"><i
-                    class="fa fa-print"></i> Cetak PDF</a>
+            <a class="btn btn-md btn-success"
+                href="{{ route('hrd.cuti.cetak', ['start_date' => request('start_date'), 'end_date' => request('end_date')]) }}"
+                target="_blank"><i class="fa fa-print"></i> Cetak PDF</a>
         </div>
     </div>
     <table class="table table-bordered table-responsive">
@@ -51,8 +54,9 @@
                 <td style="width: 150px">{{ $data->keterangan ?? '' }}</td>
                 <td style="width: 150px">
                     @if ($data->bukti_cuti)
-                        <a href="{{ asset('storage/'.$data->bukti_cuti) }}" data-lightbox="gallery" target="_blank">
-                            <img src="{{ asset('storage/'.$data->bukti_cuti) }}" style="max-width: 100px; max-height: 100px;" alt="Gambar Cuti">
+                        <a href="{{ asset('storage/' . $data->bukti_cuti) }}" data-lightbox="gallery" target="_blank">
+                            <img src="{{ asset('storage/' . $data->bukti_cuti) }}"
+                                style="max-width: 100px; max-height: 100px;" alt="Gambar Cuti">
                         </a>
                     @else
                         -
@@ -73,7 +77,9 @@
             </tr>
         @endforeach
     </table>
-    <div class="row text-center">
-        {!! $cuti->links() !!}
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            {!! $cuti->links() !!}
+        </div>
     </div>
 @endsection
